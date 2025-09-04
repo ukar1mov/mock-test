@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>sevenplus — Reading (Passage 1)</title>
+
+<link rel="icon" href="./icons/favicon-180.png" type="image/svg+xml">
+<link rel="icon" href="./icons/favicon-180.png" sizes="32x32">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180">
+<meta name="theme-color" content="#1aa2c9">
+
+<style>
+  :root{--brand-blue:#1aa2c9;--brand-gray:#55595c;--bg:#f7f9fb;--panel:#fff;--text:#1b1f23;--line:#e5e8eb}
+  [data-theme="dark"]{--bg:#0e1116;--panel:#141922;--text:#e6edf3;--line:#2a2f38}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--text);font:15px/1.55 system-ui,-apple-system,Segoe UI,Roboto}
+  .appbar{position:sticky;top:0;background:var(--panel);border-bottom:1px solid var(--line);display:flex;gap:12px;align-items:center;padding:10px 16px;z-index:10}
+  .logo-text{font-size:1.2rem;text-decoration:none}
+  .meta{margin-left:auto;display:flex;gap:10px;align-items:center}
+  .btn{border:1px solid var(--line);background:var(--panel);padding:.55rem .9rem;border-radius:10px;cursor:pointer}
+  .btn.primary{background:var(--brand-blue);color:#fff;border-color:var(--brand-blue)}
+  .btn.ghost{background:transparent}
+  .btn.active{background:var(--brand-blue);color:#fff;border-color:var(--brand-blue);pointer-events:none}
+  main{max-width:1200px;margin:16px auto;padding:0 16px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:16px}
+  .toolbar{display:flex;gap:8px;align-items:center;border:1px dashed var(--line);padding:8px;border-radius:10px;margin:10px 0}
+  .swatch{width:20px;height:20px;border-radius:4px;border:1px solid var(--line);cursor:pointer}
+  .swatch.yellow{background:#fff59d}
+  .swatch.green{background:#c8e6c9}
+  .swatch.eraser{display:flex;align-items:center;justify-content:center;font-size:14px}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .panel{min-height:60vh;max-height:calc(100vh - 150px);overflow:auto;border:1px solid var(--line);border-radius:12px;padding:16px;background:var(--panel)}
+  h1,h2,h3{margin:.2rem 0}
+  .note{color:#667085}
+  .qblock{border:1px solid var(--line);border-radius:12px;padding:12px;margin:10px 0}
+  .options{display:grid;gap:6px;margin-top:8px}
+  input[type=text]{width:100%;padding:.5rem .6rem;border:1px solid var(--line);border-radius:10px}
+  footer.nav{display:flex;gap:20px;justify-content:center;margin:18px 0}
+  footer.nav a{text-decoration:none}
+  footer.nav .btn{color:var(--brand-blue);border-radius:14px;font-weight:600;min-width:120px;text-align:center}
+  footer.nav .btn.active{background:var(--brand-blue);color:#fff;border-color:var(--brand-blue);pointer-events:none}
+
+  .timer{
+    margin-left:8px;padding:.25rem .55rem;border:1px solid var(--line);
+    border-radius:10px;background:var(--panel);font-weight:600;color:var(--brand-blue);
+    min-width:64px;text-align:center;
+  }
+
+  .fill-onecol{width:100%;border:1px solid var(--line);border-radius:8px;border-collapse:separate;border-spacing:0;margin:8px 0}
+  .fill-onecol td{border:0;padding:10px 12px;vertical-align:top}
+  .fill-onecol input[type=text]{display:inline-block;min-width:120px;max-width:220px}
+
+  .qnav{display:flex;gap:6px;flex-wrap:wrap;margin:12px 0 0 0;padding-top:12px;border-top:1px solid var(--line)}
+  .qnav button{
+    width:34px;height:34px;border:1px solid #ccc;border-radius:8px;background:#fff;cursor:pointer;
+    transition:transform .06s ease, box-shadow .06s ease, background .2s ease, color .2s ease, border-color .2s ease;
+  }
+  .qnav button:active{transform:scale(.98)}
+  .qnav button.answered{background:#4caf50;color:#fff;border-color:#4caf50;box-shadow:0 0 0 2px rgba(76,175,80,.2) inset}
+  @keyframes flashGreen{0%{box-shadow:0 0 0 0 rgba(76,175,80,.0)}50%{box-shadow:0 0 0 6px rgba(76,175,80,.35)}100%{box-shadow:0 0 0 0 rgba(76,175,80,.0)}}
+  .qnav button.flash{animation:flashGreen .6s ease}
+
+  .hl{display:inline;padding:0;border:0;line-height:inherit;font:inherit}
+  .hl-yellow{background-color:#fff59d}
+  .hl-green{background-color:#c8e6c9}
+</style>
+</head>
+<body>
+<header class="appbar">
+  <span class="logo-text"><strong style="color:var(--brand-blue)">seven</strong><strong style="color:var(--brand-gray)">plus</strong></span>
+  <span id="timer" class="timer" aria-live="polite">60:00</span>
+  <div class="meta">
+    <label style="display:flex;align-items:center;gap:8px;cursor:pointer">
+      <input id="themeToggle" type="checkbox" />
+      <span>🌓</span>
+    </label>
+  </div>
+</header>
+
+<main>
+  <div class="card">
+    <div class="toolbar"><span>Highlighter:</span>
+      <button class="swatch yellow" data-hl="yellow" title="Yellow"></button>
+      <button class="swatch green" data-hl="green" title="Green"></button>
+      <button class="swatch eraser" id="hl-eraser" title="Eraser">🧽</button>
+    </div>
+
+    <div class="grid">
+      <article id="passage" class="panel" tabindex="0">
+        <h2>READING PASSAGE 1</h2>
+        <p class="note">You should spend about 20 minutes on Questions 1–13 which are based on Reading Passage 1.</p>
+
+        <h2 style="text-align:center">California's Age of Megafires</h2>
+
+        <p><strong>A</strong> There's a reason fire squads now battling more than a dozen blazes in southern California are having such difficulty containing the flames, despite better preparedness than ever and decades of experience fighting fires fanned by the notorious Santa Ana winds. The wildfires themselves, experts say, generally are hotter, move faster, and spread more erratically than in the past.</p>
+
+        <p><strong>B</strong> The short-term explanation is that the region, which usually has dry summers, has had nine inches less rain than normal this year. Longer-term, climate change across the West is leading to hotter days on average and longer fire seasons. Experts say this is likely to yield more megafires like the conflagrations that this week forced evacuations of at least 300,000 resident in California's southland and led President Bush to declare a disaster emergency in seven counties on Tuesday.</p>
+
+        <p><strong>C</strong> Megafires, also called "siege fires," are the increasingly frequent blazes that burn 500,000 acres or more – 10 times the size of the average forest fire of 20 years ago. One of the current wildfires is the sixth biggest in California ever, in terms of acreage burned, according to state figures and news reports. The trend to more superhot fires, experts say, has been driven by a century-long policy of the US Forest Service to stop wildfires as quickly as possible. The unintentional consequence was to halt the natural eradication of underbrush, now the primary fuel for megafires. Three other factors contribute to the trend, they add. First is climate change marked by a 1-degree F. rise in average yearly temperature across the the West. Second is a fire season that on average is 78 days longer than in the late 1980s. The third is the increased building of homes and other structures in wooded areas.</p>
+
+        <p><strong>D</strong> "We are increasingly building our homes … in fire-prone ecosystems," says Dominik Kulakowski, adjunct professor of biology at Clark University Graduate School of Geography in Worcester, Mass. Doing that "in many of the forests of the Western US … is like building homes on the side of an active volcano." In California, where population growth has averaged more than 600,000 a year for at least a decade, housing has pushed into such areas. "What once was open space is now residential homes providing fuel to make fires burn with greater intensity," says Terry McHale of the California Department of Forestry firefighters union. "With so much dryness, so many communities to catch fire, so many fronts to fight, it becomes an almost incredible job."
+        </p>
+
+        <p><strong>E</strong> That said, many experts give California high marks for making progress on preparedness since 2003, when the largest fires in state history scorched 750,000 acres, burned 3,640 homes, and killed 22 people. Stung then by criticism of bungling that allowed fires to spread when they might have been contained, personnel are meeting the peculiar challenges of a neighborhood – and canyon-hopping fires better than in recent years, observers say.</p>
+
+        <p><strong>F</strong> State promises to provide newer engines, planes, and helicopters have been fulfilled. Firefighters unions that then complained of dilapidated equipment, old fire engines and insufficient blueprints for fire safety are now praising the state's commitment, noting that funding for firefighting has increased despite huge cuts in many other programs. "We are pleased that the Schwarzenegger administration has been very proactive in its support of us and come through with budgetary support of the infrastructure needs we have long sought," says Mr McHale with the firefighters union.</p>
+
+        <p><strong>G</strong> Besides providing money to upgrade the fire engines that must traverse the mammoth state and wind along serpentine canyon roads, the state has invested in better command-and-control facilities as well as the strategies to run them. "In the fire sieges of earlier years, we found out that we had the willingness of mutual-aid help from other jurisdictions and states, but we were not able to communicate adequately with them," says Kim Zagaris, chief of the state's Office of Emergency Services, fire and rescue branch. After a 2004 blue-ribbon commission examined and revamped those procedures, the statewide response "has become far more professional and responsive," he says.</p>
+
+        <p><strong>H</strong> Besides ordering the California National Guard on Monday to make 1,500 guardsmen available for firefighting efforts, Gov. Arnold Schwarzenegger asked the Pentagon to send all available Modular Airborne Fighting Systems to the area. The military Lockheed C-130 cargo/utility aircraft carry a pressurized 3,000-gallon tank that can eject fire retardant or water in fewer than five seconds through two tubes at the rear of the plane. This load can cover an area 1/4-mile long and 60 feet wide to create a fire barrier. Governor Schwarzenegger also directed 2,300 inmate firefighters and 170 custody staff from the California Department of Corrections and Rehabilitation to work hand in hand with state and local firefighters.</p>
+
+        <p><strong>I</strong> Residents and government officials alike are noting the improvements with gratitude, even amid the loss of homes, churches, businesses, and farms. By Tuesday morning, the fires had burned 1,200 homes and businesses and set 245,957 acres – 384 square miles – ablaze. Despite such losses, there is a sense that the speed, dedication, and coordination of firefighters from several states and jurisdictions are resulting in greater efficiency than in past "siege fire" situations.</p>
+
+        <p><strong>J</strong> "I am extraordinarily impressed by the improvements we have witnessed between the last big fire and this," says Ross Simmons, a San Diego-based lawyer who had to evacuate both his home and business on Monday, taking up residence at a Hampton Inn 30 miles south of his home in Rancho Bernardo. After fires consumed 172,000 acres there in 2003, the San Diego region turned communitywide soul-searching into improved building codes, evacuation procedures, and procurement of new technology. Mr Simmons and neighbors began receiving automated phone calls at 3:30 a.m. Monday morning telling them to evacuate. "Notwithstanding all the damage that will be caused by this, we will not come close to the loss of life because of what we have … put in place since then," he says.
+
+        <div class="qnav" id="qnav"></div>
+      </article>
+
+      <aside id="questions" class="panel" tabindex="0">
+        <h3>Questions 1–6</h3>
+        <p>Complete the note. Write <strong>NO MORE THAN TWO WORDS AND/OR A NUMBER</strong> from the text for each answer.</p>
+
+        <div class="qblock">
+          <table class="fill-onecol" role="table" aria-label="Questions 1 to 6 inline">
+            <tbody>
+              <tr>
+                <td>Experts point out that blazes in California are having more heat, faster speed and they <input id="R1" type="text" placeholder="1"/> more unpredictably compared with former ones.</td>
+              </tr>
+              <tr>
+                <td>One explanation is that California's summer is dry, <input id="R2" type="text" placeholder="2"/> is below the average point.</td>
+              </tr>
+              <tr>
+                <td>Another long term explanation is that hotter and longer potential days occur due to <input id="R3" type="text" placeholder="3"/>.</td>
+              </tr>
+              <tr>
+                <td>Nowadays, Megafires burn <input id="R4" type="text" placeholder="4"/> the size of forest area caused by an ordinary fire of 20 years ago.</td>
+              </tr>
+              <tr>
+                <td>The serious trend is mainly caused by well-grown underbrush, which provides <input id="R5" type="text" placeholder="5"/> for the siege fires.</td>
+              </tr>
+              <tr>
+                <td>Other contributors are climate change and extended <input id="R6" type="text" placeholder="6"/>.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3 style="margin-top:16px">Questions 7–9</h3>
+        <p>Choose the correct answer.</p>
+
+        <div class="qblock" id="Q7">
+          <p><strong>7.</strong> What is the expert's attitude towards California's performance after 2003 megafire?</p>
+          <div class="options">
+            <label><input type="radio" name="R7" value="A"> They could have done better</label>
+            <label><input type="radio" name="R7" value="B"> Blamed them on casualties</label>
+            <label><input type="radio" name="R7" value="C"> Improvement made on preparation</label>
+            <label><input type="radio" name="R7" value="D"> Serious criticism</label>
+          </div>
+        </div>
+
+        <div class="qblock" id="Q8">
+          <p><strong>8.</strong> According to Governor Schwarzenegger, which one is <strong>CORRECT</strong> about his effort for firefighting?</p>
+          <div class="options">
+            <label><input type="radio" name="R8" value="A"> Schwarzenegger requested successfully for military weapons</label>
+            <label><input type="radio" name="R8" value="B"> Schwarzenegger led many prison management staff to work together with local firefighters</label>
+            <label><input type="radio" name="R8" value="C"> Schwarzenegger acted negatively in recent megafire in California</label>
+            <label><input type="radio" name="R8" value="D"> Schwarzenegger ordered 1,500 office clerk to join firefighting scene.</label>
+          </div>
+        </div>
+
+        <div class="qblock" id="Q9">
+          <p><strong>9.</strong> What happened to Ross Simmon on the day of megafire breakout?</p>
+          <div class="options">
+            <label><input type="radio" name="R9" value="A"> He was sleeping till morning</label>
+            <label><input type="radio" name="R9" value="B"> He was doing business at Hampton Inn</label>
+            <label><input type="radio" name="R9" value="C"> He suffered employee death on that morning</label>
+            <label><input type="radio" name="R9" value="D"> He was alarmed by machine calls</label>
+          </div>
+        </div>
+
+        <h3 style="margin-top:16px">Questions 10–13</h3>
+        <p>Do the following statements agree with the information given in the text?<br>
+        <span class="note">Write <strong>TRUE</strong> / <strong>FALSE</strong> / <strong>NOT GIVEN</strong>.</span></p>
+
+        <div class="qblock" id="Q10">
+          <p><strong>10.</strong> The area of open space in California has declined during the past decade.</p>
+          <div class="options">
+            <label><input type="radio" name="R10" value="TRUE"> TRUE</label>
+            <label><input type="radio" name="R10" value="FALSE"> FALSE</label>
+            <label><input type="radio" name="R10" value="NOT GIVEN"> NOT GIVEN</label>
+          </div>
+        </div>
+
+        <div class="qblock" id="Q11">
+          <p><strong>11.</strong> Fire squad wants to recruit more firefighters this year.</p>
+          <div class="options">
+            <label><input type="radio" name="R11" value="TRUE"> TRUE</label>
+            <label><input type="radio" name="R11" value="FALSE"> FALSE</label>
+            <label><input type="radio" name="R11" value="NOT GIVEN"> NOT GIVEN</label>
+          </div>
+        </div>
+
+        <div class="qblock" id="Q12">
+          <p><strong>12.</strong> Firefighters union declared that firefighters have had the more improved and supportive facility by the local government.</p>
+          <div class="options">
+            <label><input type="radio" name="R12" value="TRUE"> TRUE</label>
+            <label><input type="radio" name="R12" value="FALSE"> FALSE</label>
+            <label><input type="radio" name="R12" value="NOT GIVEN"> NOT GIVEN</label>
+          </div>
+        </div>
+
+        <div class="qblock" id="Q13">
+          <p><strong>13.</strong> Before the year of 2004, well coordination and communication between California and other states already existed in fire siege.</p>
+          <div class="options">
+            <label><input type="radio" name="R13" value="TRUE"> TRUE</label>
+            <label><input type="radio" name="R13" value="FALSE"> FALSE</label>
+            <label><input type="radio" name="R13" value="NOT GIVEN"> NOT GIVEN</label>
+          </div>
+        </div>
+
+        <footer class="nav" aria-label="Passage navigation">
+          <a class="btn active" href="readingp1.html" aria-current="page">Passage 1</a>
+          <a class="btn" href="readingp2.html">Passage 2</a>
+          <a class="btn" href="readingp3.html">Passage 3</a>
+        </footer>
+      </aside>
+    </div>
+  </div>
+</main>
+
+<script>
+const PAGE_ID='reading_p1';
+
+/* ===== Theme ===== */
+const themeToggle=document.getElementById('themeToggle');
+if(themeToggle){
+  const saved=localStorage.getItem('sp_theme')||'light';
+  document.documentElement.setAttribute('data-theme', saved);
+  themeToggle.checked = saved==='dark';
+  themeToggle.addEventListener('change',()=>{
+    const mode=themeToggle.checked?'dark':'light';
+    document.documentElement.setAttribute('data-theme', mode);
+    localStorage.setItem('sp_theme', mode);
+  });
+}
+
+/* ===== Highlighter ===== */
+function wrapSelection(color){
+  const sel=window.getSelection();
+  if(!sel || sel.isCollapsed) return;
+  const range=sel.getRangeAt(0);
+  const span=document.createElement('span');
+  span.className = 'hl ' + (color==='yellow' ? 'hl-yellow' : 'hl-green');
+  try{ range.surroundContents(span); }catch{}
+  sel.removeAllRanges();
+}
+function eraseSelection(){
+  const sel=window.getSelection();
+  if(!sel || sel.isCollapsed) return;
+  const range=sel.getRangeAt(0);
+  document.querySelectorAll('#passage span.hl').forEach(el=>{
+    try{
+      if(range.intersectsNode(el)){
+        const parent=el.parentNode;
+        while(el.firstChild) parent.insertBefore(el.firstChild, el);
+        parent.removeChild(el);
+        parent.normalize();
+      }
+    }catch{}
+  });
+  sel.removeAllRanges();
+}
+
+document.querySelectorAll('[data-hl]').forEach(b=>b.addEventListener('click',()=>wrapSelection(b.getAttribute('data-hl'))));
+document.getElementById('hl-eraser')?.addEventListener('click', eraseSelection);
+
+/* ===== Disable autocomplete/spell suggestions on inputs ===== */
+function hardDisableSuggestions(scope=document){
+  scope.querySelectorAll('input[type="text"], textarea').forEach(el=>{
+    el.setAttribute('autocomplete','off');
+    el.setAttribute('autocorrect','off');
+    el.setAttribute('autocapitalize','off');
+    el.setAttribute('spellcheck','false');
+    el.setAttribute('data-lpignore','true');
+  });
+}
+hardDisableSuggestions();
+
+/* ===== Debounced aggregator (saves consolidated objects) ===== */
+let aggTimer=null;
+function scheduleAggregate(){ clearTimeout(aggTimer); aggTimer=setTimeout(aggregateAllAnswers, 200); }
+
+function snapshotPageToPerInput(){
+  document.querySelectorAll('input[type=text], textarea, select').forEach(el=>{
+    const id = el.id || el.name; if(!id) return;
+    localStorage.setItem('R_'+id, el.value || '');
+  });
+  const radioNames = new Set();
+  document.querySelectorAll('input[type=radio][name^="R"]').forEach(r=>radioNames.add(r.name));
+  radioNames.forEach(name=>{
+    const checked = document.querySelector('input[type=radio][name="'+name+'"]:checked');
+    if(checked) localStorage.setItem('R_'+name, checked.value);
+  });
+}
+
+function aggregateAllAnswers(){
+  // ensure current page values are snapped first
+  snapshotPageToPerInput();
+
+  const answers = {};
+  for (let i=0; i<localStorage.length; i++){
+    const k = localStorage.key(i);
+    if(!k || !k.startsWith('R_R')) continue;  // per-input reading keys e.g. R_R1, R_R7
+    const id = k.slice(2);                    // -> "R1", "R7"
+    answers[id] = localStorage.getItem(k) || '';
+  }
+  const qmap = {};
+  for (let n=1;n<=13;n++) qmap['Q'+n] = answers['R'+n] || '';
+
+  const iso = new Date().toISOString();
+  try{
+    localStorage.setItem('sp_reading_answers', JSON.stringify(answers));
+    localStorage.setItem('sp_reading_answers_q', JSON.stringify(qmap));
+    localStorage.setItem('sp_reading_saved_at', iso);
+    localStorage.setItem('sp_reading_p1', JSON.stringify({ page: PAGE_ID, savedAt: iso, answers: qmap }));
+  }catch{}
+}
+
+/* ===== Autosave bindings (restore + save) ===== */
+function saveRadios(name){
+  const key='R_'+name;
+  const saved=localStorage.getItem(key)||'';
+  document.querySelectorAll('input[type=radio][name="'+name+'"]').forEach(n=>{
+    if(n.value===saved) n.checked=true;
+    n.addEventListener('change',()=>{ localStorage.setItem(key,n.value); scheduleAggregate(); });
+  });
+}
+function bindInput(id){
+  const el=document.getElementById(id); if(!el) return;
+  const k='R_'+id;
+  el.value=localStorage.getItem(k)||'';
+  el.addEventListener('input',()=>{ localStorage.setItem(k,el.value); scheduleAggregate(); });
+  hardDisableSuggestions(el.parentElement || document);
+}
+['R7','R8','R9','R10','R11','R12','R13'].forEach(nm=>saveRadios(nm));
+['R1','R2','R3','R4','R5','R6'].forEach(bindInput);
+
+/* ===== Footer nav should save first, then navigate ===== */
+(function(){
+  document.querySelectorAll('footer.nav a').forEach(a=>{
+    a.addEventListener('click', e=>{
+      e.preventDefault();
+      aggregateAllAnswers();
+      window.location.href = a.getAttribute('href');
+    });
+  });
+})();
+
+/* ===== Question nav (builds 1–13 and marks answered) ===== */
+(function buildQuestionNav(){
+  const container = document.getElementById('qnav');
+  if(!container) return;
+
+  const keys = new Set();
+  document.querySelectorAll('input[type="text"][id^="R"]').forEach(el=>{
+    const m = el.id.match(/^R(\d+)$/); if(m) keys.add(m[1]);
+  });
+  const radioNames = new Set();
+  document.querySelectorAll('input[type="radio"][name^="R"]').forEach(el=>radioNames.add(el.name));
+  Array.from(radioNames).forEach(n=>{ const m=n.match(/^R(\d+)$/); if(m) keys.add(m[1]); });
+
+  const nums = Array.from(keys).map(n=>parseInt(n,10)).sort((a,b)=>a-b);
+  const btnMap = new Map();
+
+  function isAnswered(num){
+    const id='R'+num;
+    const text=document.getElementById(id);
+    if(text && text.type==='text') return (text.value||'').trim().length>0;
+    const radios=document.querySelectorAll('input[type="radio"][name="'+id+'"]');
+    return radios.length ? Array.from(radios).some(r=>r.checked) : false;
+  }
+  function mark(num, justAnswered){
+    const btn=btnMap.get(num); if(!btn) return;
+    const answered=isAnswered(num);
+    const was=btn.classList.contains('answered');
+    if(answered){
+      btn.classList.add('answered');
+      if(!was && justAnswered){
+        btn.classList.add('flash');
+        btn.addEventListener('animationend',()=>btn.classList.remove('flash'),{once:true});
+      }
+    }else{
+      btn.classList.remove('answered'); btn.classList.remove('flash');
+    }
+  }
+
+  nums.forEach(num=>{
+    const b=document.createElement('button');
+    b.type='button'; b.textContent=String(num);
+    b.addEventListener('click',()=>{
+      const id='R'+num;
+      const text=document.getElementById(id);
+      if(text){ text.scrollIntoView({behavior:'smooth',block:'center'}); text.focus(); }
+      else{
+        const target=document.querySelector('[name="'+id+'"]') || document.getElementById('Q'+num);
+        if(target){ (target.closest('.qblock')||target).scrollIntoView({behavior:'smooth',block:'center'}); if(target.focus) target.focus(); }
+      }
+    });
+    container.appendChild(b);
+    btnMap.set(num,b);
+  });
+
+  nums.forEach(num=>{
+    const id='R'+num;
+    const text=document.getElementById(id);
+    if(text && text.type==='text'){ text.addEventListener('input',()=>mark(num,true)); mark(num,false); }
+    else{
+      const radios=document.querySelectorAll('input[type="radio"][name="'+id+'"]');
+      if(radios.length){ radios.forEach(r=>r.addEventListener('change',()=>mark(num,true))); mark(num,false); }
+    }
+  });
+
+  window.addEventListener('pageshow', ()=>nums.forEach(n=>mark(n,false)));
+})();
+
+/* ===== Ensure timer badge exists ===== */
+(function ensureTimerBadge(){
+  if(!document.getElementById('timer')){
+    const badge=document.createElement('span');
+    badge.id='timer'; badge.className='timer'; badge.textContent='60:00';
+    const header=document.querySelector('.appbar');
+    const meta=document.querySelector('.appbar .meta');
+    if(header) header.insertBefore(badge, meta || null);
+  }
+})();
+
+/* ===== Global 60-minute reading countdown (persists across passages) ===== */
+(function readingCountdown(){
+  const DURATION_MS = 60 * 60 * 1000;
+  const END_KEY = 'sp_reading_end_ts';
+  const DONE_KEY = 'sp_reading_done';
+  const timerEl = document.getElementById('timer');
+
+  let end = parseInt(localStorage.getItem(END_KEY)||'0', 10);
+  const now = Date.now();
+  if (!end || end < now) {
+    end = now + DURATION_MS;
+    localStorage.setItem(END_KEY, String(end));
+    localStorage.removeItem(DONE_KEY);
+  }
+  function fmt(n){ return String(n).padStart(2,'0'); }
+
+  function disableInputs(){
+    document.querySelectorAll('input, select, textarea, button').forEach(el=>{
+      if (el.id !== 'themeToggle') el.disabled = true;
+    });
+  }
+
+  function timeUp(){
+    if (localStorage.getItem(DONE_KEY)==='1'){ window.location.href='writing.html'; return; }
+    disableInputs();
+    aggregateAllAnswers();
+    localStorage.setItem('sp_reading_submitted_at', new Date().toISOString());
+    localStorage.setItem(DONE_KEY,'1');
+    setTimeout(()=>window.location.href='writing.html', 300);
+  }
+
+  (function tick(){
+    if (localStorage.getItem(DONE_KEY)==='1'){ window.location.href='writing.html'; return; }
+    const remain = parseInt(localStorage.getItem(END_KEY)||String(end),10) - Date.now();
+    if (remain <= 0){ if (timerEl) timerEl.textContent='00:00'; timeUp(); return; }
+    const s = Math.floor(remain/1000), m=Math.floor(s/60), r=s%60;
+    if (timerEl) timerEl.textContent = `${fmt(m)}:${fmt(r)}`;
+    setTimeout(tick, 250);
+  })();
+
+  // Save on any click to writing page
+  document.addEventListener('click', (ev)=>{
+    const a = ev.target.closest('a[href$="writing.html"]');
+    if(!a) return;
+    aggregateAllAnswers();
+    localStorage.setItem('sp_reading_submitted_at', new Date().toISOString());
+    localStorage.setItem(DONE_KEY,'1');
+  });
+
+  // Expose helper if needed elsewhere
+  window.sp_saveReadingAndGo = function(){
+    aggregateAllAnswers();
+    localStorage.setItem('sp_reading_submitted_at', new Date().toISOString());
+    localStorage.setItem(DONE_KEY,'1');
+    window.location.href='writing.html';
+  };
+})();
+
+// Background autosave hooks
+window.addEventListener('visibilitychange',()=>{ if(document.visibilityState==='hidden') aggregateAllAnswers(); });
+window.addEventListener('pagehide', aggregateAllAnswers);
+window.addEventListener('beforeunload', aggregateAllAnswers);
+
+// First aggregate right away so you can see saved objects in DevTools
+aggregateAllAnswers();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,980 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>sevenplus — CD IELTS (Listening Test)</title>
+
+  <link rel="icon" href="./icons/favicon-180.png" type="image/png">
+  <link rel="apple-touch-icon" href="./icons/favicon-180.png" sizes="180x180">
+  <meta name="theme-color" content="#1aa2c9">
+
+  <style>
+    :root{
+      --brand-blue:#1aa2c9; --brand-gray:#55595c;
+      --bg:#f7f9fb; --panel:#fff; --text:#0f172a; --line:#e5e8eb;
+    }
+    [data-theme="dark"]{
+      --bg:#0e1116; --panel:#141922; --text:#e6edf3; --line:#2a2f38;
+    }
+
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--bg);color:var(--text);font:15px/1.55 system-ui,-apple-system,Segoe UI,Roboto}
+
+    /* AppBar */
+    .appbar{
+      position:sticky;top:0;z-index:20;
+      background:var(--panel);border-bottom:1px solid var(--line);
+      display:flex;gap:12px;align-items:center;padding:10px 16px;
+    }
+    .logo-text{font-size:1.2rem;text-decoration:none}
+    .meta{margin-left:auto;display:flex;gap:10px;align-items:center}
+
+    /* Base */
+    main{max-width:1000px;margin:22px auto;padding:0 16px}
+    .card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:22px;box-shadow:0 8px 24px rgba(0,0,0,.05)}
+    .screen{display:none}
+    .screen.active{display:block}
+    .spacer{height:12px}
+
+    /* Buttons */
+    .btn{border:1px solid var(--line);background:var(--panel);padding:.55rem .9rem;border-radius:10px;cursor:pointer}
+    .btn:hover{border-color:var(--brand-blue)}
+    .btn.primary{background:var(--brand-blue);color:#fff;border-color:var(--brand-blue)}
+    .btn.lg{padding:.7rem 1.1rem;font-weight:600}
+
+    /* Form bits (Welcome) */
+    #screen-welcome .card{display:grid;gap:14px;background:linear-gradient(135deg, rgba(26,162,201,.06), transparent) , var(--panel)}
+    .field{display:flex;flex-direction:column;gap:6px}
+    .field input{padding:.7rem .8rem;border:1px solid var(--line);border-radius:12px}
+
+    /* Tables & MCQs */
+    table.form-table, .matrix-table, .ref-table{width:100%;border-collapse:separate;border-spacing:0;border:1px solid var(--line);border-radius:12px;overflow:hidden}
+    table.form-table th,table.form-table td{border-top:1px solid var(--line);padding:10px;vertical-align:top}
+    table.form-table th{background:rgba(26,162,201,.08);text-align:left}
+    table.form-table tr:first-child th, table.form-table tr:first-child td{border-top:none}
+    input.answer{width:auto;max-width:100%;padding:.45rem .6rem;border:1px solid var(--line);border-radius:10px;display:inline-block;margin:0 6px;vertical-align:middle}
+    small.note{color:#667085}
+    .mcq{border:1px solid var(--line);border-radius:12px;padding:12px;margin-top:12px;background:var(--panel)}
+    .mcq h4{margin:0 0 8px 0}
+    .options{display:grid;gap:8px;margin-top:8px}
+    .options label{display:flex;gap:8px;align-items:flex-start}
+    .mcq + .mcq{margin-top:16px}
+    .mcq ul li{margin:10px 0}
+
+    /* Highlighter Toolbar */
+    .toolbar{display:flex;gap:10px;align-items:center;border:1px dashed var(--line);padding:8px;border-radius:10px;margin:10px 0}
+    .toolbar.sticky{position:sticky;top:56px;z-index:5;background:var(--panel);box-shadow:0 2px 8px rgba(0,0,0,.04)}
+    .toolbar-label{font-weight:600;color:#64707d}
+    .swatch{
+      width:22px;height:22px;border:1px solid var(--line);border-radius:6px;
+      padding:0;cursor:pointer;display:inline-block;
+      appearance:none;-webkit-appearance:none;outline:none;box-shadow:none;background:transparent;
+    }
+    .swatch.yellow{background:#fff59d}
+    .swatch.green{background:#c8e6c9}
+    .swatch:focus{outline:2px solid var(--brand-blue);outline-offset:2px}
+    .icon-btn{
+      width:34px;height:34px;display:inline-grid;place-items:center;
+      border:1px solid var(--line);background:var(--panel);border-radius:8px;
+      cursor:pointer;font-size:18px;line-height:1;padding:0;
+    }
+    .icon-btn:hover{border-color:var(--brand-blue)}
+    .hl{background:#fff59d;border-radius:2px;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+    .hl[data-hl="green"]{background:#c8e6c9}
+
+    /* Legend (A/B/C) */
+    .legend{padding:12px;border-radius:12px;border:1px solid var(--line);background:var(--panel)}
+    .legend .row{display:flex;justify-content:center;gap:22px;flex-wrap:wrap;font-weight:600;margin-top:6px}
+    .legend .row .item{display:flex;align-items:baseline;gap:8px}
+    .legend .row .item strong{
+      display:inline-grid;place-items:center;width:28px;height:28px;border-radius:8px;
+      background:var(--brand-blue);color:#fff;border:1px solid var(--brand-blue);font-weight:800;
+    }
+
+    /* Question nav (bottom of each part) */
+    .qnav{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:12px 0 0 0}
+    .qbtn{min-width:30px;height:30px;padding:0 8px;border:1px solid var(--line);border-radius:8px;background:var(--panel);cursor:pointer;font-weight:600}
+    .qbtn:hover{border-color:var(--brand-blue)}
+    .qbtn.active{background:var(--brand-blue);color:#fff;border-color:var(--brand-blue)}
+    .qbtn.answered{background:#16a34a;color:#fff;border-color:#16a34a}
+    @keyframes flashGreen{from{box-shadow:0 0 0 0 rgba(22,163,74,.8)} to{box-shadow:0 0 0 12px rgba(22,163,74,0)}}
+    .qbtn.flash{animation:flashGreen .8s ease-out 1}
+
+    /* Part nav */
+    footer.part-nav{display:flex;gap:8px;justify-content:center;margin-top:14px}
+    .part-nav .btn.active{background:#38bdf8;border-color:#38bdf8;color:#0b1224;font-weight:700}
+    @keyframes flashBlue{from{box-shadow:0 0 0 0 rgba(56,189,248,.9)} to{box-shadow:0 0 0 14px rgba(56,189,248,0)}}
+    .part-nav .btn.flash{animation:flashBlue .8s ease-out 1}
+
+    /* Matching (Q17–20) */
+    .match-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:8px}
+    @media (max-width: 800px){.match-grid{grid-template-columns:1fr}}
+    .left{display:grid;gap:10px}
+    .match-row{display:grid;grid-template-columns:1fr 1fr 36px;gap:10px;align-items:center}
+    .facility{padding:.6rem .75rem;border:1px dashed var(--line);border-radius:10px;background:var(--panel)}
+    .drop-slot{min-height:50px;border:2px dashed var(--line);border-radius:10px;background:rgba(26,162,201,.06);display:flex;align-items:center;justify-content:flex-start;padding:6px 8px;gap:8px}
+    .drop-slot.filled{border-color:#16a34a;background:rgba(22,163,74,.08)}
+    .slot-content{width:100%;border:1px dashed rgba(56,189,248,.9);background:rgba(56,189,248,.10);padding:6px 8px;border-radius:8px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;word-break:break-word}
+    .slot-remove{margin-left:auto;border:none;background:transparent;color:#64707d;cursor:pointer;font-size:16px;line-height:1}
+    .pill{display:inline-grid;place-items:center;min-width:26px;height:26px;border-radius:8px;background:var(--brand-blue);color:#fff;font-weight:700;border:1px solid var(--brand-blue)}
+    .token-bank{display:grid;gap:8px}
+    .token{padding:.55rem .65rem;border:1px solid var(--line);border-radius:10px;background:var(--panel);cursor:grab;user-select:none}
+    .token:active{cursor:grabbing}
+    .token.assigned{opacity:.75}
+
+    /* Misc */
+    .note.muted{color:#64707d}
+  </style>
+</head>
+<body>
+  <header class="appbar">
+    <span class="logo-text"><strong style="color:var(--brand-blue)">seven</strong><strong style="color:var(--brand-gray)">plus</strong></span>
+    <div class="meta">
+      <label class="switch" style="display:flex;align-items:center;gap:8px;cursor:pointer">
+        <input id="themeToggle" type="checkbox" /><span>🌓</span>
+      </label>
+    </div>
+  </header>
+
+  <main>
+    <!-- WELCOME -->
+    <section id="screen-welcome" class="screen active">
+      <div class="card">
+        <div>
+          <h1 style="margin:0 0 6px 0;font-size:1.6rem">
+            <strong style="color:var(--brand-blue)">seven</strong><strong style="color:var(--brand-gray)">plus</strong> — CD IELTS
+          </h1>
+          <p style="margin:0 0 8px 0;color:#64707d">Please enter your details. Listening Part 1 will start automatically.</p>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+          <label class="field">Full name
+            <input id="fullName" type="text" placeholder="e.g., Ulug'bek Karimov" />
+          </label>
+          <label class="field">Candidate number
+            <input id="candidateNumber" type="text" inputmode="numeric" placeholder="e.g., SP0101" />
+          </label>
+        </div>
+        <div class="spacer"></div>
+        <div style="display:flex;justify-content:center;margin-top:12px">
+          <button id="startBtn" class="btn primary lg">Start test</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- LISTENING -->
+    <section id="screen-listening" class="screen">
+      <div class="card">
+        <div class="section-header"><h2>Listening</h2></div>
+
+        <!-- Highlighter Toolbar -->
+        <div class="toolbar sticky" id="hlToolbar">
+          <span class="toolbar-label">Highlighter:</span>
+          <button class="swatch yellow" data-hl="yellow" aria-label="Yellow highlight" title="Highlight (yellow)"></button>
+          <button class="swatch green"  data-hl="green"  aria-label="Green highlight" title="Highlight (green)"></button>
+          <button class="icon-btn" id="clearHighlights" title="Erase selected/current highlight" aria-label="Erase highlight">🧽</button>
+        </div>
+
+        <audio id="audio" autoplay preload="auto" playsinline muted>
+          <source src="./audio/mix_28m26s (audio-joiner.com) - CopyCopyCopyCopyCopyCopyCopyCopyCopyCopyCopyCopyCopyCopyCopyCopyCopyCopyCopy.mp3" type="audio/mpeg" />
+        </audio>
+
+        <!-- PART 1 -->
+        <div id="part1">
+          <h3 style="display:flex;align-items:center;gap:10px;margin-bottom:8px">Part 1
+            <span style="font-weight:500;color:#64707d">Listen and answer questions 1–10</span>
+          </h3>
+
+          <p><em>Questions 1–10</em> — Write <strong>NO MORE THAN THREE WORDS AND/OR A NUMBER</strong> for each answer.</p>
+
+          <div class="card" style="padding:0;border-radius:12px">
+            <div style="padding:16px 16px 0 16px">
+              <h4 style="margin:0 0 6px 0">Wildlife Conservation Society</h4>
+              <p style="margin:0 0 12px 0;color:#64707d">Application for membership</p>
+              <p style="margin:0 12px 12px 0"><strong>Example</strong> — Caller’s name: <em>Michael Jones</em></p>
+            </div>
+            <table class="form-table">
+              <tbody>
+                <tr><th style="width:30%">Heard of WCS from</th><td><input id="L1" class="answer" placeholder="1" /></td></tr>
+                <tr><th>Address</th><td>21 Beel Street, Leeds</td></tr>
+                <tr><th>Postcode</th><td><input id="L2" class="answer" placeholder="2" style="max-width:220px" /></td></tr>
+                <tr><th>Phone number</th><td>01173 58642</td></tr>
+                <tr><th>E-mail address</th><td>mj@<input id="L3" class="answer" placeholder="3" style="max-width:220px" />.</td></tr>
+                <tr><th>Length of membership</th><td><input id="L4" class="answer" placeholder="4" style="max-width:120px" /> years</td></tr>
+                <tr><th>Type of membership</th><td><input id="L5" class="answer" placeholder="5" style="max-width:260px" /></td></tr>
+                <tr><th>Fee</th><td>£ <input id="L6" class="answer" placeholder="6" style="max-width:120px" /></td></tr>
+                <tr><th>Payment details</th><td>direct debit</td></tr>
+                <tr><th>Name of bank</th><td><input id="L7" class="answer" placeholder="7" style="max-width:300px" /></td></tr>
+                <tr><th>Account name</th><td>Michael Jones</td></tr>
+                <tr><th>Account number</th><td>01059612</td></tr>
+                <tr><th>Date of first payment</th><td><input id="L8" class="answer" placeholder="8" style="max-width:220px" /></td></tr>
+                <tr><th>Reference number</th><td><input id="L9" class="answer" placeholder="9" style="max-width:220px" /></td></tr>
+                <tr>
+                  <th>Other requests</th>
+                  <td>
+                    <ul style="margin:0;padding-left:18px;list-style:disc">
+                      <li>extra information pack</li>
+                      <li><input id="L10" class="answer" placeholder="10" style="max-width:400px" /></li>
+                    </ul>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <div style="padding:0 16px 16px 16px"><small class="note">Answers autosave in your browser.</small></div>
+          </div>
+
+          <!-- per-question buttons 1–10 -->
+          <div class="qnav" aria-label="Question navigation 1-10">
+            <button class="qbtn" data-target="L1">1</button><button class="qbtn" data-target="L2">2</button>
+            <button class="qbtn" data-target="L3">3</button><button class="qbtn" data-target="L4">4</button>
+            <button class="qbtn" data-target="L5">5</button><button class="qbtn" data-target="L6">6</button>
+            <button class="qbtn" data-target="L7">7</button><button class="qbtn" data-target="L8">8</button>
+            <button class="qbtn" data-target="L9">9</button><button class="qbtn" data-target="L10">10</button>
+          </div>
+        </div>
+
+        <!-- PART 2 -->
+        <div id="part2" style="display:none">
+          <h3>Part 2</h3>
+          <p><em>Questions 11–20</em>. Listen and answer the questions below.</p>
+
+          <!-- 11–16 -->
+          <p><strong>Questions 11–16</strong> — Choose the correct answer.</p>
+          <div class="mcq"><h4>11. What is the purpose of the talk?</h4>
+            <div class="options">
+              <label><input type="radio" name="L11" value="A"> to welcome its new members</label>
+              <label><input type="radio" name="L11" value="B"> to commemorate its 10th anniversary</label>
+              <label><input type="radio" name="L11" value="C"> to celebrate the award it received recently</label>
+            </div>
+          </div>
+          <div class="mcq"><h4>12. What's the audience of this speech?</h4>
+            <div class="options">
+              <label><input type="radio" name="L12" value="A"> journalists</label>
+              <label><input type="radio" name="L12" value="B"> local residents</label>
+              <label><input type="radio" name="L12" value="C"> school children</label>
+            </div>
+          </div>
+          <div class="mcq"><h4>13. Why is the speaker most proud of the skating rink?</h4>
+            <div class="options">
+              <label><input type="radio" name="L13" value="A"> Because two world champions have been trained there.</label>
+              <label><input type="radio" name="L13" value="B"> Because people in this area are fitter than the rest of the country.</label>
+              <label><input type="radio" name="L13" value="C"> Because they have encouraged local school children to participate more in sports.</label>
+            </div>
+          </div>
+          <div class="mcq"><h4>14. The complex has recently opened a new venue for</h4>
+            <div class="options">
+              <label><input type="radio" name="L14" value="A"> the unemployed.</label>
+              <label><input type="radio" name="L14" value="B"> mothers with babies.</label>
+              <label><input type="radio" name="L14" value="C"> pensioners.</label>
+            </div>
+          </div>
+          <div class="mcq"><h4>15. What does the complex plan to do next year?</h4>
+            <div class="options">
+              <label><input type="radio" name="L15" value="A"> extend opening hours</label>
+              <label><input type="radio" name="L15" value="B"> expand the space</label>
+              <label><input type="radio" name="L15" value="C"> sell fitness equipment</label>
+            </div>
+          </div>
+          <div class="mcq"><h4>16. What does the complex encourage people to do?</h4>
+            <div class="options">
+              <label><input type="radio" name="L16" value="A"> become a coach</label>
+              <label><input type="radio" name="L16" value="B"> be on the committee</label>
+              <label><input type="radio" name="L16" value="C"> work as volunteers</label>
+            </div>
+          </div>
+
+          <!-- 17–20 drag & drop -->
+          <div class="mcq">
+            <h4 style="margin-bottom:6px">Questions 17–20</h4>
+            <p style="margin-top:0">Choose <strong>FOUR</strong> answers from the box and write the correct letter, <strong>A–G</strong>, next to Questions 17–20.</p>
+            <div class="match-grid">
+              <div class="left">
+                <div class="match-row">
+                  <div class="facility">Swimming pool</div>
+                  <div class="drop-slot" data-q="L17" aria-label="Drop option for Question 17"></div>
+                  <div class="qnum">17</div>
+                </div>
+                <div class="match-row">
+                  <div class="facility">Climbing wall</div>
+                  <div class="drop-slot" data-q="L18" aria-label="Drop option for Question 18"></div>
+                  <div class="qnum">18</div>
+                </div>
+                <div class="match-row">
+                  <div class="facility">Skating rink</div>
+                  <div class="drop-slot" data-q="L19" aria-label="Drop option for Question 19"></div>
+                  <div class="qnum">19</div>
+                </div>
+                <div class="match-row">
+                  <div class="facility">Gym</div>
+                  <div class="drop-slot" data-q="L20" aria-label="Drop option for Question 20"></div>
+                  <div class="qnum">20</div>
+                </div>
+              </div>
+              <div class="right">
+                <div id="bank17" class="token-bank" aria-label="Options A–G">
+                  <div class="token" data-letter="A" draggable="true"><strong>A.</strong> A one-on-one coach is bookable.</div>
+                  <div class="token" data-letter="B" draggable="true"><strong>B.</strong> It is featured in a TV drama.</div>
+                  <div class="token" data-letter="C" draggable="true"><strong>C.</strong> It is beneficial for young people.</div>
+                  <div class="token" data-letter="D" draggable="true"><strong>D.</strong> It is only available for women sometimes.</div>
+                  <div class="token" data-letter="E" draggable="true"><strong>E.</strong> It is the largest in the country.</div>
+                  <div class="token" data-letter="F" draggable="true"><strong>F.</strong> It can be booked for parties.</div>
+                  <div class="token" data-letter="G" draggable="true"><strong>G.</strong> It is a place to hold courses for school children.</div>
+                </div>
+                <small class="note">Drag an option to a question slot, or click an option then click a slot to place it. Each option can be used once.</small>
+              </div>
+            </div>
+          </div>
+
+          <!-- per-question buttons 11–20 -->
+          <div class="qnav" aria-label="Question navigation 11-20">
+            <button class="qbtn" data-target="L11">11</button><button class="qbtn" data-target="L12">12</button>
+            <button class="qbtn" data-target="L13">13</button><button class="qbtn" data-target="L14">14</button>
+            <button class="qbtn" data-target="L15">15</button><button class="qbtn" data-target="L16">16</button>
+            <button class="qbtn" data-target="L17">17</button><button class="qbtn" data-target="L18">18</button>
+            <button class="qbtn" data-target="L19">19</button><button class="qbtn" data-target="L20">20</button>
+          </div>
+        </div>
+
+        <!-- PART 3 -->
+        <div id="part3" style="display:none">
+          <h3>Part 3</h3>
+          <p><em>Questions 21–30</em>. Listen and answer the questions below.</p>
+
+          <!-- 21–24 -->
+          <p><strong>Questions 21–24</strong> — Choose the correct answer.</p>
+          <div class="mcq"><h4>21. What background information does Daisy give about rice?</h4>
+            <div class="options">
+              <label><input type="radio" name="L21" value="A"> Wild rice is grown throughout Asia</label>
+              <label><input type="radio" name="L21" value="B"> Some types of rice need less water than others.</label>
+              <label><input type="radio" name="L21" value="C"> All rice varieties have a lovely aroma</label>
+            </div>
+          </div>
+          <div class="mcq"><h4>22. Erik says that a priority for rice farmers is to be able to</h4>
+            <div class="options">
+              <label><input type="radio" name="L22" value="A"> grow rice without fertilizers.</label>
+              <label><input type="radio" name="L22" value="B"> predict the weather patterns.</label>
+              <label><input type="radio" name="L22" value="C"> manage water resources.</label>
+            </div>
+          </div>
+          <div class="mcq"><h4>23. Where is the International Rice Research Institute?</h4>
+            <div class="options">
+              <label><input type="radio" name="L23" value="A"> The Philippines</label>
+              <label><input type="radio" name="L23" value="B"> China</label>
+              <label><input type="radio" name="L23" value="C"> Japan</label>
+            </div>
+          </div>
+          <div class="mcq"><h4>24. Scientists in Bangladesh want to find a</h4>
+            <div class="options">
+              <label><input type="radio" name="L24" value="A"> more effective type of fertilizer.</label>
+              <label><input type="radio" name="L24" value="B"> strain of rice resistant to flooding.</label>
+              <label><input type="radio" name="L24" value="C"> way to reduce the effects of global warming.</label>
+            </div>
+          </div>
+
+          <!-- 25–30 matrix -->
+          <div class="mcq">
+            <h4 style="margin-bottom:6px">Questions 25–30</h4>
+            <div class="legend">
+              <div><strong>List of Countries</strong></div>
+              <div class="row">
+                <div class="item"><strong>A</strong> <span>Japan</span></div>
+                <div class="item"><strong>B</strong> <span>China</span></div>
+                <div class="item"><strong>C</strong> <span>Thailand</span></div>
+              </div>
+            </div>
+            <table class="matrix-table" role="grid" aria-label="Which country do the following statements apply to?">
+              <thead>
+                <tr><th>Which country do the following statements apply to?</th><th>A</th><th>B</th><th>C</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><span class="qid">25</span> They grow the most rice in the world.</td>
+                  <td class="pick"><label><input type="radio" name="L25" value="A" aria-label="25 A"></label></td>
+                  <td class="pick"><label><input type="radio" name="L25" value="B" aria-label="25 B"></label></td>
+                  <td class="pick"><label><input type="radio" name="L25" value="C" aria-label="25 C"></label></td>
+                </tr>
+                <tr>
+                  <td><span class="qid">26</span> They export the most rice in the world.</td>
+                  <td class="pick"><label><input type="radio" name="L26" value="A" aria-label="26 A"></label></td>
+                  <td class="pick"><label><input type="radio" name="L26" value="B" aria-label="26 B"></label></td>
+                  <td class="pick"><label><input type="radio" name="L26" value="C" aria-label="26 C"></label></td>
+                </tr>
+                <tr>
+                  <td><span class="qid">27</span> They aim to increase the nutritional value of rice.</td>
+                  <td class="pick"><label><input type="radio" name="L27" value="A" aria-label="27 A"></label></td>
+                  <td class="pick"><label><input type="radio" name="L27" value="B" aria-label="27 B"></label></td>
+                  <td class="pick"><label><input type="radio" name="L27" value="C" aria-label="27 C"></label></td>
+                </tr>
+                <tr>
+                  <td><span class="qid">28</span> Less rice is eaten than in the past.</td>
+                  <td class="pick"><label><input type="radio" name="L28" value="A" aria-label="28 A"></label></td>
+                  <td class="pick"><label><input type="radio" name="L28" value="B" aria-label="28 B"></label></td>
+                  <td class="pick"><label><input type="radio" name="L28" value="C" aria-label="28 C"></label></td>
+                </tr>
+                <tr>
+                  <td><span class="qid">29</span> An annual rice festival takes place.</td>
+                  <td class="pick"><label><input type="radio" name="L29" value="A" aria-label="29 A"></label></td>
+                  <td class="pick"><label><input type="radio" name="L29" value="B" aria-label="29 B"></label></td>
+                  <td class="pick"><label><input type="radio" name="L29" value="C" aria-label="29 C"></label></td>
+                </tr>
+                <tr>
+                  <td><span class="qid">30</span> A new type of rice is now popular locally.</td>
+                  <td class="pick"><label><input type="radio" name="L30" value="A" aria-label="30 A"></label></td>
+                  <td class="pick"><label><input type="radio" name="L30" value="B" aria-label="30 B"></label></td>
+                  <td class="pick"><label><input type="radio" name="L30" value="C" aria-label="30 C"></label></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- per-question buttons 21–30 -->
+          <div class="qnav" aria-label="Question navigation 21-30">
+            <button class="qbtn" data-target="L21">21</button><button class="qbtn" data-target="L22">22</button>
+            <button class="qbtn" data-target="L23">23</button><button class="qbtn" data-target="L24">24</button>
+            <button class="qbtn" data-target="L25">25</button><button class="qbtn" data-target="L26">26</button>
+            <button class="qbtn" data-target="L27">27</button><button class="qbtn" data-target="L28">28</button>
+            <button class="qbtn" data-target="L29">29</button><button class="qbtn" data-target="L30">30</button>
+          </div>
+        </div>
+
+        <!-- PART 4 -->
+        <div id="part4" style="display:none">
+          <h3>Part 4</h3>
+          <p><em>Questions 31–40</em>. Listen and answer the questions below.</p>
+
+          <!-- 31–37 short answers -->
+          <div class="mcq">
+            <h4 style="margin-bottom:6px">Questions 31–37</h4>
+            <p style="margin:0 0 8px 0">Write <strong>NO MORE THAN TWO WORDS</strong> for each answer.</p>
+            <div class="card" style="padding:14px;margin:8px 0">
+              <h4 style="margin:0 0 8px 0">How to Choose Flooring Materials</h4>
+              <div style="display:grid;gap:10px">
+                <div><strong>Source</strong></div>
+                <ul style="margin:0;padding-left:18px;list-style:disc">
+                  <li>There are some man-made materials like <input id="L31" class="answer" placeholder="31" style="max-width:260px" />.</li>
+                  <li>Before being used, material undergoes <input id="L32" class="answer" placeholder="32" style="max-width:260px" />.</li>
+                  <li>Wood should be cut and <input id="L33" class="answer" placeholder="33" style="max-width:260px" />.</li>
+                  <li>Stone should be cut and <input id="L34" class="answer" placeholder="34" style="max-width:260px" />.</li>
+                </ul>
+                <div style="margin-top:6px"><strong>Selection</strong></div>
+                <ul style="margin:0;padding-left:18px;list-style:disc">
+                  <li>Aside from environmental factors, one should take <input id="L35" class="answer" placeholder="35" style="max-width:260px" /> into account during construction.</li>
+                  <li>Some properties of materials affect mood, such as <input id="L36" class="answer" placeholder="36" style="max-width:220px" />, texture, and colour.</li>
+                  <li>Use a mathematical formula to choose the type of wood, because <input id="L37" class="answer" placeholder="37" style="max-width:320px" /> are subjective, which are ambiguous in verbal description.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- 38–40 table -->
+          <div class="mcq">
+            <h4 style="margin-bottom:6px">Questions 38–40</h4>
+            <p style="margin-top:0">Complete the table below. Write <strong>NO MORE THAN TWO WORDS AND/OR A NUMBER</strong> for each answer.</p>
+            <table class="ref-table" role="grid" aria-label="Material and reflectance rate">
+              <thead><tr><th>Material</th><th>Reflectance rate</th></tr></thead>
+              <tbody>
+                <tr><td>Polished silver</td><td>Almost 1.0</td></tr>
+                <tr><td>White-painted plastic</td><td>Approximately <input id="L38" class="answer" placeholder="38" style="max-width:140px" /></td></tr>
+                <tr><td>Quarry tile</td><td>Approximately <input id="L39" class="answer" placeholder="39" style="max-width:140px" /></td></tr>
+                <tr><td><input id="L40" class="answer" placeholder="40" style="max-width:260px" /></td><td>Almost 0.0</td></tr>
+              </tbody>
+            </table>
+            <small class="note">Answers autosave in your browser.</small>
+          </div>
+
+          <!-- per-question buttons 31–40 -->
+          <div class="qnav" aria-label="Question navigation 31-40">
+            <button class="qbtn" data-target="L31">31</button><button class="qbtn" data-target="L32">32</button>
+            <button class="qbtn" data-target="L33">33</button><button class="qbtn" data-target="L34">34</button>
+            <button class="qbtn" data-target="L35">35</button><button class="qbtn" data-target="L36">36</button>
+            <button class="qbtn" data-target="L37">37</button><button class="qbtn" data-target="L38">38</button>
+            <button class="qbtn" data-target="L39">39</button><button class="qbtn" data-target="L40">40</button>
+          </div>
+
+          <div class="spacer"></div>
+          <button class="btn primary" id="toReading">Proceed to Reading module</button>
+        </div>
+
+        <!-- PART NAV -->
+        <footer class="part-nav">
+          <button class="btn" data-part="1">Part 1</button>
+          <button class="btn" data-part="2">Part 2</button>
+          <button class="btn" data-part="3">Part 3</button>
+          <button class="btn" data-part="4">Part 4</button>
+        </footer>
+      </div>
+    </section>
+
+    <!-- READING placeholder (not used; button goes to readingp1.html) -->
+    <section id="screen-reading" class="screen" style="display:none">
+      <div class="card">
+        <h2>Reading – Module</h2>
+        <p class="note muted">Click “Proceed to Reading module” above. This placeholder exists only for future inline mode.</p>
+      </div>
+    </section>
+  </main>
+
+  <script>
+  /* ========= Welcome / Start flow ========= */
+  (function startFlow(){
+    const startBtn = document.getElementById('startBtn');
+    if(!startBtn) return;
+    const nameEl = document.getElementById('fullName');
+    const numEl  = document.getElementById('candidateNumber');
+
+    // restore candidate info
+    const cachedName = localStorage.getItem('sp_candidate_name');
+    const cachedNum  = localStorage.getItem('sp_candidate_number');
+    if (cachedName) nameEl.value = cachedName;
+    if (cachedNum)  numEl.value  = cachedNum;
+
+    // start
+    startBtn.addEventListener('click', ()=>{
+      const name = (nameEl?.value || '').trim();
+      const num  = (numEl?.value  || '').trim();
+      if (!name || !num) {
+        alert('Please fill in both fields.');
+        (name ? numEl : nameEl)?.focus();
+        return;
+      }
+      localStorage.setItem('sp_candidate_name', name);
+      localStorage.setItem('sp_candidate_number', num);
+      localStorage.setItem('sp_test_started_at', new Date().toISOString());
+
+      // switch screens
+      document.getElementById('screen-welcome')?.classList.remove('active');
+      document.getElementById('screen-listening')?.classList.add('active');
+
+      // show part 1
+      ['1','2','3','4'].forEach(n => {
+        const p = document.getElementById('part'+n);
+        if (p) p.style.display = (n === '1') ? 'block' : 'none';
+      });
+
+      // unmute & play
+      const a = document.getElementById('audio');
+      if (a){ a.muted = false; a.currentTime = 0; a.play().catch(()=>{}); }
+
+      // focus first
+      document.getElementById('L1')?.focus();
+
+      // debounce accidental double-clicks
+      startBtn.disabled = true; setTimeout(()=> startBtn.disabled = false, 800);
+    });
+  })();
+
+  /* ========= Persistence (text inputs + radios) ========= */
+  (function persistence(){
+    // Bind ALL text-based answers automatically (no hardcoded IDs)
+    const fields = document.querySelectorAll('input.answer:not([type="radio"]):not([type="checkbox"]), textarea.answer');
+    fields.forEach(el=>{
+      const id = el.id || el.name; if(!id) return;
+      const key = 'sp_' + id;
+      const saved = localStorage.getItem(key);
+      if(saved !== null) el.value = saved;
+
+      const save = () => localStorage.setItem(key, el.value);
+      el.addEventListener('input', save);
+      el.addEventListener('change', save);
+      el.addEventListener('blur', save);
+    });
+
+    // Radios — persist by name
+    const radioGroups = new Map();
+    document.querySelectorAll('input[type="radio"][name]').forEach(r=>{
+      radioGroups.set(r.name, true);
+    });
+    radioGroups.forEach((_, name)=>{
+      const saved = localStorage.getItem('sp_'+name) || '';
+      if (saved) {
+        const toCheck = document.querySelector('input[type="radio"][name="'+name+'"][value="'+saved+'"]');
+        if (toCheck) toCheck.checked = true;
+      }
+      document.querySelectorAll('input[type="radio"][name="'+name+'"]').forEach(r=>{
+        r.addEventListener('change', ()=> localStorage.setItem('sp_'+name, r.value));
+      });
+    });
+  })();
+
+  /* ========= Part navigation ========= */
+  (function partNav(){
+    const audioEl = document.getElementById('audio');
+    const sections = { '1':'part1','2':'part2','3':'part3','4':'part4' };
+    const buttons = document.querySelectorAll('footer.part-nav .btn[data-part]');
+
+    const setActive = (p) => {
+      buttons.forEach(b=> b.classList.toggle('active', b.getAttribute('data-part')===p));
+      Object.entries(sections).forEach(([k,id])=>{
+        const sec = document.getElementById(id);
+        if (sec) sec.style.display = (k===p) ? 'block' : 'none';
+      });
+      if (audioEl) audioEl.play().catch(()=>{});
+    };
+
+    buttons.forEach(b=>{
+      b.addEventListener('click', ()=>{
+        setActive(b.getAttribute('data-part'));
+        b.classList.add('flash');
+        b.addEventListener('animationend', ()=> b.classList.remove('flash'), {once:true});
+      });
+    });
+    setActive('1');
+  })();
+
+  /* ========= Global question navs (answered state + jump) ========= */
+  (function qNavs(){
+    function findTarget(id){
+      let el = document.getElementById(id); if(el) return el;
+      el = document.querySelector('input[type="radio"][name="'+id+'"]'); if(el) return el;
+      el = document.querySelector('.drop-slot[data-q="'+id+'"]'); if(el) return el;
+      return null;
+    }
+    function isAnswered(id){
+      const t = document.getElementById(id); if(t) return (t.value||'').trim().length>0;
+      const r = document.querySelector('input[type="radio"][name="'+id+'"]:checked'); if(r) return true;
+      const s = document.querySelector('.drop-slot[data-q="'+id+'"]'); if(s) return !!s.querySelector('.slot-content');
+      return false;
+    }
+
+    document.querySelectorAll('.qnav').forEach(nav=>{
+      const btns = [...nav.querySelectorAll('.qbtn')];
+      const ids  = btns.map(b=> b.getAttribute('data-target'));
+
+      // init answered
+      btns.forEach((b,i)=>{ if(isAnswered(ids[i])) b.classList.add('answered'); });
+
+      // click -> jump
+      btns.forEach((b,i)=>{
+        const id = ids[i];
+        b.addEventListener('click', ()=>{
+          btns.forEach(x=>x.classList.remove('active'));
+          b.classList.add('active','flash');
+          b.addEventListener('animationend', ()=> b.classList.remove('flash'), {once:true});
+          const t = findTarget(id);
+          if (t){ t.scrollIntoView({behavior:'smooth', block:'center'}); try{ t.focus({preventScroll:true}); }catch{} }
+        });
+      });
+
+      // text inputs live update
+      ids.forEach(id=>{
+        const t = document.getElementById(id);
+        if (t) t.addEventListener('input', ()=>{
+          const b = nav.querySelector('[data-target="'+id+'"]');
+          const filled = (t.value||'').trim().length>0;
+          b.classList.toggle('answered', filled);
+          if(filled){ b.classList.add('flash'); b.addEventListener('animationend', ()=> b.classList.remove('flash'), {once:true}); }
+        });
+
+        // radios live update
+        document.querySelectorAll('input[type=radio][name="'+id+'"]').forEach(r=> r.addEventListener('change', ()=>{
+          const b = nav.querySelector('[data-target="'+id+'"]');
+          b.classList.add('answered','flash'); b.addEventListener('animationend', ()=> b.classList.remove('flash'), {once:true});
+        }));
+
+        // drag-drop live update
+        const s = document.querySelector('.drop-slot[data-q="'+id+'"]');
+        if (s){
+          const obs = new MutationObserver(()=>{
+            const b=nav.querySelector('[data-target="'+id+'"]');
+            const filled=!!s.querySelector('.slot-content');
+            b.classList.toggle('answered', filled);
+            if(filled){ b.classList.add('flash'); b.addEventListener('animationend', ()=> b.classList.remove('flash'), {once:true}); }
+          });
+          obs.observe(s,{childList:true,subtree:true});
+        }
+      });
+    });
+  })();
+
+  /* ========= Drag & drop (17–20) ========= */
+  (function matching(){
+    const bank = document.getElementById('bank17'); if(!bank) return;
+    const slots = [...document.querySelectorAll('.drop-slot[data-q]')];
+
+    // order tokens A..G once
+    [...bank.querySelectorAll('.token')]
+      .sort((a,b)=> a.dataset.letter.localeCompare(b.dataset.letter))
+      .forEach(t=> bank.appendChild(t));
+
+    let selectedToken = null;
+
+    bank.addEventListener('click', e=>{
+      const t = e.target.closest('.token'); if(!t) return;
+      selectedToken = t;
+      bank.querySelectorAll('.token').forEach(k=>k.classList.remove('active'));
+      t.classList.add('active');
+    });
+
+    slots.forEach(s=> s.addEventListener('click', ()=>{
+      if (selectedToken){ placeToken(selectedToken, s); selectedToken.classList.remove('active'); selectedToken=null; }
+    }));
+
+    bank.querySelectorAll('.token').forEach(t=>{
+      t.addEventListener('dragstart', e=> e.dataTransfer.setData('text/plain', t.dataset.letter));
+    });
+
+    slots.forEach(s=>{
+      s.addEventListener('dragover', e=>{ e.preventDefault(); s.classList.add('drag'); });
+      s.addEventListener('dragleave', ()=> s.classList.remove('drag'));
+      s.addEventListener('drop', e=>{
+        e.preventDefault(); s.classList.remove('drag');
+        const letter = e.dataTransfer.getData('text/plain');
+        const token  = bank.querySelector('.token[data-letter="'+letter+'"]');
+        if (token) placeToken(token, s);
+      });
+    });
+
+    function clearSlot(slot){
+      const content = slot.querySelector('.slot-content');
+      if(content){
+        const letter = content.dataset.letter;
+        const t = bank.querySelector('.token[data-letter="'+letter+'"]');
+        if (t){ t.classList.remove('assigned'); bank.appendChild(t); }
+        content.remove();
+        slot.classList.remove('filled');
+        persist();
+      }
+    }
+
+    function placeToken(token, slot){
+      // make letter unique (move from previous slot if exists)
+      const used = document.querySelector('.slot-content[data-letter="'+token.dataset.letter+'"]');
+      if (used) clearSlot(used.closest('.drop-slot'));
+
+      // clear current slot if occupied
+      if (slot.querySelector('.slot-content')) clearSlot(slot);
+
+      const wrap = document.createElement('div');
+      wrap.className = 'slot-content';
+      wrap.dataset.letter = token.dataset.letter;
+
+      const pill = document.createElement('span'); pill.className='pill'; pill.textContent = token.dataset.letter;
+      const text = document.createElement('span'); text.textContent = token.textContent.replace(/^\s*[A-G]\.\s*/,'').trim();
+      const rem  = document.createElement('button'); rem.className='slot-remove'; rem.setAttribute('title','Remove'); rem.innerHTML='&times;';
+      rem.addEventListener('click', ()=> clearSlot(slot));
+
+      wrap.appendChild(pill); wrap.appendChild(text); wrap.appendChild(rem);
+      slot.appendChild(wrap);
+      slot.classList.add('filled');
+
+      token.classList.add('assigned');
+      persist();
+
+      slot.animate([{boxShadow:'0 0 0 0 rgba(22,163,74,.8)'},{boxShadow:'0 0 0 16px rgba(22,163,74,0)'}],{duration:600,easing:'ease-out'});
+    }
+
+    function persist(){
+      const map = {};
+      slots.forEach(s=>{
+        const q=s.dataset.q; const c=s.querySelector('.slot-content');
+        map[q] = c ? c.dataset.letter : '';
+      });
+      Object.entries(map).forEach(([k,v])=> localStorage.setItem('sp_'+k, v));
+    }
+
+    (function restore(){
+      ['L17','L18','L19','L20'].forEach(q=>{
+        const letter = localStorage.getItem('sp_'+q) || '';
+        if (!letter) return;
+        const token = bank.querySelector('.token[data-letter="'+letter+'"]');
+        const slot  = document.querySelector('.drop-slot[data-q="'+q+'"]');
+        if (token && slot) placeToken(token, slot);
+      });
+    })();
+  })();
+
+  /* ========= Highlighter (stable, within one block) + targeted eraser ========= */
+  (function highlighter(){
+    let lastRange = null;
+
+    function snapshot(){
+      const sel = window.getSelection();
+      if (sel && sel.rangeCount && !sel.isCollapsed) lastRange = sel.getRangeAt(0).cloneRange();
+    }
+    document.addEventListener('selectionchange', snapshot);
+    ['mouseup','keyup'].forEach(evt => document.addEventListener(evt, snapshot, true));
+
+    function unwrap(node){
+      if(!node || !node.parentNode) return;
+      const p = node.parentNode;
+      while(node.firstChild) p.insertBefore(node.firstChild, node);
+      p.removeChild(node);
+    }
+
+    function rangeIntersectsElement(range, el){
+      const r = document.createRange(); r.selectNodeContents(el);
+      return range.compareBoundaryPoints(Range.END_TO_START, r) < 0 &&
+             range.compareBoundaryPoints(Range.START_TO_END, r) > 0;
+    }
+
+    function isFormCtrl(el){ return !!(el && el.closest('input,textarea,button,select,.answer')); }
+
+    function getCommonBlock(aNode, bNode){
+      const A = (aNode.nodeType===1 ? aNode : aNode.parentElement);
+      const B = (bNode.nodeType===1 ? bNode : bNode.parentElement);
+      if (!A || !B) return null;
+      const blockSel = 'th,td,p,li,blockquote,div,h1,h2,h3,h4,h5,h6';
+      const ca = A.closest(blockSel);
+      const cb = B.closest(blockSel);
+      return (ca && cb && ca === cb) ? ca : null;
+    }
+
+    function applyHighlight(color){
+      const sel = window.getSelection();
+      let range = (sel && sel.rangeCount && !sel.isCollapsed) ? sel.getRangeAt(0).cloneRange()
+                 : (lastRange ? lastRange.cloneRange() : null);
+      if (!range) return;
+
+      const sc = (range.startContainer.nodeType===1 ? range.startContainer : range.startContainer.parentElement);
+      const ec = (range.endContainer.nodeType===1   ? range.endContainer   : range.endContainer.parentElement);
+      if (isFormCtrl(sc) || isFormCtrl(ec)) return;
+
+      const container = getCommonBlock(range.startContainer, range.endContainer);
+      if (!container) return;
+
+      const tw = document.createTreeWalker(container, NodeFilter.SHOW_TEXT, {
+        acceptNode: (n) => n.nodeValue.trim().length ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT
+      });
+
+      const bg = (color === 'green') ? '#c8e6c9' : '#fff59d';
+      const slices = [];
+
+      while (tw.nextNode()){
+        const node = tw.currentNode;
+        if (node.parentElement && node.parentElement.matches('span.hl')) continue;
+        if (!rangeIntersectsElement(range, node.parentElement)) continue;
+
+        let start = 0, end = node.nodeValue.length;
+        if (node === range.startContainer && range.startOffset > start) start = range.startOffset;
+        if (node === range.endContainer   && range.endOffset   < end)   end   = range.endOffset;
+        if (start >= end) continue;
+
+        slices.push({node,start,end});
+      }
+
+      // recolor within single highlight
+      const startHL = sc && sc.closest('span.hl');
+      const endHL   = ec && ec.closest('span.hl');
+      if (startHL && endHL && startHL === endHL && rangeIntersectsElement(range, startHL)){
+        startHL.dataset.hl = color;
+        startHL.style.background = bg;
+        return;
+      }
+
+      // wrap back-to-front
+      for (let i = slices.length - 1; i >= 0; i--){
+        const {node,start,end} = slices[i];
+        const mid = node.splitText(start);
+        mid.splitText(end - start);
+
+        const span = document.createElement('span');
+        span.className = 'hl';
+        span.dataset.hl = color;
+        span.style.background = bg;
+
+        mid.parentNode.replaceChild(span, mid);
+        span.appendChild(mid);
+      }
+
+      // merge neighbors of same color
+      document.querySelectorAll('span.hl').forEach(h=>{
+        const n = h.nextSibling, p = h.previousSibling;
+        if (n && n.nodeType===1 && n.matches('span.hl') && n.dataset.hl===h.dataset.hl){
+          while (n.firstChild) h.appendChild(n.firstChild); n.remove();
+        }
+        if (p && p.nodeType===1 && p.matches('span.hl') && p.dataset.hl===h.dataset.hl){
+          while (h.firstChild) p.appendChild(h.firstChild); h.remove();
+        }
+      });
+    }
+
+    // Swatch handlers (pointer & click capture)
+    function swatchHandler(e){
+      const btn = e.target.closest('[data-hl]');
+      if (!btn) return;
+      e.preventDefault(); e.stopPropagation();
+      applyHighlight(btn.getAttribute('data-hl'));
+    }
+    document.addEventListener('pointerdown', swatchHandler, true);
+    document.addEventListener('mousedown',  swatchHandler, true);
+    document.addEventListener('click',      swatchHandler, true);
+
+    // Targeted eraser
+    (function bindEraser(){
+      const old = document.getElementById('clearHighlights'); if(!old) return;
+      const btn = old.cloneNode(true); old.replaceWith(btn); btn.id='clearHighlights';
+
+      function intersects(range, el){
+        const r = document.createRange(); r.selectNodeContents(el);
+        return range.compareBoundaryPoints(Range.END_TO_START, r) < 0 &&
+               range.compareBoundaryPoints(Range.START_TO_END, r) > 0;
+      }
+
+      btn.addEventListener('click', ()=>{
+        const sel = window.getSelection();
+        if (sel && !sel.isCollapsed){
+          const r = sel.getRangeAt(0);
+          document.querySelectorAll('span.hl').forEach(s=>{ if (intersects(r, s)) unwrap(s); });
+          sel.removeAllRanges();
+          return;
+        }
+        let node = (sel && sel.anchorNode) ? sel.anchorNode : document.activeElement;
+        if (node && node.nodeType === 3) node = node.parentElement;
+        const target = node && node.closest ? node.closest('span.hl') : null;
+        if (target) unwrap(target);
+      });
+
+      // Alt+click to remove a single highlight
+      document.addEventListener('click', (e)=>{
+        if (!e.altKey) return;
+        const hl = e.target.closest && e.target.closest('span.hl');
+        if (hl){ e.preventDefault(); unwrap(hl); }
+      }, true);
+    })();
+  })();
+
+  /* ========= Theme toggle ========= */
+  (function theme(){
+    const themeToggle = document.getElementById('themeToggle');
+    if(!themeToggle) return;
+    const saved = localStorage.getItem('sp_theme') || 'light';
+    document.documentElement.setAttribute('data-theme', saved);
+    themeToggle.checked = saved === 'dark';
+    themeToggle.addEventListener('change', ()=>{
+      const mode = themeToggle.checked ? 'dark' : 'light';
+      document.documentElement.setAttribute('data-theme', mode);
+      localStorage.setItem('sp_theme', mode);
+    });
+  })();
+
+  /* ========= Misc ========= */
+  // disable autocomplete for all inputs
+  document.querySelectorAll('input').forEach(el => el.setAttribute('autocomplete','off'));
+
+  // attempt autoplay on visibility
+  (function attemptAutoplay(){
+    const a=document.getElementById('audio'); if(!a) return;
+    const play=()=>a.play().catch(()=>{});
+    if(document.readyState==='complete' || document.readyState==='interactive') play();
+    else document.addEventListener('DOMContentLoaded', play);
+    document.addEventListener('visibilitychange', ()=>{ if(document.visibilityState==='visible') play(); });
+  })();
+
+  // Proceed to Reading (navigate to readingp1.html)
+  (function goReading(){
+    const btn = document.getElementById('toReading'); if(!btn) return;
+    btn.addEventListener('click', (e)=>{
+      e.preventDefault();
+      const a=document.getElementById('audio'); if(a){a.pause(); a.currentTime=0;}
+      window.location.href='readingp1.html';
+    });
+  })();
+
+  // Helpful console notice when using file://
+  if (location.protocol === 'file:') {
+    try { console.warn('Running from file:// — each file has its own LocalStorage. Serve via http://localhost so pages share storage.'); } catch {}
+  }
+  </script>
+  
+</body>
+</html>

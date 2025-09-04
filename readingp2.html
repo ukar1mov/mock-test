@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>sevenplus — Reading (Passage 2)</title>
+<link rel="icon" href="./icons/favicon-180.png" type="image/svg+xml">
+<link rel="icon" href="./icons/favicon-180.png" sizes="32x32">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180">
+<meta name="theme-color" content="#1aa2c9">
+<style>
+  :root{--brand-blue:#1aa2c9;--brand-gray:#55595c;--bg:#f7f9fb;--panel:#fff;--text:#1b1f23;--line:#e5e8eb}
+  [data-theme="dark"]{--bg:#0e1116;--panel:#141922;--text:#e6edf3;--line:#2a2f38}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--text);font:15px/1.55 system-ui,-apple-system,Segoe UI,Roboto}
+  .appbar{position:sticky;top:0;background:var(--panel);border-bottom:1px solid var(--line);display:flex;gap:12px;align-items:center;padding:10px 16px;z-index:10}
+  .logo-text{font-size:1.2rem;text-decoration:none}
+  .meta{margin-left:auto;display:flex;gap:10px;align-items:center}
+  .btn{border:1px solid var(--line);background:var(--panel);padding:.55rem .9rem;border-radius:10px;cursor:pointer}
+  .btn.primary{background:var(--brand-blue);color:#fff;border-color:var(--brand-blue)}
+  .btn.ghost{background:transparent}
+  .btn.active{background:var(--brand-blue);color:#fff;border-color:var(--brand-blue);pointer-events:none}
+  main{max-width:1200px;margin:16px auto;padding:0 16px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:16px}
+  .toolbar{display:flex;gap:8px;align-items:center;border:1px dashed var(--line);padding:8px;border-radius:10px;margin:10px 0}
+  .swatch{width:20px;height:20px;border-radius:4px;border:1px solid var(--line);cursor:pointer}
+  .swatch.yellow{background:#fff59d}
+  .swatch.green{background:#c8e6c9}
+  .swatch.eraser{display:flex;align-items:center;justify-content:center;font-size:14px}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .panel{min-height:60vh;max-height:calc(100vh - 150px);overflow:auto;border:1px solid var(--line);border-radius:12px;padding:16px;background:var(--panel)}
+  h1,h2,h3{margin:.2rem 0}
+  .note{color:#667085}
+  .qblock{border:1px solid var(--line);border-radius:12px;padding:12px;margin:10px 0}
+  .options{display:grid;gap:6px;margin-top:8px}
+  input[type=text]{width:100%;padding:.5rem .6rem;border:1px solid var(--line);border-radius:10px}
+  select{width:100%;padding:.5rem .6rem;border:1px solid var(--line);border-radius:10px;background:var(--panel)}
+  footer.nav{display:flex;gap:8px;justify-content:center;margin:14px 0}
+  footer.nav a{ text-decoration:none }
+  .timer{margin-left:8px;padding:.25rem .55rem;border:1px solid var(--line);border-radius:10px;background:var(--panel);font-weight:600;color:var(--brand-blue);min-width:64px;text-align:center}
+
+  /* Pills and match tables for this passage */
+  .heading-list{display:flex;flex-direction:column;gap:6px;margin:8px 0}
+  .heading-list .pill{border:1px solid var(--line);border-radius:8px;padding:8px 10px;background:#fff}
+  [data-theme="dark"] .heading-list .pill{background:var(--panel)}
+  .match-table{width:100%;border-collapse:collapse;margin:8px 0}
+  .match-table th,.match-table td{border:1px solid var(--line);padding:8px}
+
+  /* Highlights should not shift layout */
+  .hl{display:inline;padding:0;border:0;line-height:inherit;font:inherit}
+  .hl-yellow{background-color:#fff59d}
+  .hl-green{background-color:#c8e6c9}
+  /* Question number boxes */
+  .qnav{display:flex;gap:6px;flex-wrap:wrap;margin:12px 0}
+  .qnav button{width:34px;height:34px;border:1px solid var(--line);border-radius:6px;background:#fff;cursor:pointer}
+  .qnav button.done{background:#1fb66a;color:#fff;font-weight:600;border-color:#1fb66a}
+  .qnav button.active{outline:2px solid var(--brand-blue)}
+  @keyframes pulseGreen{0%{box-shadow:0 0 0 0 rgba(31,182,106,.6)}70%{box-shadow:0 0 0 10px rgba(31,182,106,0)}100%{box-shadow:none}}
+  .qnav button.pulse{animation:pulseGreen .6s ease-out 1}
+  [data-theme="dark"] .qnav button{background:var(--panel)}
+</style>
+</head>
+<body>
+<header class="appbar">
+  <span class="logo-text"><strong style="color:var(--brand-blue)">seven</strong><strong style="color:var(--brand-gray)">plus</strong></span>
+  <span id="timer" class="timer" aria-live="polite">60:00</span>
+  <div class="meta">
+    <label style="display:flex;align-items:center;gap:8px;cursor:pointer">
+      <input id="themeToggle" type="checkbox" />
+      <span>🌓</span>
+    </label>
+  </div>
+</header>
+
+<main>
+  <div class="card">
+    <div class="toolbar"><span>Highlighter:</span>
+      <button class="swatch yellow" data-hl="yellow" title="Yellow"></button>
+      <button class="swatch green" data-hl="green" title="Green"></button>
+      <button class="swatch eraser" id="hl-eraser" title="Eraser">🧽</button>
+    </div>
+
+    <div class="grid">
+      <!-- LEFT: PASSAGE (scrollable) -->
+      <article id="passage" class="panel" tabindex="0">
+        <h2>READING PASSAGE 2</h2>
+        <p class="note">You should spend about 20 minutes on Questions 14–26 which are based on Reading Passage 2.</p>
+
+        <h2 style="text-align:center">Griffith and American films</h2>
+        <p>Movies are key cultural artefacts that offer a window into American cultural and social history. A mixture of art, business, and popular entertainment, the movies provide a host of insights into Americans' shifting ideas, fantasies, and preoccupations</p>
+
+        <p><strong>A</strong> Many films of the early silent era dealt with gender relations. Before 1905, as Kathy Peiss has argued, movie screens were filled with salacious sexual imagery and risque humor, drawn from burlesque halls and vaudeville theaters. Early films offered many glimpses of women disrobing or of passionate kisses. As the movies' female audience grew, sexual titillation and voyeurism persisted. But an ever-increasing number of the film dealt with the changing work and sexual roles of women in a more sophisticated manner. While D.W. Griffith's films presented an idealized picture of the frail Victorian child-woman and showed an almost obsessive preoccupation with female honor and chastity, other silent movies presented quite different images of femininity. These ranged from the exotic, sexually aggressive vamp to the athletic, energetic "serial queen"; the street smart urban working gal, who repels the sexual advances of her lascivious boss; and cigarette-smoking, alcohol drinking chorus girls or burlesque queens.</p>
+
+        <p><strong>B</strong> In early 1910, director D.W. Griffith was sent by the Biograph Company to the west coast with his acting troupe, consisting of actors Blanche Sweet, Lillian Gish, Mary Pickford, Lionel Barrymore, and others. While there, the company decided to explore new territories, traveling several miles north to Hollywood, a little village that was friendly and enjoyed the movie company filming there. By focusing the camera on particular actors and actresses, Griffith inadvertently encouraged the development of the star system. As early as 1910, newspapers were deluged with requests for actors' names. But most studios refused to divulge their identities, fearing the salary demands of popular performers. As one industry observer put it, "In the 'star' your producer gets not only a 'production' value …. but a 'trademark' value, and an 'insurance' value which are … very potent in guaranteeing the sale of this product." As the star system emerged, salaries soared. In the course of just two years, the salary of actress Mary Pickford rose from less than $400 a week in 1914 to $10,000 a week in 1916. This action made Griffith believe the big potential in the movie industry. Thus many competitors completely copy the same system as Griffith used, for the considerable profits. Additionally, they also study the theory and methods which Griffith suggested.</p>
+
+        <p><strong>C</strong> From the moment America entered the war, Hollywood feared that the industry would be subject to heavy-handed government censorship. But the government itself wanted no repeat of World War I, when the Committee on Public Information had whipped up anti-German hysteria and oversold the war as "a Crusade not merely to re-win the tomb of Christ, but to bring back to earth the rule of right, the peace, goodwill to men and gentleness he taught."</p>
+
+        <p><strong>D</strong> The formation of the movie trust ushered in a period of rationalization within the film industry. Camera and projecting equipment were standardized; film rental fees were fixed; theaters were upgraded; which improved the quality of movies by removing damaged prints from circulation. This was also a period of intense artistic and technical innovation, as pioneering directors like David Wark Griffith and others created a new language of film and revolutionized screen narrative.</p>
+
+        <p><strong>E</strong> With just six months of film experience, Griffith, a former stage actor, was hired as a director by the Biograph Company and promised $50 a week and one-twentieth of a cent for every foot of film sold to a rental exchange. Each week, Griffith turned out two or three one-reelers. While earlier directors had used such cinematic devices as close-ups, slow motion, fade-ins and fade-outs, lighting effects, and editing before, Griffith's great contribution to the movie industry was to show how these techniques could be used to create a wholly new style of storytelling, distinct from the theater. Griffith's approach to movie storytelling has been aptly called "photographic realism." This is not to say that he merely wished to record a story accurately; rather he sought to convey the illusion of realism. He demanded that his performers act less in a more lifelike manner, avoiding the broad, exaggerated gestures and pantomiming of emotions that characterized the nineteenth-century stage. He wanted his performers to take on a role rather than directly addressing the camera. Above all, he used close-ups, lighting, editing, and other cinematic techniques convey suspense and other emotions and to focus the audience's attention on individual performers.</p>
+
+        <p><strong>F</strong> During the 1920s and 1930s, a small group of film companies consolidated their control. Known as the "Big Five" – Paramount, Warner Brothers, RKO, 20th Century-Fox, and Lowe's (MGM) and the "Little Three" – Universal, Columbia, and United Artists, they formed fully integrated companies. The old film company's opposition was shocked by new tycoons. The confusion of tongues in the foreign version of American films deepened when American directors themselves embarked on the shooting of the new version. They did not usually speak Spanish (or the given target language) and, at that time, there were only a few translators at the studio's disposal. For this reason, it was more general to contract Spanish directors, actors, and screenwriters to produce American films in Spanish for Latin American audiences and for the public in the Iberian Peninsula. Hollywood had depended on overseas markets for as much as 40 percent of its revenue. But in an effort to nurture their own film industries and prevent an excessive outflow of dollars, Britain, France, and Italy imposed stiff import tariffs and restrictive quotas on imported American movies.</p>
+
+        <p><strong>G</strong> A basic problem facing today's Hollywood is the rapidly rising cost of making and marketing a movie: an average of $40 million today. The immense cost of producing movies has led the studios to seek guaranteed hits: blockbuster loaded with high-tech special effects, sequels, and remakes of earlier movies, foreign films, and even old TV shows. Hollywood has also sought to cope with rising costs by focusing ever more intently on its core audiences. Since the mid-1980s, the movie-going audience has continued to decrease in size. Ticket sales fell from 1.2 billion in 1983 to 950 million in 1992, with the biggest drop occurring among adults. And since over half of Hollywood's profits are earned overseas, the target market has to be changed due to the increasing costs and salary of making a film. The industry has concentrated much of its energy on crude action films easily understood by an international audience, featuring stars like Arnold Schwarzenegger and Sylvester Stallone.</p>
+
+        <!-- Numbered navigation boxes 14–26 (below the passage text) -->
+        <div class="qnav" id="qnav">
+          <button data-q="q14">14</button><button data-q="q15">15</button><button data-q="q16">16</button><button data-q="q17">17</button><button data-q="q18">18</button><button data-q="q19">19</button><button data-q="q20">20</button><button data-q="q21">21</button><button data-q="q22">22</button><button data-q="q23">23</button><button data-q="q24">24</button><button data-q="q25">25</button><button data-q="q26">26</button>
+        </div>
+      </article>
+
+      <!-- RIGHT: QUESTIONS (scrollable) -->
+      <aside id="questions" class="panel" tabindex="0">
+        <h3>Questions 14–19</h3>
+        <p>The text has six sections. Choose the correct heading for each section and move it into the gap.</p>
+
+        <div class="qblock">
+          <h4>List of Headings</h4>
+          <div class="heading-list">
+            <div class="pill">i. Detailed description for a film system</div>
+            <div class="pill">ii. Griffith's contribution to American films</div>
+            <div class="pill">iii. The gender in the development of American film</div>
+            <div class="pill">iv. Change the view of the American movie</div>
+            <div class="pill">v. People's reaction to making movies in the war period</div>
+            <div class="pill">vi. The increasing market of the film in society</div>
+            <div class="pill">vii. Griffith improved gender recognition in society</div>
+          </div>
+
+          <table class="match-table" aria-label="Headings for sections A–F">
+            <thead><tr><th>Section</th><th>Your answer (pick one)</th></tr></thead>
+            <tbody>
+              <tr id="q14"><td>14 &nbsp; A</td>
+                <td>
+                  <select id="P2_H_A">
+                    <option value="">—</option>
+                    <option value="i">i</option>
+                    <option value="ii">ii</option>
+                    <option value="iii">iii</option>
+                    <option value="iv">iv</option>
+                    <option value="v">v</option>
+                    <option value="vi">vi</option>
+                    <option value="vii">vii</option>
+                  </select>
+                </td>
+              </tr>
+              <tr id="q15"><td>15 &nbsp; B</td>
+                <td>
+                  <select id="P2_H_B">
+                    <option value="">—</option>
+                    <option value="i">i</option>
+                    <option value="ii">ii</option>
+                    <option value="iii">iii</option>
+                    <option value="iv">iv</option>
+                    <option value="v">v</option>
+                    <option value="vi">vi</option>
+                    <option value="vii">vii</option>
+                  </select>
+                </td>
+              </tr>
+              <tr id="q16"><td>16 &nbsp; C</td>
+                <td>
+                  <select id="P2_H_C">
+                    <option value="">—</option>
+                    <option value="i">i</option>
+                    <option value="ii">ii</option>
+                    <option value="iii">iii</option>
+                    <option value="iv">iv</option>
+                    <option value="v">v</option>
+                    <option value="vi">vi</option>
+                    <option value="vii">vii</option>
+                  </select>
+                </td>
+              </tr>
+              <tr id="q17"><td>17 &nbsp; D</td>
+                <td>
+                  <select id="P2_H_D">
+                    <option value="">—</option>
+                    <option value="i">i</option>
+                    <option value="ii">ii</option>
+                    <option value="iii">iii</option>
+                    <option value="iv">iv</option>
+                    <option value="v">v</option>
+                    <option value="vi">vi</option>
+                    <option value="vii">vii</option>
+                  </select>
+                </td>
+              </tr>
+              <tr id="q18"><td>18 &nbsp; E</td>
+                <td>
+                  <select id="P2_H_E">
+                    <option value="">—</option>
+                    <option value="i">i</option>
+                    <option value="ii">ii</option>
+                    <option value="iii">iii</option>
+                    <option value="iv">iv</option>
+                    <option value="v">v</option>
+                    <option value="vi">vi</option>
+                    <option value="vii">vii</option>
+                  </select>
+                </td>
+              </tr>
+              <tr id="q19"><td>19 &nbsp; F</td>
+                <td>
+                  <select id="P2_H_F">
+                    <option value="">—</option>
+                    <option value="i">i</option>
+                    <option value="ii">ii</option>
+                    <option value="iii">iii</option>
+                    <option value="iv">iv</option>
+                    <option value="v">v</option>
+                    <option value="vi">vi</option>
+                    <option value="vii">vii</option>
+                  </select>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3 style="margin-top:16px">Questions 20–23</h3>
+        <p>Use the information in the text to match the companies with opinions.</p>
+
+        <div class="qblock">
+          <p><strong>List of Companies</strong></p>
+          <ul>
+            <li><strong>A</strong> – old company's opposition</li>
+            <li><strong>B</strong> – huge drop happens among adults</li>
+            <li><strong>C</strong> – the pressure to change its market</li>
+            <li><strong>D</strong> – completely copy his system</li>
+          </ul>
+
+          <table class="match-table" aria-label="Match companies to statements">
+            <thead><tr><th>Q</th><th>Statement</th><th>Answer (A–D)</th></tr></thead>
+            <tbody>
+              <tr id="q20">
+                <td>20</td>
+                <td>Griffith's successful in the 1910s, led his rivals …</td>
+                <td>
+                  <select id="P2_M_20">
+                    <option value="">—</option>
+                    <option>A</option><option>B</option><option>C</option><option>D</option>
+                  </select>
+                </td>
+              </tr>
+              <tr id="q21">
+                <td>21</td>
+                <td>The growing costs and salary in Hollywood which shows it has …</td>
+                <td>
+                  <select id="P2_M_21">
+                    <option value="">—</option>
+                    <option>A</option><option>B</option><option>C</option><option>D</option>
+                  </select>
+                </td>
+              </tr>
+              <tr id="q22">
+                <td>22</td>
+                <td>The increasing new movie industries have a big impact on …</td>
+                <td>
+                  <select id="P2_M_22">
+                    <option value="">—</option>
+                    <option>A</option><option>B</option><option>C</option><option>D</option>
+                  </select>
+                </td>
+              </tr>
+              <tr id="q23">
+                <td>23</td>
+                <td>In 1992, ticket sales declined dramatically, due to …</td>
+                <td>
+                  <select id="P2_M_23">
+                    <option value="">—</option>
+                    <option>A</option><option>B</option><option>C</option><option>D</option>
+                  </select>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3 style="margin-top:16px">Questions 24–26</h3>
+        <p>Choose the correct answer.</p>
+
+        <div class="qblock" id="q24">
+          <p><strong>24.</strong> Why Griffith believe the potential in making movies?</p>
+          <div class="options">
+            <label><input type="radio" name="P2_Q24" value="A"> The gender development in American films</label>
+            <label><input type="radio" name="P2_Q24" value="B"> He used the star system successfully</label>
+            <label><input type="radio" name="P2_Q24" value="C"> He prefers advanced movie techniques</label>
+            <label><input type="radio" name="P2_Q24" value="D"> He earns lots of money</label>
+          </div>
+        </div>
+
+        <div class="qblock" id="q25">
+          <p><strong>25.</strong> What is other competitors' reaction to Griffith?</p>
+          <div class="options">
+            <label><input type="radio" name="P2_Q25" value="A"> Adopt Griffith's theory and methods in making films</label>
+            <label><input type="radio" name="P2_Q25" value="B"> Complete copy his theory and methods</label>
+            <label><input type="radio" name="P2_Q25" value="C"> Try to catch up with their innovations</label>
+            <label><input type="radio" name="P2_Q25" value="D"> Find a new system against Griffith</label>
+          </div>
+        </div>
+
+        <div class="qblock" id="q26">
+          <p><strong>26.</strong> What is the great change in films industries during the 1920s and 1930s?</p>
+          <div class="options">
+            <label><input type="radio" name="P2_Q26" value="A"> Try to seek the high-tech special efforts</label>
+            <label><input type="radio" name="P2_Q26" value="B"> Dismiss the needs of overseas audiences</label>
+            <label><input type="radio" name="P2_Q26" value="C"> Changed its goal market</label>
+            <label><input type="radio" name="P2_Q26" value="D"> Improved the foreign version of American movies</label>
+          </div>
+        </div>
+
+        <footer class="nav">
+          <a class="btn ghost" href="readingp1.html">Passage 1</a>
+          <a class="btn active" href="readingp2.html" aria-current="page">Passage 2</a>
+          <a class="btn ghost" href="readingp3.html">Passage 3</a>
+        </footer>
+      </aside>
+    </div>
+  </div>
+</main>
+
+<script>
+  /* ---------- GLOBAL: collect & persist all Reading P2 answers ---------- */
+  function collectAndSaveAnswersP2(){
+    // Gather current answers from the DOM
+    const answers = {};
+  
+    // radios
+    document.querySelectorAll('input[type=radio]:checked').forEach(el=>{
+      answers[el.name] = el.value;               // e.g., P2_Q24 -> "A"
+    });
+  
+    // selects
+    document.querySelectorAll('select').forEach(el=>{
+      answers[el.id || el.name || `sel_${Math.random().toString(36).slice(2)}`] = el.value; // e.g., P2_H_A -> "ii"
+    });
+  
+    // text/textarea (none here, but harmless)
+    document.querySelectorAll('input[type=text], textarea').forEach(el=>{
+      answers[el.id || el.name || `txt_${Math.random().toString(36).slice(2)}`] = el.value;
+    });
+  
+    // Flat snapshot (for export/debug)
+    localStorage.setItem('sp_reading_answers', JSON.stringify(answers));
+    localStorage.setItem('sp_reading_submitted_at', new Date().toISOString());
+  
+    // Merge into the shared "reading" namespace
+    const reading = JSON.parse(localStorage.getItem('reading') || '{}');
+  
+    // 1) Keep exact P2_* keys (no double prefixing)
+    Object.entries(answers).forEach(([k,v])=>{
+      if (k && k.startsWith('P2_')) reading[k] = v;
+    });
+  
+    // 2) Explicitly map to Q14–Q26 keys that your summary/score page reads
+    const map = {
+      Q14:'P2_H_A', Q15:'P2_H_B', Q16:'P2_H_C', Q17:'P2_H_D', Q18:'P2_H_E', Q19:'P2_H_F',
+      Q20:'P2_M_20', Q21:'P2_M_21', Q22:'P2_M_22', Q23:'P2_M_23',
+      Q24:'P2_Q24',  Q25:'P2_Q25',  Q26:'P2_Q26'
+    };
+    for (const [qKey, srcKey] of Object.entries(map)){
+      reading[qKey] = answers[srcKey] || '';     // keep '' if unanswered
+    }
+  
+    localStorage.setItem('reading', JSON.stringify(reading));
+  }
+  </script>
+  
+
+<script>
+// Dark mode toggle (shared)
+const themeToggle=document.getElementById('themeToggle');
+if(themeToggle){
+  const saved=localStorage.getItem('sp_theme')||'light';
+  document.documentElement.setAttribute('data-theme', saved);
+  themeToggle.checked = saved==='dark';
+  themeToggle.addEventListener('change',()=>{
+    const mode=themeToggle.checked?'dark':'light';
+    document.documentElement.setAttribute('data-theme', mode);
+    localStorage.setItem('sp_theme', mode);
+  });
+}
+
+// Highlighter (yellow/green + eraser) — layout-safe
+function wrapSelection(color){
+  const sel=window.getSelection();
+  if(!sel || sel.isCollapsed) return;
+  const range=sel.getRangeAt(0);
+  const span=document.createElement('span');
+  span.className = 'hl ' + (color==='yellow' ? 'hl-yellow' : 'hl-green');
+  try{range.surroundContents(span);}catch{}
+  sel.removeAllRanges();
+}
+function eraseSelection(){
+  const sel=window.getSelection();
+  if(!sel || sel.isCollapsed) return;
+  const range=sel.getRangeAt(0);
+  document.querySelectorAll('#passage span.hl').forEach(el=>{
+    try{
+      if(range.intersectsNode(el)){
+        const parent=el.parentNode;
+        while(el.firstChild) parent.insertBefore(el.firstChild, el);
+        parent.removeChild(el);
+        parent.normalize();
+      }
+    }catch{}
+  });
+  sel.removeAllRanges();
+}
+document.querySelectorAll('[data-hl]').forEach(b=>b.addEventListener('click',()=>wrapSelection(b.getAttribute('data-hl'))));
+const erBtn=document.getElementById('hl-eraser'); if(erBtn) erBtn.addEventListener('click', eraseSelection);
+
+// Autosave: text, radios, selects (prefix P2_)
+(function persistAll(){
+  document.querySelectorAll('input[type=text], textarea').forEach(el=>{
+    const key='P2_'+(el.id||el.name||'txt_'+Math.random().toString(36).slice(2));
+    if(!el.dataset.key){ el.dataset.key = key; }
+    el.value = localStorage.getItem(el.dataset.key) || '';
+    el.addEventListener('input',()=>{
+      localStorage.setItem(el.dataset.key, el.value);
+      collectAndSaveAnswersP2();
+    });
+  });
+  document.querySelectorAll('input[type=radio]').forEach(el=>{
+    const key='P2_'+(el.name||el.id||'radio');
+    if(localStorage.getItem(key)===el.value) el.checked=true;
+    el.addEventListener('change',()=>{
+      if(el.checked) localStorage.setItem(key, el.value);
+      collectAndSaveAnswersP2();
+    });
+  });
+  document.querySelectorAll('select').forEach(el=>{
+    const key='P2_'+(el.id||el.name||'sel');
+    const saved=localStorage.getItem(key);
+    if(saved!==null) el.value=saved;
+    el.addEventListener('change',()=>{
+      localStorage.setItem(key, el.value);
+      collectAndSaveAnswersP2();
+    });
+  });
+  // initial combined snapshot
+  collectAndSaveAnswersP2();
+})();
+
+// Question nav: smooth jump & active ring (not overriding completion)
+(function(){
+  const qnav=document.getElementById('qnav');
+  const aside=document.getElementById('questions');
+  if(!qnav||!aside) return;
+  qnav.addEventListener('click', (e)=>{
+    const btn=e.target.closest('button[data-q]');
+    if(!btn) return;
+    const target=document.getElementById(btn.dataset.q);
+    if(target){ aside.scrollTo({top: target.offsetTop - 8, behavior:'smooth'}); }
+    qnav.querySelectorAll('button').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+  });
+})();
+
+// Mark question boxes green when their answers are filled
+(function(){
+  const map={
+    q14:'#P2_H_A', q15:'#P2_H_B', q16:'#P2_H_C', q17:'#P2_H_D', q18:'#P2_H_E', q19:'#P2_H_F',
+    q20:'#P2_M_20', q21:'#P2_M_21', q22:'#P2_M_22', q23:'#P2_M_23',
+    q24:'input[name="P2_Q24"]', q25:'input[name="P2_Q25"]', q26:'input[name="P2_Q26"]'
+  };
+  const qnav=document.getElementById('qnav');
+  if(!qnav) return;
+  function btnFor(id){ return qnav.querySelector(`button[data-q="${id}"]`); }
+  function isAnswered(id){
+    const sel=map[id]; if(!sel) return false;
+    if(sel.startsWith('input[')){
+      return !!document.querySelector(sel+':checked');
+    }
+    const el=document.querySelector(sel);
+    if(!el) return false;
+    if(el.tagName==='SELECT') return el.value!=='';
+    return (el.value||'').trim().length>0;
+  }
+  function update(id, pulse){
+    const btn=btnFor(id); if(!btn) return;
+    const done=isAnswered(id);
+    if(done){
+      const firstTime=!btn.classList.contains('done');
+      btn.classList.add('done');
+      if(pulse && firstTime){ btn.classList.add('pulse'); setTimeout(()=>btn.classList.remove('pulse'),600); }
+    } else {
+      btn.classList.remove('done');
+    }
+    // keep LS snapshot current
+    collectAndSaveAnswersP2();
+  }
+  // Bind listeners
+  Object.entries(map).forEach(([qid, sel])=>{
+    if(sel.startsWith('input[')){
+      document.querySelectorAll(sel).forEach(r=>r.addEventListener('change',()=>update(qid,true)));
+    }else{
+      const el=document.querySelector(sel);
+      if(!el) return;
+      el.addEventListener(el.tagName==='SELECT'?'change':'input',()=>update(qid,true));
+    }
+  });
+  // Initial paint after autosave restore
+  setTimeout(()=>{ Object.keys(map).forEach(id=>update(id,false)); }, 0);
+})();
+</script>
+
+<script>
+// Ensure timer badge exists in header
+(function ensureTimerBadge(){
+  if(!document.getElementById('timer')){
+    const badge=document.createElement('span');
+    badge.id='timer';
+    badge.className='timer';
+    badge.textContent='60:00';
+    const header=document.querySelector('.appbar');
+    const meta=document.querySelector('.appbar .meta');
+    if(header) header.insertBefore(badge, meta || null);
+  }
+})();
+</script>
+
+<script>
+// Footer nav should actually navigate
+(function(){
+  document.querySelectorAll('footer.nav a').forEach(a=>{
+    a.addEventListener('click', (e)=>{ e.preventDefault(); window.location.href = a.getAttribute('href'); });
+  });
+})();
+</script>
+
+<script>
+// ===== Reading global 60-minute countdown (persists across passages) =====
+(function readingCountdown(){
+  const DURATION_MS = 60 * 60 * 1000; // 60 minutes
+  const END_KEY = 'sp_reading_end_ts';
+  const DONE_KEY = 'sp_reading_done';
+  const timerEl = document.getElementById('timer');
+
+  // Start or continue the shared timer
+  let end = parseInt(localStorage.getItem(END_KEY)||'0', 10);
+  const now = Date.now();
+  if (!end || end < now) {
+    end = now + DURATION_MS;
+    localStorage.setItem(END_KEY, String(end));
+    localStorage.removeItem(DONE_KEY);
+  }
+
+  function fmt(n){ return String(n).padStart(2,'0'); }
+  function tick(){
+    if (localStorage.getItem(DONE_KEY)==='1') { timeUp(true); return; }
+    const remain = parseInt(localStorage.getItem(END_KEY)||String(end),10) - Date.now();
+    if (remain <= 0){ if (timerEl) timerEl.textContent = '00:00'; timeUp(false); return; }
+    const totalSec = Math.floor(remain/1000);
+    const m = Math.floor(totalSec/60);
+    const s = totalSec % 60;
+    if (timerEl) timerEl.textContent = `${fmt(m)}:${fmt(s)}`;
+    setTimeout(tick, 250);
+  }
+
+  function timeUp(fromOtherTab){
+    if (localStorage.getItem(DONE_KEY)==='1') { window.location.href = 'writing.html'; return; }
+    try{
+      document.querySelectorAll('input, select, textarea, button').forEach(el=>{ if (el.id !== 'themeToggle') el.disabled = true; });
+    }catch{}
+    // final save
+    collectAndSaveAnswersP2();
+    localStorage.setItem(DONE_KEY, '1');
+    setTimeout(()=>{ window.location.href = 'writing.html'; }, fromOtherTab ? 0 : 300);
+  }
+
+  // keep snapshot current even if page is closed suddenly
+  window.addEventListener('beforeunload', collectAndSaveAnswersP2);
+
+  tick();
+})();
+</script>
+</body>
+</html>

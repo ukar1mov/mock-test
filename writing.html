@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>sevenplus — IELTS Writing (Academic)</title>
+<meta name="theme-color" content="#1aa2c9">
+<style>
+  :root{--brand-blue:#1aa2c9;--brand-gray:#55595c;--bg:#f7f9fb;--panel:#fff;--text:#1b1f23;--line:#e5e8eb}
+  [data-theme="dark"]{--bg:#0e1116;--panel:#141922;--text:#e6edf3;--line:#2a2f38}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--text);font:15px/1.55 system-ui,-apple-system,Segoe UI,Roboto}
+  header{position:sticky;top:0;background:var(--panel);border-bottom:1px solid var(--line);padding:10px 16px;z-index:10;display:flex;gap:12px;align-items:center}
+  .logo{font-weight:700}
+  .cand{padding:.25rem .55rem;border:1px solid var(--line);border-radius:10px;background:var(--panel);color:var(--brand-gray)}
+  .timer{margin-left:auto;padding:.25rem .55rem;border:1px solid var(--line);border-radius:10px;background:var(--panel);font-weight:600;color:var(--brand-blue);min-width:64px;text-align:center}
+  main{max-width:1100px;margin:16px auto;padding:0 16px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:16px}
+  .split{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .panel{min-height:320px;overflow:auto;border:1px solid var(--line);border-radius:12px;padding:16px;background:var(--panel)}
+  .prompt{border:2px solid #000;border-radius:6px;padding:12px;background:rgba(0,0,0,.03)}
+  textarea.answer{width:100%;min-height:380px;border:1px solid var(--line);border-radius:12px;padding:12px;font:15px/1.6 system-ui,-apple-system,Segoe UI,Roboto;resize:vertical;background:var(--panel);color:var(--text)}
+  .wc{margin-top:6px;color:#667085}
+  .wc.low{color:#b54708}
+  .btn{border:1px solid var(--line);background:var(--panel);padding:.55rem .9rem;border-radius:10px;cursor:pointer}
+  .btn.primary{background:var(--brand-blue);color:#fff;border-color:var(--brand-blue)}
+  .submit-fixed{position:fixed;right:16px;bottom:16px;z-index:50}
+</style>
+</head>
+<body>
+<header>
+  <span class="logo"><span style="color:var(--brand-blue)">seven</span><span style="color:var(--brand-gray)">plus</span></span>
+  <span id="candInfo" class="cand" aria-live="polite" title="Candidate"></span>
+  <span id="timer" class="timer" aria-live="polite">60:00</span>
+  <label style="display:flex;align-items:center;gap:8px;cursor:pointer">
+    <input id="themeToggle" type="checkbox" /><span>🌓</span>
+  </label>
+</header>
+
+<main>
+  <div class="card">
+    <section class="task" id="task1">
+      <h2>TASK 1</h2>
+      <p class="note">Spend about 20 minutes. Write at least <strong>150 words</strong>.</p>
+      <div class="split">
+        <div class="panel">
+          <div class="prompt">
+            <p><em>The graph below shows the average monthly change in the prices of three metals during 2014.</em></p>
+            <p><strong>Summarise</strong> the information by selecting and reporting the main features, and make comparisons where relevant.</p>
+          </div>
+        </div>
+        <div class="panel">
+          <textarea id="W1" class="answer" placeholder="Write your Task 1 response here..."></textarea>
+          <div id="wc1" class="wc">Words: 0 (min 150)</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="task" id="task2">
+      <h2>TASK 2</h2>
+      <p class="note">Spend about 40 minutes. Write at least <strong>250 words</strong>.</p>
+      <div class="split">
+        <div class="panel">
+          <div class="prompt">
+            <p><em>Nowadays, a growing number of people with health problems are trying alternative medicines and treatments instead of visiting their usual doctor.</em></p>
+            <p><strong>Do you think this is a positive or a negative development?</strong></p>
+          </div>
+          <p>Give reasons for your answer and include relevant examples.</p>
+        </div>
+        <div class="panel">
+          <textarea id="W2" class="answer" placeholder="Write your Task 2 essay here..."></textarea>
+          <div id="wc2" class="wc">Words: 0 (min 250)</div>
+        </div>
+      </div>
+    </section>
+  </div>
+</main>
+
+<button class="btn primary submit-fixed" id="submitNow">Submit</button>
+
+<script>
+/* ===== Theme + Word count ===== */
+const themeToggle = document.getElementById('themeToggle');
+if (themeToggle) {
+  const saved = localStorage.getItem('sp_theme') || 'light';
+  document.documentElement.setAttribute('data-theme', saved);
+  themeToggle.checked = saved === 'dark';
+  themeToggle.addEventListener('change', () => {
+    const mode = themeToggle.checked ? 'dark' : 'light';
+    document.documentElement.setAttribute('data-theme', mode);
+    localStorage.setItem('sp_theme', mode);
+  });
+}
+function countWords(str){ return (str.trim().match(/\b[\w'-]+\b/g)||[]).length; }
+function updateWC(id, min){
+  const el=document.getElementById(id), wc=document.getElementById('wc'+id.slice(1));
+  const n=countWords(el.value);
+  wc.textContent=`Words: ${n} (min ${min})`;
+  wc.classList.toggle('low', n<min);
+}
+['W1','W2'].forEach((id,i)=>{
+  const key='sp_'+id;
+  const el=document.getElementById(id);
+  el.value = localStorage.getItem(key)||'';
+  updateWC(id,i===0?150:250);
+  el.addEventListener('input',()=>{ localStorage.setItem(key, el.value); updateWC(id,i===0?150:250); });
+});
+
+/* ===== Candidate badge (no nested backticks) ===== */
+function getCandidateInfo(){
+  const name =
+    localStorage.getItem('sp_candidate_name')  ||
+    localStorage.getItem('candidate_name')     ||
+    localStorage.getItem('candName')           || '';
+  const number =
+    localStorage.getItem('sp_candidate_number')||
+    localStorage.getItem('candidate_number')   ||
+    localStorage.getItem('candNumber')         || '';
+  return { name, number };
+}
+(function renderCandidateBadge(){
+  const { name, number } = getCandidateInfo();
+  const el = document.getElementById('candInfo');
+  let label = 'Candidate: —';
+  if (name || number) {
+    const left  = (name && String(name).trim()) ? String(name).trim() : '—';
+    const right = (number && String(number).trim()) ? ' (#' + String(number).trim() + ')' : '';
+    label = left + right;
+  }
+  if(el) el.textContent = label;
+})();
+
+/* ===== Timer ===== */
+(function writingCountdown(){
+  const DURATION_MS = 60*60*1000;
+  const END_KEY='sp_writing_end_ts', DONE_KEY='sp_writing_done';
+  const timerEl=document.getElementById('timer');
+  let end = parseInt(localStorage.getItem(END_KEY)||'0',10);
+  const now=Date.now();
+  const done=localStorage.getItem(DONE_KEY)==='1';
+  if(!end){ end=now+DURATION_MS; localStorage.setItem(END_KEY,String(end)); }
+  else if(end<now && !done){ end=now+DURATION_MS; localStorage.setItem(END_KEY,String(end)); }
+  function fmt(n){return String(n).padStart(2,'0');}
+  (function tick(){
+    if(localStorage.getItem(DONE_KEY)==='1'){ return; }
+    const remain = parseInt(localStorage.getItem(END_KEY)||String(end),10)-Date.now();
+    if(remain<=0){ if(timerEl) timerEl.textContent='00:00'; submitAll(); return; }
+    const s=Math.floor(remain/1000), m=Math.floor(s/60), r=s%60;
+    if(timerEl) timerEl.textContent=`${fmt(m)}:${fmt(r)}`;
+    setTimeout(tick,250);
+  })();
+})();
+
+/* =========================================================
+   ANSWER KEYS + BAND TABLES
+   ========================================================= */
+const ANSWER_KEYS = {
+  listening: {
+    Q1:["a radio program","radio program"],Q2:"LS142JW",Q3:"hennings.co.uk",Q4:["two","2"],Q5:"joint",
+    Q6:["forty-nine","forty nine","49"],Q7:["The Union Bank","Union Bank"],
+    Q8:["15th October","15 October","October 15th","October 15"],Q9:"JYZ37",Q10:"video",
+    Q11:"B",Q12:"A",Q13:"C",Q14:"A",Q15:"C",Q16:"B",Q17:"F",Q18:"C",Q19:"E",Q20:"A",
+    Q21:"B",Q22:"C",Q23:"A",Q24:"B",Q25:"B",Q26:"C",Q27:"B",Q28:"A",Q29:"C",Q30:"A",
+    Q31:"plastic",Q32:"processing",Q33:["properly seasoned","seasoned"],Q34:"polished",
+    Q35:["the cost","cost"],Q36:["grain patterns","grain pattern"],Q37:"words",Q38:"0.8",Q39:"0.1",Q40:"black velvet"
+  },
+  reading: {
+    Q1:"spread",Q2:"rain",Q3:"climate change",Q4:"10 times",Q5:["primary fuel","fuel"],Q6:"fire season",
+    Q7:"C",Q8:"B",Q9:"D",Q10:"TRUE",Q11:"NOT GIVEN",Q12:"TRUE",Q13:"FALSE",
+    Q14:"iii",Q15:"i",Q16:"v",Q17:"iv",Q18:"ii",Q19:"vi",
+    Q20:"D",Q21:"C",Q22:"A",Q23:"B",Q24:"B",Q25:"A",Q26:"D",
+    Q27:"B",Q28:"B",Q29:"A",Q30:"C",Q31:"YES",Q32:"NO",Q33:"NOT GIVEN",Q34:"NO",Q35:"YES",
+    Q36:"D",Q37:"B",Q38:"I",Q39:"E",Q40:"G"
+  }
+};
+function listeningBand(n){
+  const rows = [
+    {min:39,max:40,band:9},{min:37,max:38,band:8.5},{min:35,max:36,band:8},
+    {min:32,max:34,band:7.5},{min:30,max:31,band:7},{min:26,max:29,band:6.5},
+    {min:23,max:25,band:6},{min:18,max:22,band:5.5},{min:16,max:17,band:5},
+    {min:13,max:15,band:4.5},{min:11,max:12,band:4},{min:8,max:10,band:3.5},
+  ];
+  for(const r of rows){ if(n>=r.min && n<=r.max) return r.band; }
+  if (n<=0) return 0;
+  const last = rows[rows.length-1];
+  if (n < last.min){ const approx = last.band * (n / last.min); return Math.max(0, Math.round(approx*2)/2); }
+  return null;
+}
+function readingBand(n){
+  const rows = [
+    {min:39,max:40,band:9},{min:37,max:38,band:8.5},{min:35,max:36,band:8},
+    {min:33,max:34,band:7.5},{min:30,max:32,band:7},{min:27,max:29,band:6.5},
+    {min:23,max:26,band:6},{min:19,max:22,band:5.5},{min:15,max:18,band:5},
+    {min:13,max:14,band:4.5},{min:10,max:12,band:4},{min:8,max:9,band:3.5},
+    {min:6,max:7,band:3},{min:4,max:5,band:2.5},
+  ];
+  for(const r of rows){ if(n>=r.min && n<=r.max) return r.band; }
+  if (n<=0) return 0;
+  const last = rows[rows.length-1];
+  if (n < last.min){ const approx = last.band * (n / last.min); return Math.max(0, Math.round(approx*2)/2); }
+  return null;
+}
+
+/* =========================================================
+   NORMALISATION + SCORING
+   ========================================================= */
+const tidy = s => String(s).replace(/[“”‘’]/g,'"').replace(/[–—]/g,'-').replace(/\s+/g,' ').trim();
+function canonTFYN(s){
+  const t = tidy(s).toUpperCase();
+  if (t==='T' || t==='TRUE') return 'TRUE';
+  if (t==='F' || t==='FALSE') return 'FALSE';
+  if (t==='Y' || t==='YES')   return 'YES';
+  if (t==='N' || t==='NO')    return 'NO';
+  if (t==='NG' || t==='N.G.' || t==='NOT GIVEN' || t==='NOTGIVEN') return 'NOT GIVEN';
+  return t;
+}
+function canonRoman(s){ const l=String(s).toLowerCase(); return /^(i|ii|iii|iv|v|vi|vii|viii|ix|x)$/.test(l)?l:s; }
+function normalizeAtomic(v){
+  if (v==null) return '';
+  let s = tidy(v);
+  if (/^[a-e]$/i.test(s)) return s.toUpperCase();
+  s = canonTFYN(s);
+  s = canonRoman(s);
+  return s;
+}
+function splitMulti(s){ return String(s).split(/\s*(?:,|;|\/|\|)\s*/).filter(Boolean); }
+function norm(val){
+  if (Array.isArray(val)) return Array.from(new Set(val.map(normalizeAtomic))).filter(Boolean).sort().join('||');
+  const parts = splitMulti(val);
+  if (parts.length>1) return Array.from(new Set(parts.map(normalizeAtomic))).filter(Boolean).sort().join('||');
+  return normalizeAtomic(val);
+}
+function equalAns(user, keyVal){
+  if (Array.isArray(keyVal)) return keyVal.some(k => equalAns(user, k));
+  const u = norm(user), k = norm(keyVal);
+  if (u.includes('||') || k.includes('||')){
+    const U = new Set(u.split('||')), K = new Set(k.split('||'));
+    if (U.size!==K.size) return false; for (const x of U) if(!K.has(x)) return false; return true;
+  }
+  return u === k;
+}
+function scoreSection(answersQ, which){
+  const keyMap = ANSWER_KEYS[which] || {};
+  const details = {};
+  let correct = 0;
+  for (let i=1;i<=40;i++){
+    const q = 'Q'+i;
+    const user = answersQ[q] ?? '';
+    const gold = keyMap[q];
+    const ok = (gold!==undefined) ? equalAns(user, gold) : null;
+    details[q] = { user: normalizeAtomic(user), key: Array.isArray(gold)?gold.join(' / '):(gold??''), correct: ok };
+    if (ok===true) correct++;
+  }
+  const band = (which==='listening') ? listeningBand(correct) : readingBand(correct);
+  return { correct, total: 40, band, details };
+}
+
+/* =========================================================
+   READING COLLECTOR (strict, ignores Listening/Writing)
+   ========================================================= */
+function isWritingKey(k){
+  const s = String(k);
+  return (
+    /^sp_W[12]$/i.test(s) ||
+    /^W[12]$/i.test(s) ||
+    /(^|[^A-Za-z])W[12](?:[^A-Za-z]|$)/i.test(s) ||
+    /writing|task\s*[12]\b|^wc[12]$/i.test(s)
+  );
+}
+function explicitQuestionNumber(k){
+  const s = String(k).trim();
+  let m;
+  if ((m = s.match(/^Q\s*0*(\d{1,2})$/i)))     return +m[1];
+  if ((m = s.match(/^RD\s*0*(\d{1,2})$/i)))    return +m[1];
+  if ((m = s.match(/^drop\s*0*(\d{1,2})$/i)))  return +m[1];
+  if ((m = s.match(/^R\s*0*(\d{1,2})$/i)))     return +m[1];
+  return null;
+}
+function passageBase(ctx){
+  const m = String(ctx).match(/(?:^|[^A-Za-z])P\s*([123])(?:[^A-Za-z]|$)|(?:^|[^A-Za-z])Section\s*([123])(?:[^A-Za-z]|$)/i);
+  const p = m ? (m[1]||m[2]) : null;
+  return p==='1'?0 : p==='2'?13 : p==='3'?26 : null;
+}
+function localIndexFromKeyInContext(k){
+  const m = String(k).match(/(?:^|[^A-Za-z])(Q|No|Num|Question|drop)[_\- ]?(\d{1,2})(?!\d)/i);
+  return m ? +m[2] : null;
+}
+function assignBest(meta, qNum, val, fromKey, weight){
+  if(qNum<1 || qNum>40) return;
+  const v = (val==null) ? '' : String(val);
+  if(!v.trim()) return;
+  const prev = meta[qNum];
+  const score = (weight||0) + (v.trim().length >= 3 ? 2 : 0);
+  if (!prev || score > prev.score || (score === prev.score && v.length > prev.value.length)) {
+    meta[qNum] = { value: v, score, from: String(fromKey||'') };
+  }
+}
+function scanNode(meta, node, ctx){
+  if(node==null) return;
+  if(Array.isArray(node)){
+    const base = passageBase(ctx);
+    if (base != null){
+      if (base === 13 && node.length === 6){ for(let i=0;i<6;i++) assignBest(meta, 14+i, node[i], ctx+`[#${i}]`, 40); }
+      else { for(let i=0;i<node.length && i<13;i++) assignBest(meta, base+(i+1), node[i], ctx+`[#${i}]`, 30); }
+    } else if (node.length === 40){ for(let i=0;i<40;i++) assignBest(meta, i+1, node[i], ctx+`[#${i}]`, 25); }
+    node.forEach((v,i)=>scanNode(meta, v, `${ctx}.#${i}`));
+    return;
+  }
+  if(typeof node === 'object'){
+    const base = passageBase(ctx);
+    for(const [k,v] of Object.entries(node)){
+      if (isWritingKey(k)) continue;
+      if (String(k).toLowerCase().includes('listen')) continue; // hard ignore
+      const childCtx = ctx ? `${ctx}.${k}` : String(k);
+      const nStandalone = explicitQuestionNumber(k);
+      if (nStandalone != null) assignBest(meta, nStandalone, v, childCtx, 100);
+      if (base != null){
+        const local = localIndexFromKeyInContext(k);
+        if (local != null){
+          const g = (local <= 13) ? base + local : local;
+          assignBest(meta, g, v, childCtx, 60);
+        }
+      }
+      scanNode(meta, v, childCtx);
+    }
+    return;
+  }
+  if(typeof node === 'string'){
+    let m;
+    const re = /"(Q|RD|drop|R)?\s*0*(1[0-9]|[1-9])"\s*:\s*"(.*?)"/gi;
+    while((m = re.exec(node)) !== null){
+      const tag = (m[1]||'').toUpperCase();
+      const num = +m[2];
+      const val = m[3];
+      if (num>=1 && num<=40){
+        const w = tag ? 80 : 10;
+        assignBest(meta, num, val, ctx+'(str)', w);
+      }
+    }
+  }
+}
+function collectReadingAnswers(){
+  const meta = {};
+  for(let i=0;i<localStorage.length;i++){
+    const k = localStorage.key(i); if(!k) continue;
+    if (['sp_submission','sp_reading_answers_q','sp_reading_answers_raw','sp_last_scoring'].includes(k)) continue;
+    if (/(^|_)(L_|listening_|sp_L\d+)/i.test(k)) continue;
+    if (String(k).toLowerCase().includes('listen')) continue;
+    if (isWritingKey(k)) continue;
+
+    const raw = localStorage.getItem(k);
+    if (raw == null) continue;
+
+    const nExp = explicitQuestionNumber(k);
+    if (nExp != null) assignBest(meta, nExp, raw, k, 120);
+
+    try { const parsed = JSON.parse(raw); scanNode(meta, parsed, k); }
+    catch { scanNode(meta, raw, k); }
+  }
+  const byQ = {}; for(let i=1;i<=40;i++) byQ['Q'+i] = meta[i]?.value || '';
+  try {
+    localStorage.setItem('sp_reading_answers_q', JSON.stringify(byQ));
+    localStorage.setItem('sp_reading_answers_raw', JSON.stringify(meta));
+  } catch {}
+  return byQ;
+}
+
+/* ===== Listening collector ===== */
+function extractQnum(k){ const m = String(k).match(/(?:^|[^A-Za-z])Q\s*0*(\d{1,2})(?!\d)/i); return m?+m[1]:null; }
+function collectListeningFromStorage(){
+  const byQ={}; for(let i=1;i<=40;i++) byQ['Q'+i]='';
+  const assign=(n,val)=>{ if(n>=1&&n<=40 && byQ['Q'+n]==='') byQ['Q'+n]=(val==null?'':String(val)); };
+
+  // legacy keys like sp_L15, L_20, listening_03...
+  for(let i=0;i<localStorage.length;i++){
+    const k = localStorage.key(i); if(!k) continue;
+    if(/^sp_L/.test(k) || /^L_/.test(k) || /^listening_/i.test(k)){
+      const v = localStorage.getItem(k);
+      const nums = String(k).match(/(\d{1,2})(?!\d)/g);
+      if(nums){ const n = parseInt(nums[nums.length-1],10); assign(n, v); }
+    }
+  }
+  // JSON states labelled as listening
+  for(let i=0;i<localStorage.length;i++){
+    const k = localStorage.key(i); if(!k) continue;
+    const lower = k.toLowerCase();
+    if (!lower.includes('listen')) continue;
+    const raw = localStorage.getItem(k); if(!raw) continue;
+    let parsed=null; try{ parsed=JSON.parse(raw);}catch{}
+    if (parsed && typeof parsed==='object'){
+      const stack=[parsed];
+      while(stack.length){
+        const node=stack.pop();
+        if(Array.isArray(node)){ for(const v of node) if(v&&typeof v==='object') stack.push(v); }
+        else{
+          for(const [kk,vv] of Object.entries(node)){
+            const n = extractQnum(kk); if(n) assign(n, vv);
+            if(vv&&typeof vv==='object') stack.push(vv);
+          }
+        }
+      }
+    }
+  }
+  try { localStorage.setItem('sp_listening_answers_q', JSON.stringify(byQ)); } catch {}
+  return byQ;
+}
+
+/* ===== Writing snapshot ===== */
+function collectWriting(){
+  const t1=document.getElementById('W1')?.value || '';
+  const t2=document.getElementById('W2')?.value || '';
+  const obj = { task1:t1, task2:t2, wc1:countWords(t1), wc2:countWords(t2) };
+  try { localStorage.setItem('sp_writing_snapshot', JSON.stringify(obj)); } catch {}
+  return obj;
+}
+
+/* ===== Simple Thank-You Overlay (no answers displayed) ===== */
+function showThankYouOverlay(){
+  const overlay=document.createElement('div');
+  overlay.style.position='fixed';
+  overlay.style.inset='0';
+  overlay.style.background='rgba(12,18,28,.55)';
+  overlay.style.display='flex';
+  overlay.style.alignItems='center';
+  overlay.style.justifyContent='center';
+  overlay.style.zIndex='9999';
+
+  const card=document.createElement('div');
+  card.style.background='var(--panel)';
+  card.style.color='var(--text)';
+  card.style.border='1px solid var(--line)';
+  card.style.borderRadius='18px';
+  card.style.boxShadow='0 10px 30px rgba(0,0,0,.25)';
+  card.style.maxWidth='720px';
+  card.style.width='92%';
+  card.style.padding='28px';
+  card.style.textAlign='center';
+
+  const h=document.createElement('div');
+  h.textContent='Thank you';
+  h.style.fontSize='28px';
+  h.style.fontWeight='800';
+  h.style.marginBottom='8px';
+
+  const p1=document.createElement('div');
+  p1.textContent='Your answers have been submitted successfully.';
+  p1.style.fontSize='16px';
+  p1.style.marginBottom='12px';
+
+  const p2=document.createElement('div');
+  p2.textContent='Your overall band score will be released till Thursday.';
+  p2.style.color='#667085';
+  p2.style.marginBottom='18px';
+
+  const when=document.createElement('div');
+  when.textContent=new Date().toLocaleString();
+  when.style.display='inline-block';
+  when.style.border='1px solid var(--line)';
+  when.style.borderRadius='12px';
+  when.style.padding='.35rem .65rem';
+  when.style.background='var(--panel)';
+  when.style.marginBottom='14px';
+  when.style.color='#55595c';
+
+  const btn=document.createElement('button');
+  btn.className='btn primary';
+  btn.textContent='Close';
+  btn.style.marginTop='6px';
+  btn.addEventListener('click',()=>overlay.remove());
+
+  card.appendChild(h);
+  card.appendChild(p1);
+  card.appendChild(p2);
+  card.appendChild(when);
+  card.appendChild(btn);
+
+  overlay.addEventListener('click',(e)=>{ if(e.target===overlay) overlay.remove(); });
+  overlay.appendChild(card);
+  document.body.appendChild(overlay);
+}
+
+/* ===== Submit ===== */
+function submitAll(){
+  try{
+    const listeningAnsQ = collectListeningFromStorage(); // saved into sp_listening_answers_q
+    const readingAnsQ   = collectReadingAnswers();       // saved into sp_reading_answers_q
+    const writingAns    = collectWriting();
+    const candidate     = getCandidateInfo();
+
+    const listeningScore = scoreSection(listeningAnsQ, 'listening');
+    const readingScore   = scoreSection(readingAnsQ,   'reading');
+
+    const payload = {
+      submittedAt: new Date().toISOString(),
+      candidate,
+      listening: { answers: listeningAnsQ, score: listeningScore },
+      reading:   { answers: readingAnsQ,   score: readingScore },
+      writing:   writingAns
+    };
+
+    localStorage.setItem('sp_submission', JSON.stringify(payload));
+    localStorage.setItem('sp_last_scoring', JSON.stringify({listening: listeningScore, reading: readingScore}));
+    localStorage.setItem('sp_writing_done','1');
+
+    // lock UI
+    document.querySelectorAll('textarea,input,select,button').forEach(el=>{
+      if(el.id==='themeToggle' || el.id==='submitNow') return;
+      el.disabled = true;
+    });
+
+    // optional external hook
+    try { window.dispatchEvent(new CustomEvent('sp_submission_ready', { detail: payload })); } catch {}
+    try { if (typeof window.saveSubmissionToFirestore === 'function') { window.saveSubmissionToFirestore(payload); } } catch {}
+
+    // Show minimal professional overlay
+    showThankYouOverlay();
+  }catch(err){
+    console.error('Submit failed:', err);
+    alert('Submit failed: ' + (err?.message || err));
+  }
+}
+document.getElementById('submitNow')?.addEventListener('click', submitAll);
+
+// Early snapshot for debugging
+try { localStorage.setItem('sp_reading_answers_q', JSON.stringify(collectReadingAnswers())); } catch {}
+</script>
+
+<!-- Optional: Answer Saver (works even if no <form> on page) -->
+<script>
+  (function () {
+    "use strict";
+    const DEBOUNCE_MS = 220;
+    const STORAGE_PREFIX = "sevenplus:form:";
+    const TEXTLIKE = new Set(["text","search","email","url","tel","password","number","range","date","time","week","month","color"]);
+    const IGNORE_TYPES = new Set(["button","submit","reset","file","hidden"]);
+
+    if (!window.CSS || !CSS.escape) { window.CSS = window.CSS || {}; CSS.escape = CSS.escape || (value => String(value).replace(/[^a-zA-Z0-9_\u00A0-\uFFFF-]/g, "\\$&")); }
+
+    const Memory = {};
+    const Store = {
+      getItem(k){ try { return localStorage.getItem(k); } catch { return Memory[k] ?? null; } },
+      setItem(k,v){ try { localStorage.setItem(k,v); } catch { Memory[k] = v; } },
+      removeItem(k){ try { localStorage.removeItem(k); } catch { delete Memory[k]; } },
+    };
+    const has = (o,k) => Object.prototype.hasOwnProperty.call(o,k);
+    const debounce=(fn,wait)=>{ let t=null; return (...args)=>{ clearTimeout(t); t=setTimeout(()=>fn.apply(null,args), wait); }; };
+
+    function hash32(str){ let h=2166136261>>>0; for (let i=0;i<str.length;i++){ h^=str.charCodeAt(i); h=Math.imul(h,16777619);} return (h>>>0).toString(36); }
+    function relCssPath(el, root){
+      const parts=[]; let node=el;
+      while(node && node!==root && node.nodeType===1){
+        const tag=node.tagName.toLowerCase();
+        if (node.id){ parts.unshift(tag+"#"+node.id); break; }
+        const parent=node.parentElement; if(!parent){ parts.unshift(tag); break; }
+        const siblings=Array.from(parent.children).filter(c=>c.tagName===node.tagName);
+        if (siblings.length>1){ const idx=siblings.indexOf(node)+1; parts.unshift(`${tag}:nth-of-type(${idx})`); }
+        else { parts.unshift(tag); }
+        node=parent;
+      }
+      return parts.join(">");
+    }
+    function getFormKey(form){
+      if (form.dataset.formId) return STORAGE_PREFIX + form.dataset.formId;
+      if (form.id)            return STORAGE_PREFIX + "id#" + form.id;
+      const title=(document.title||"sevenplus").trim();
+      const sig=relCssPath(form, document.body);
+      return STORAGE_PREFIX + title + ":" + hash32(sig);
+    }
+
+    const isSelect=el=>el.tagName==="SELECT";
+    const isTextarea=el=>el.tagName==="TEXTAREA";
+    const isInput=el=>el.tagName==="INPUT";
+    const isTextLike=el=>isTextarea(el)||(isInput(el)&&TEXTLIKE.has(el.type||"text"));
+    const isRadio=el=>isInput(el)&&el.type==="radio";
+    const isCheckbox=el=>isInput(el)&&el.type==="checkbox";
+
+    function collectControls(scope){
+      const selector=[
+        "input[type='text']","input[type='search']","input[type='email']","input[type='url']","input[type='tel']",
+        "input[type='password']","input[type='number']","input[type='range']","input[type='date']","input[type='time']",
+        "input[type='week']","input[type='month']","input[type='color']",
+        "input[type='radio']","input[type='checkbox']",
+        "textarea","select"
+      ].join(",");
+      return Array.from(scope.querySelectorAll(selector)).filter(el=>{
+        if (isInput(el) && IGNORE_TYPES.has(el.type)) return false;
+        return true;
+      });
+    }
+
+    function elementKey(el, form){
+      if (el.dataset && el.dataset.qid) return "qid:" + el.dataset.qid.trim();
+      if (el.id) return "id:" + el.id.trim();
+      return "path:" + hash32(relCssPath(el, form));
+    }
+    function nearestGroupContainer(el, form){
+      const type=isRadio(el)?"radio":"checkbox";
+      const name=el.name||"";
+      if (!name) return el.parentElement||form;
+      let node=el.parentElement, candidate=null, count=1;
+      while(node && node!==form){
+        const c=node.querySelectorAll(`input[type="${type}"][name="${CSS.escape(name)}"]`).length;
+        if (c>=2){ candidate=node; count=c; break; }
+        node=node.parentElement;
+      }
+      if (!candidate) return el.parentElement||form;
+      let parent=candidate.parentElement;
+      while(parent && parent!==form){
+        const pc=parent.querySelectorAll(`input[type="${type}"][name="${CSS.escape(name)}"]`).length;
+        if (pc>count) break;
+        parent=parent.parentElement;
+      }
+      return candidate;
+    }
+    function groupKeyFor(el, form){
+      const type=isRadio(el)?"RG":"CG";
+      const name=el.name||"";
+      const cont=nearestGroupContainer(el, form);
+      return `${type}:${hash32(relCssPath(cont, form))}:${hash32(name||"_noname_")}`;
+    }
+    function readValue(el){
+      if (isRadio(el) || isCheckbox(el)) return !!el.checked;
+      if (isSelect(el)){ if(el.multiple) return Array.from(el.options).filter(o=>o.selected).map(o=>o.value); return el.value; }
+      if (isTextLike(el)) return el.value;
+      if ("value" in el) return el.value;
+      if ("checked" in el) return !!el.checked;
+      return null;
+    }
+    function writeValue(el, value, fire=true){
+      try{
+        if (isRadio(el)||isCheckbox(el)){ el.checked=!!value; if(fire) el.dispatchEvent(new Event("change",{bubbles:true})); return; }
+        if (isSelect(el)){ if(el.multiple && Array.isArray(value)){ const set=new Set(value.map(String)); Array.from(el.options).forEach(o=>o.selected=set.has(o.value));}
+          else if(typeof value==="string"){ el.value=value; } if(fire) el.dispatchEvent(new Event("change",{bubbles:true})); return; }
+        if (isTextLike(el)){ if(typeof value==="string") el.value=value; if(fire) el.dispatchEvent(new Event("input",{bubbles:true})); return; }
+        if ("value" in el && typeof value==="string"){ el.value=value; return; }
+        if ("checked" in el){ el.checked=!!value; return; }
+      }catch{}
+    }
+    function enforceRadioGroup(form, state, groupKey){
+      const radios=Array.from(form.querySelectorAll("input[type='radio'][name]"));
+      const group=radios.filter(r=>groupKeyFor(r, form)===groupKey);
+      const sel=state[groupKey];
+      if(typeof sel==="string"){
+        let hit=false; for(const r of group){ const on=(r.value===sel); r.checked=on; if(on) hit=true; }
+        if(!hit) group.forEach(r=>r.checked=false);
+      }
+    }
+
+    function bindForm(form){
+      const storageKey=getFormKey(form);
+      const state=(function(){ try{return JSON.parse(Store.getItem(storageKey)||"{}");}catch{return{};} })();
+      const flush=()=>{ try{Store.setItem(storageKey, JSON.stringify(state));}catch{} };
+      const flushDebounced=debounce(flush, DEBOUNCE_MS);
+
+      const bound=new WeakSet();
+      function bindControl(el){
+        if (bound.has(el)) return; bound.add(el);
+        if (isRadio(el)){ const gk=groupKeyFor(el, form); const sel=state[gk]; if(typeof sel==="string"){ if(el.value===sel) writeValue(el,true,false); else writeValue(el,false,false);} else if (sel==="") writeValue(el,false,false); }
+        else if (isCheckbox(el)){
+          const name=el.name||""; let groupCount=0;
+          if (name){ const cont=nearestGroupContainer(el, form); groupCount=cont.querySelectorAll(`input[type="checkbox"][name="${CSS.escape(name)}"]`).length; }
+          if (name && groupCount>=2){ const gk=groupKeyFor(el, form); const arr=state[gk]; if(Array.isArray(arr)) writeValue(el, arr.includes(el.value), false); }
+          else { const k=elementKey(el, form); if(has(state,k)) writeValue(el, !!state[k], false); }
+        } else { const k=elementKey(el, form); if(has(state,k)) writeValue(el, state[k], false); }
+
+        const onChange=()=>{
+          if (isRadio(el)){
+            const gk=groupKeyFor(el, form);
+            const group=Array.from(form.querySelectorAll("input[type='radio'][name]")).filter(r=>groupKeyFor(r, form)===gk);
+            const chosen=group.find(r=>r.checked);
+            state[gk]=chosen?String(chosen.value):"";
+            flushDebounced(); return;
+          }
+          if (isCheckbox(el)){
+            const name=el.name||""; let groupCount=0;
+            if (name){ const cont=nearestGroupContainer(el, form); groupCount=cont.querySelectorAll(`input[type="checkbox"][name="${CSS.escape(name)}"]`).length; }
+            if (name && groupCount>=2){
+              const gk=groupKeyFor(el, form);
+              const cont=nearestGroupContainer(el, form);
+              const group=Array.from(cont.querySelectorAll(`input[type="checkbox"][name="${CSS.escape(name)}"]`));
+              state[gk]=group.filter(c=>c.checked).map(c=>String(c.value||"on"));
+              flushDebounced();
+            } else {
+              const k=elementKey(el, form);
+              state[k]=!!el.checked;
+              flushDebounced();
+            }
+            return;
+          }
+          const k=elementKey(el, form);
+          state[k]=readValue(el); flushDebounced();
+        };
+
+        if (isTextLike(el)){ el.addEventListener("input", onChange); el.addEventListener("change", onChange); el.addEventListener("blur", onChange); }
+        else { el.addEventListener("change", onChange); }
+      }
+
+      collectControls(form).forEach(bindControl);
+      Object.keys(state).forEach(key=>{ if(key.startsWith("RG:")) enforceRadioGroup(form, state, key); });
+
+      const mo=new MutationObserver(muts=>{
+        let touched=new Set();
+        for(const m of muts){
+          if (m.addedNodes){
+            m.addedNodes.forEach(node=>{
+              if(!(node instanceof Element)) return;
+              if(node.matches && node.matches("input,textarea,select")) bindControl(node);
+              collectControls(node).forEach(bindControl);
+              if(node.matches && node.matches("input[type='radio']")) touched.add(groupKeyFor(node, form));
+              node.querySelectorAll && node.querySelectorAll("input[type='radio']").forEach(r=>touched.add(groupKeyFor(r, form)));
+            });
+          }
+        }
+        touched.forEach(gk=>enforceRadioGroup(form, state, gk));
+      });
+      mo.observe(form, { childList:true, subtree:true });
+
+      form.addEventListener("submit", flush);
+      window.addEventListener("beforeunload", flush);
+
+      window.SevenPlusAnswers = window.SevenPlusAnswers || {
+        clear(target){ const key=resolveFormKey(target); Store.removeItem(key); },
+        dump(target){ const key=resolveFormKey(target); try{return JSON.parse(Store.getItem(key)||"{}");}catch{return{};} }
+      };
+      function resolveFormKey(target){
+        if(!target) return getFormKey(form);
+        if(typeof target==="string"){
+          const byData=document.querySelector(`form[data-form-id="${CSS.escape(target)}"]`);
+          if(byData) return getFormKey(byData);
+          const byId=document.getElementById(target); if(byId && byId.tagName==="FORM") return getFormKey(byId);
+          return STORAGE_PREFIX + target;
+        }
+        if(target instanceof HTMLFormElement) return getFormKey(target);
+        return getFormKey(form);
+      }
+    }
+
+    const forms=Array.from(document.querySelectorAll("form"));
+    if(forms.length){ forms.forEach(bindForm); }
+    else { const pseudo=document.createElement("form"); Object.defineProperty(pseudo,"dataset",{value:{formId:"page-body"}}); bindForm(pseudo); }
+  })();
+</script>
+
+</body>
+</html>
