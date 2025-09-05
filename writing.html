@@ -740,6 +740,70 @@ try { localStorage.setItem('sp_reading_answers_q', JSON.stringify(collectReading
     else { const pseudo=document.createElement("form"); Object.defineProperty(pseudo,"dataset",{value:{formId:"page-body"}}); bindForm(pseudo); }
   })();
 </script>
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+  import {
+    getFirestore, collection, addDoc, setDoc, doc, serverTimestamp
+  } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+  // --- your project ---
+  const firebaseConfig = {
+    apiKey: "AIzaSyAemCY9HP4ROiArtcIPOVgygkxlf5BfDEk",
+    authDomain: "cd-ielts.firebaseapp.com",
+    projectId: "cd-ielts",
+    storageBucket: "cd-ielts.appspot.com",    // important: *.appspot.com
+    messagingSenderId: "825769899021",
+    appId: "1:825769899021:web:ff54fdb5dfabf5c6bed144",
+    measurementId: "G-4VCCR48GTS"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db  = getFirestore(app);
+
+  /**
+   * Called by submitAll() (already in your page).
+   * Saves a compact record into collection `submissions`.
+   * - If candidate number is present -> upsert doc with that ID (easy to match later).
+   * - Otherwise -> add a new document with an auto ID.
+   */
+  window.saveSubmissionToFirestore = async function saveSubmissionToFirestore(payload) {
+    const info   = payload?.candidate ?? {};
+    const fullName = (info.name   || "").trim();
+    const candNo   = (info.number || "").trim();
+
+    const lRaw  = payload?.listening?.score?.correct ?? 0;
+    const lBand = payload?.listening?.score?.band    ?? 0;
+    const rRaw  = payload?.reading?.score?.correct   ?? 0;
+    const rBand = payload?.reading?.score?.band      ?? 0;
+
+    const data = {
+      fullName,
+      candNo,
+      listening: { raw: lRaw, band: lBand },
+      reading:   { raw: rRaw, band: rBand },
+      writing: {
+        t1: { essay: payload?.writing?.task1 || "" },
+        t2: { essay: payload?.writing?.task2 || "" }
+      },
+      // keep the original client timestamp too (helpful in the admin UI)
+      submittedAtISO: payload?.submittedAt || new Date().toISOString(),
+      createdAt: serverTimestamp(),
+      updatedAt: serverTimestamp(),
+      source: "exam"
+      // If you also want raw answers in Firestore, uncomment next two lines:
+      // ,listeningAnswers: payload?.listening?.answers ?? null
+      // ,readingAnswers:   payload?.reading?.answers   ?? null
+    };
+
+    if (candNo) {
+      // Upsert by candidate number so the admin panel sees one row per candidate.
+      await setDoc(doc(db, "submissions", candNo), data, { merge: true });
+    } else {
+      // No candidate number; create a new doc.
+      await addDoc(collection(db, "submissions"), data);
+    }
+  };
+</script>
 
 </body>
 </html>
