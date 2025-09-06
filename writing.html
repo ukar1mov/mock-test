@@ -4,6 +4,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>sevenplus — IELTS Writing (Academic)</title>
+<link rel="icon" href="./favicon/favicon-180.png" sizes="32x32">
 <meta name="theme-color" content="#1aa2c9">
 <style>
   :root{--brand-blue:#1aa2c9;--brand-gray:#55595c;--bg:#f7f9fb;--panel:#fff;--text:#1b1f23;--line:#e5e8eb}
@@ -25,6 +26,13 @@
   .btn{border:1px solid var(--line);background:var(--panel);padding:.55rem .9rem;border-radius:10px;cursor:pointer}
   .btn.primary{background:var(--brand-blue);color:#fff;border-color:var(--brand-blue)}
   .submit-fixed{position:fixed;right:16px;bottom:16px;z-index:50}
+  /* media for task 1 graph */
+.task1-graph { margin-top:12px; text-align:center; }
+.task1-graph img { max-width:100%; height:auto; border:1px solid var(--line); border-radius:8px; }
+
+/* spaced actions in the thank-you overlay */
+.sp-actions { display:flex; align-items:center; justify-content:center; gap:10px; flex-wrap:wrap; }
+
 </style>
 </head>
 <body>
@@ -48,6 +56,12 @@
             <p><em>The graph below shows the average monthly change in the prices of three metals during 2014.</em></p>
             <p><strong>Summarise</strong> the information by selecting and reporting the main features, and make comparisons where relevant.</p>
           </div>
+          
+          <!-- Task 1 graph (replace src with your actual image path if needed) -->
+          <div class="task1-graph">
+            <img src="./task1/task1.jpg" alt="Average monthly change in prices of copper, nickel and zinc (2014)">
+          </div>
+          
         </div>
         <div class="panel">
           <textarea id="W1" class="answer" placeholder="Write your Task 1 response here..."></textarea>
@@ -448,37 +462,39 @@ function showThankYouOverlay(){
   p1.style.marginBottom='12px';
 
   const p2=document.createElement('div');
-  p2.textContent='Your overall band score will be released till Thursday.';
+  p2.textContent='Your overall band score will be released on 11/09/25.'; // fixed date
   p2.style.color='#667085';
   p2.style.marginBottom='18px';
 
+  // actions row (date pill + close button) with spacing
+  const actions=document.createElement('div');
+  actions.className='sp-actions';
+
   const when=document.createElement('div');
   when.textContent=new Date().toLocaleString();
-  when.style.display='inline-block';
   when.style.border='1px solid var(--line)';
   when.style.borderRadius='12px';
   when.style.padding='.35rem .65rem';
   when.style.background='var(--panel)';
-  when.style.marginBottom='14px';
   when.style.color='#55595c';
 
   const btn=document.createElement('button');
   btn.className='btn primary';
   btn.textContent='Close';
-  btn.style.marginTop='6px';
   btn.addEventListener('click',()=>overlay.remove());
+
+  actions.appendChild(when);
+  actions.appendChild(btn);
 
   card.appendChild(h);
   card.appendChild(p1);
   card.appendChild(p2);
-  card.appendChild(when);
-  card.appendChild(btn);
+  card.appendChild(actions);
 
   overlay.addEventListener('click',(e)=>{ if(e.target===overlay) overlay.remove(); });
   overlay.appendChild(card);
   document.body.appendChild(overlay);
 }
-
 /* ===== Submit ===== */
 function submitAll(){
   try{
