@@ -31,15 +31,13 @@
   h1,h2,h3{margin:.2rem 0}
   .note{color:#667085}
   .qblock{border:1px solid var(--line);border-radius:12px;padding:12px;margin:10px 0}
-  /* Keep class for compatibility; no card flash */
-  .qblock.correct{border-color:inherit;animation:none}
   .options{display:grid;gap:6px;margin-top:8px}
   input[type=text]{width:100%;padding:.5rem .6rem;border:1px solid var(--line);border-radius:10px}
   footer.nav{display:flex;gap:8px;justify-content:center;margin:14px 0}
-  footer.nav a{ text-decoration:none }
+  footer.nav a{text-decoration:none}
   .timer{margin-left:8px;padding:.25rem .55rem;border:1px solid var(--line);border-radius:10px;background:var(--panel);font-weight:600;color:var(--brand-blue);min-width:64px;text-align:center}
 
-  /* Highlights should not shift layout */
+  /* Highlights */
   .hl{display:inline;padding:0;border:0;line-height:inherit;font:inherit}
   .hl-yellow{background-color:#fff59d}
   .hl-green{background-color:#c8e6c9}
@@ -50,11 +48,10 @@
   .qnav button.done{background:#1fb66a;color:#fff;font-weight:600;border-color:#1fb66a}
   .qnav button.active{outline:2px solid var(--brand-blue)}
   @keyframes pulseGreen{0%{box-shadow:0 0 0 0 rgba(31,182,106,.6)}70%{box-shadow:0 0 0 10px rgba(31,182,106,0)}100%{box-shadow:none}}
-  /* Only the numbered boxes (below the text) should flash */
   .qnav button.pulse{animation:pulseGreen .6s ease-out 1;border-color:#1fb66a}
   [data-theme="dark"] .qnav button{background:var(--panel)}
 
-  /* Drag & drop (Q36–40) */
+  /* Drag & drop chips (for 27–31) */
   .bank{display:flex;flex-wrap:wrap;gap:8px;padding:8px;border:1px dashed var(--line);border-radius:10px;margin:6px 0;background:var(--panel)}
   .chip{user-select:none;cursor:grab;display:inline-flex;align-items:center;padding:6px 10px;border:1px solid var(--line);border-radius:999px;background:#fff}
   [data-theme="dark"] .chip{background:var(--panel)}
@@ -84,164 +81,167 @@
     </div>
 
     <div class="grid">
-      <!-- LEFT: PASSAGE (scrollable) -->
+      <!-- LEFT: PASSAGE -->
       <article id="passage" class="panel" tabindex="0">
         <h2>READING PASSAGE 3</h2>
         <p class="note">You should spend about 20 minutes on Questions 27–40 which are based on Reading Passage 3.</p>
 
-        <h2 style="text-align:center">Environmentally-friendly vehicles</h2>
+        <h2 style="text-align:center">Beyond the Blue Line</h2>
 
-        <p><strong>A</strong> In the early 1990s, the California Air Resources Board (CARB), the government of California's "clean air agency", began a push for more fuel-efficient, lower-emissions vehicles, with the ultimate goal being a move to zero-emissions vehicles such as electric vehicles. In response, automakers developed electric models, including the Chrysler TEVan, Ford Ranger EV pickup truck, GM EV1 and S10 EV pickup, Honda EV Plus hatchback, Nissan lithium-battery Altra EV miniwagon and Toyota RAV4 EV. Ford Fusion is manufactured at Ford's Hermosillo Stamping &amp; Assembly plant, located in Sonora Mexico. I thought going green was supposed to provide the U.S. with more jobs.</p>
+        <!-- Paste of the passage user provided -->
+        <p><strong>A</strong>  Much of the thrill of venturing to the far side of the world rests on the romance of difference. So one feels a certain sympathy for Captain James Cook on the day in 1778 that he "discovered" Hawaii. Then on his third expedition to the Pacific, the British navigator had explored scores of islands across the breadth of the sea, from lush New Zealand to the lonely wastes of Easter Island. This latest voyage had taken him thousands of miles north from the Society Islands to an archipelago so remote that even the old Polynesians back on Tahiti knew nothing about it. Imagine Cook's surprise, then, when the natives of Hawaii came paddling out in their canoes and greeted him in a familiar tongue, one he had heard on virtually every mote of inhabited land he had visited. Marveling at the ubiquity of this Pacific language and culture, he later wondered in his journal: "How shall we account for this Nation spreading itself so far over this vast ocean?"</p>
+        <p><strong>B</strong> That question, and others that flow from it has tantalized inquiring minds for centuries: Who were these amazing seafarers? Where did they come from, starting more than 3,000 years ago? And how could a Neolithic people with simple canoes and no navigation gear manage to find, let alone colonize, hundreds of far-flung island specks scattered across an ocean that spans nearly a third of the globe? Answers have been slow in coming. But now a startling archaeological find on the island of Éfaté, in the Pacific nation of Vanuatu, has revealed an ancient seafaring people, the distant ancestors of today's Polynesians, taking their first steps into the unknown. The discoveries there have also opened a window into the shadowy world of those early voyagers.</p>
+        <p><strong>C</strong> "What we have is a first- or second-generation site containing the graves of some of the Pacific's first explorers," says Spriggs, professor of archaeology at the Australian National University and co-leader of an international team excavating the site. It came to light only by luck. A backhoe operator, digging up topsoil on the grounds of a derelict coconut plantation, scraped open a grave – the first of dozens in a burial ground some 3,000 years old. It is the oldest cemetery ever found in the Pacific islands, and it harbors the bones of an ancient people archaeologists call the Lapita, a label that derives from a beach in New Caledonia where a landmark cache of their pottery was found in the 1950s.</p>
+        <p><strong>D</strong>They were daring blue-water adventurers who roved the sea not just as explorers but also as pioneers, bringing along everything they would need to build new lives – their families and livestock, taro seedlings and stone tools. Within the span of a few centuries, the Lapita stretched the boundaries of their world from the jungle-clad volcanoes of Papua New Guinea to the loneliest coral outliers of Tonga, at least 2,000 miles eastward in the Pacific. Along the way they explored millions of square miles of an unknown sea, discovering and colonizing scores of tropical islands never before seen by human eyes: Vanuatu, New Caledonia, Fiji, Samoa.
 
-        <p><strong>B</strong> The automakers were accused of pandering to the wishes of CARB in order to continue to be allowed to sell cars in the lucrative Californian market, while failing to adequately promote their electric vehicles in order to create the impression that the consumers were not interested in the cars, all the while joining oil industry lobbyists in vigorously protesting CARB's mandate. GM's program came under particular scrutiny; in an unusual move, consumers were not allowed to purchase EV1s, but were instead asked to sign closed-end leases, meaning that the cars had to be returned to GM at the end of the lease period, with no option to purchase, despite lesser interest in continuing to own the cars. Chrysler, Toyota, and a group of GM dealers sued CARB in Federal court, leading to the eventual neutering of CARB's ZEV Mandate.</p>
+          It was their descendants, centuries later, who became the great Polynesian navigators we all tend to think of: the Tahitians and Hawaiians, the New Zealand Maori, and the curious people who erected those statues on Easter Island. But it was the Lapita who laid the foundation – who bequeathed to the island the language, customs, and cultures that their more famous descendants carried around the Pacific.</p>
+        <p><strong>E</strong> While the Lapita left a glorious legacy, they also left precious few clues about themselves. A particularly intriguing clue comes from chemical tests on the teeth of several skeletons. Then as now, the food and water you consume as a child deposits oxygen, carbon, strontium, and other elements in your still-forming adult teeth. The isotope signatures of these elements vary subtly from place to place, so that if you grow up in, say, Buffalo, New York, then spend your adult life in California, tests on the isotopes in your teeth will always reveal your eastern roots.
 
-        <p><strong>C</strong> After public protests by EV drivers' groups upset by the repossession of their cars, Toyota offered the last 328 RAV4-EVs for sale to the general public during six months, up until November 22, 2002. Almost all other production electric cars were withdrawn from the market and were in some cases seen to have been destroyed by their manufactures. Toyota continues to support the several hundred Toyota RAV4-EV in the hands of the general public and in fleet usage. GM famously de-activated the few EV1s that were donated to engineering schools and museums.</p>
+          Isotope analysis indicates that several of the Lapita buried on Éfaté didn't spend their childhoods here but came from somewhere else. And while isotopes can't pinpoint their precise island of origin, this much is clear: At some point in their lives, these people left the villages of their birth and made a voyage by seagoing canoe, never to return. DNA teased from these ancient bones may also help answer one of the most puzzling questions in Pacific anthropology: Did all Pacific islanders spring from one source or many? Was there only one outward migration from a single point in Asia, or several from different points? "This represents the best opportunity we've had yet," says Spriggs, "to find out who the Lapita actually were, where they came from, and who their closest descendants are today."</p>
+        <p><strong>F</strong>There is one stubborn question for which archaeology has yet to provide any answers: How did the Lapita accomplish the ancient equivalent of a moon landing, many times over? No one has found one of their canoes or any rigging, which could reveal how the canoes were sailed. Nor do the oral histories and traditions of later Polynesians offer any insights.
 
-        <p><strong>D</strong> Throughout the 1990s, the appeal of fuel-efficient or environmentally friendly cars declined among Americans, who instead favored sport utility vehicles, which were affordable to operate despite their poor fuel efficiency thanks to lower gasoline prices. American automakers chose to focus their product lines around the truck-based vehicles, which enjoyed larger profit margins than the smaller cars which were preferred in places like Europe or Japan. In 1999, the Honda Insight hybrid car became the first hybrid to be sold in North America since the little-known Woods hybrid of 1917.</p>
+          "All we can say for certain is that the Lapita had canoes that were capable of ocean voyages, and they had the ability to sail them," says Geoff Irwin, a professor of archaeology at the University of Auckland and an avid yachtsman. Those sailing skills, he says, were developed and passed down over thousands of years by earlier mariners who worked their way through the archipelagoes of the western Pacific making short crossings to islands within sight of each other. The real adventure didn't begin, however, until their Lapita descendants neared the end of the Solomons chain, for this was the edge of the world. The nearest landfall, the Santa Cruz Islands, is almost 230 miles away, and for at least 150 of those miles, the Lapita sailors would have been out of sight of land, with empty horizons on every side.</p>
+        <p><strong>G</strong> The Lapita's thrust into the Pacific was eastward, against the prevailing trade winds, Irwin notes. Those nagging headwinds, he argues, may have been the key to their success. "They could sail out for days into the unknown and reconnoiter, secure in the knowledge that if they didn't find anything, they could turn about and catch a swift ride home on the trade winds. It's what made the whole thing work." Once out there, skilled seafarers would detect abundant leads to follow to land: seabirds and turtles, coconuts and twigs carried out to sea by the tides and the afternoon pileup of clouds on the horizon that often betokens an island in the distance.
 
-        <p><strong>E</strong> In 1995, Toyota debuted a hybrid concept car at the Tokyo Motor Show, with testing following a year later. The first Prius, model NHW10, went on sale on December 10, 1997. It was available only in Japan, though it has been imported privately to at least the United Kingdom, Australia, and New Zealand. The first-generation Prius, at its launch, became the world's first mass-produced gasoline-electric hybrid car. The NHW10 Prius styling originated from California designers, who were selected over competing designs from other Toyota design studios.</p>
+          All this presupposes one essential detail, says Atholl Anderson, professor of prehistory at the Australian National University and, like Irwin, a keen yachtsman: that the Lapita had mastered the advanced art of tacking into the wind. "And there's no proof that they could do any such thing," Anderson says. "There has been this assumption that they must have done so, and people have built canoes to re-create those early voyages based on that assumption. But nobody has any idea what their canoes looked like or how they were rigged."</p>
+        <p><strong>H</strong> However they did it, the Lapita spread themselves a third of the way across the Pacific, then called it quits for reasons known only to them. Ahead lay the vast emptiness of the central Pacific, and perhaps they were too thinly stretched to venture farther. They probably never numbered more than a few thousand in total, and in their rapid migration eastward they encountered hundreds of islands – more than 300 in Fiji alone. Supplied with such an embarrassment of riches, they could settle down and enjoy what for a time was Earth's last Edens.</p>
+        <p><strong>I</strong> Rather than give all the credit to human skill and daring, Anderson invokes the winds of change. El Niño, the same climate disruption that affects the Pacific today, may have helped scatter the first settlers to the ends of the ocean, Anderson suggests. Climate data obtained from slow-growing corals around the Pacific and from lake-bed sediments in the Andes of South America point to a series of unusually frequent El Niño around the time of the Lapita expansion, and again between 1,600 and 1,200 years ago, when the second wave of pioneer navigators made their voyages farther east, to the remotest corners of the Pacific. By reversing the regular east-to-west flow of the trade winds for weeks at a time, these "super El Niño" might have sped the Pacific's ancient mariners on long, unplanned voyages could have been key to launching Polynesians across the wide expanse of open water between Tonga, where the Lapita stopped, and the distant archipelagoes of eastern Polynesia. "Once they crossed that gap, they could island-hop throughout the region, and from the Marquesas, it's mostly downwind to Hawaii," Anderson says. It took another 400 years for mariners to reach Easter Island, which lies in the opposite direction – normally upwind. "Once again this was during a period of frequent El Niño activity."</p>
 
-        <p><strong>F</strong> In the United States, the NHW11 was the first Prius to be sold. The Prius was marketed between the smaller Corolla and the larger Camry. The published retail price of the car was US$19,995. The NHW11 Prius became more powerful partly to satisfy the higher speeds and longer distances that Americans drive. Air conditioning and electric power steering were standard equipment. The vehicle was the second mass-produced hybrid on the American market, after the two-seat Honda Insight. While the larger Prius could seat five, its battery pack restricted cargo space.</p>
-
-        <p><strong>G</strong> Hybrids, which featured a combined gasoline and electric powertrain, were seen as a balance, offering an environmentally friendly image and improved fuel economy, without being hindered by the low range of electric vehicles, albeit at an increased price over comparable gasoline cars. Sales were poor, the lack of interest attributed to the car's small size and the lack of necessity for a fuel-efficient car at the time. The 2000s energy crisis brought renewed interest in hybrid and electric cars. In America, sales of the Toyota Prius jumped, and a variety of automakers followed suit, releasing hybrid models of their own. Several began to produce new electric car prototypes, as consumers called for cars that would free them from the fluctuations of oil prices.</p>
-
-        <p><strong>H</strong> In 2000, Hybrid Technologies, later renamed Li-ion Motors, started manufacturing electric cars in Mooresville, North Carolina. There has been increasing controversy with Li-ion Motors though due to the ongoing 'Lemon issues' regarding their product. And their attempt to cover it up. California electric-car maker Tesla Motors began development in 2004 on the Tesla Roadster, which was first delivered to customers in 2008. The Roadster remained the only highway-capable EV in serial production and available for sale until 2010. Senior leaders at several large automakers, including Nissan and General Motors, have stated that the Roadster was a catalyst which demonstrated that there is pent-up consumer demand for more efficient vehicles. GM Vice Chairman Bob Lutz said in 2007 that the Tesla Roadster inspired him to push GM to develop the Chevrolet Volt, a plug-in hybrid sedan prototype that aims to reverse years of dwindling market share and massive financial losses for America's largest automaker. In an August 2009 edition of The New Yorker, Lutz was quoted as saying, "All the geniuses here at General Motors kept saying lithium-ion technology is 10 years away, and Toyota agreed with us – and boom, along comes Tesla. So I said, 'How come some tiny little California startup, run by guys who know nothing about the car business, can do this, and we can't?' That was the crowbar that helped break up the log jam."
-        </p>
-
-        <!-- Numbered navigation boxes 27–40 (below the passage text) -->
+        <!-- number nav -->
         <div class="qnav" id="qnav">
           <button data-q="q27">27</button><button data-q="q28">28</button><button data-q="q29">29</button><button data-q="q30">30</button><button data-q="q31">31</button><button data-q="q32">32</button><button data-q="q33">33</button><button data-q="q34">34</button><button data-q="q35">35</button><button data-q="q36">36</button><button data-q="q37">37</button><button data-q="q38">38</button><button data-q="q39">39</button><button data-q="q40">40</button>
         </div>
       </article>
 
-      <!-- RIGHT: QUESTIONS (scrollable) -->
+      <!-- RIGHT: QUESTIONS -->
       <aside id="questions" class="panel" tabindex="0">
-        <h3>Questions 27–30</h3>
+        <h3>Questions 27–31</h3>
+        <p>Complete the summary using the list of words A–L. <em>(Drag a chip into each blank.)</em></p>
+
+        <div class="qblock">
+          <div class="bank" id="bank">
+            <span class="chip" draggable="true" data-key="A">A. bones</span>
+            <span class="chip" draggable="true" data-key="B">B. co-leader</span>
+            <span class="chip" draggable="true" data-key="C">C. descendents</span>
+            <span class="chip" draggable="true" data-key="D">D. international team</span>
+            <span class="chip" draggable="true" data-key="E">E. inquiring minds</span>
+            <span class="chip" draggable="true" data-key="F">F. proof</span>
+            <span class="chip" draggable="true" data-key="G">G. ancestors</span>
+            <span class="chip" draggable="true" data-key="H">H. early seafarers</span>
+            <span class="chip" draggable="true" data-key="I">I. pottery</span>
+            <span class="chip" draggable="true" data-key="J">J. assumption</span>
+            <span class="chip" draggable="true" data-key="K">K. horizons</span>
+            <span class="chip" draggable="true" data-key="L">L. grave</span>
+          </div>
+
+          <div id="q27" class="qblock" style="border:0;padding:0;margin:0">
+            <p>
+              The question, arisen from Captain Cook’s expedition to Hawaii, and others derived from it, has fascinated researchers for a long time. However, a surprising archaeological find on Éfaté began to provide valuable information about the
+              <span class="drop" id="drop27" data-answer="G" data-label="27">27</span>
+              of Lapita. On the excavating site, a
+              <span class="drop" id="drop28" data-answer="L" data-label="28">28</span>
+              containing
+              <span class="drop" id="drop29" data-answer="A" data-label="29">29</span>
+              of Lapita was uncovered. Later on, various researches and tests have been done to study the ancient people – Lapita and their
+              <span class="drop" id="drop30" data-answer="C" data-label="30">30</span>.
+              How could they manage to spread themselves so far over the vast ocean? All that is certain is that they were good at canoeing. And perhaps they could take well advantage of the trade wind. But there is no
+              <span class="drop" id="drop31" data-answer="F" data-label="31">31</span>
+              of it.
+            </p>
+            <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:8px">
+              <button class="btn" id="reset27to31">Reset</button>
+            </div>
+          </div>
+        </div>
+
+        <h3 style="margin-top:16px">Questions 32–35</h3>
         <p>Choose the correct answer.</p>
 
-        <div class="qblock" id="q27" data-type="single" data-answer="A">
-          <p><strong>27.</strong> What does the author think of the factory in Sonora in Mexico where the Ford Fusion is manufactured?</p>
+        <div class="qblock" id="q32">
+          <p><strong>32.</strong> The chemical tests indicate that</p>
           <div class="options">
-            <label><input type="radio" name="P3_Q27" value="A"> the factory should be helpful in the US soil business</label>
-            <label><input type="radio" name="P3_Q27" value="B"> Employment of US will be created as consumers change their awareness</label>
-            <label><input type="radio" name="P3_Q27" value="C"> More competitive cars will be introduced into the market</label>
-            <label><input type="radio" name="P3_Q27" value="D"> this issue is hard to give a predict</label>
+            <label><input type="radio" name="P3_Q32" value="A"> the elements in one's teeth varied from childhood to adulthood.</label>
+            <label><input type="radio" name="P3_Q32" value="B"> the isotope signatures of the elements remain the same in different places.</label>
+            <label><input type="radio" name="P3_Q32" value="C"> the result of the study is not fascinating.</label>
+            <label><input type="radio" name="P3_Q32" value="D"> these chemicals can't conceal one's origin.</label>
           </div>
         </div>
 
-        <div class="qblock" id="q28" data-type="single" data-answer="B">
-          <p><strong>28.</strong> In the 1990s, what dropped in America for environmentally friendly vehicles?</p>
+        <div class="qblock" id="q33">
+          <p><strong>33.</strong> The isotope analysis from the Lapita</p>
           <div class="options">
-            <label><input type="radio" name="P3_Q28" value="A"> production</label>
-            <label><input type="radio" name="P3_Q28" value="B"> Attractiveness</label>
-            <label><input type="radio" name="P3_Q28" value="C"> Announcement</label>
-            <label><input type="radio" name="P3_Q28" value="D"> Expectation</label>
+            <label><input type="radio" name="P3_Q33" value="A"> exactly locates their birth island.</label>
+            <label><input type="radio" name="P3_Q33" value="B"> reveals that the Lapita found the new place via straits.</label>
+            <label><input type="radio" name="P3_Q33" value="C"> helps researchers to find out answers about the islanders.</label>
+            <label><input type="radio" name="P3_Q33" value="D"> leaves more new questions for anthropologists to answer.</label>
           </div>
         </div>
 
-        <div class="qblock" id="q29" data-type="single" data-answer="A">
-          <p><strong>29.</strong> What did GM notably send to engineering schools and museums?</p>
+        <div class="qblock" id="q34">
+          <p><strong>34.</strong> According to paragraph F, the offspring of Lapita</p>
           <div class="options">
-            <label><input type="radio" name="P3_Q29" value="A"> EV 1</label>
-            <label><input type="radio" name="P3_Q29" value="B"> CARB</label>
-            <label><input type="radio" name="P3_Q29" value="C"> RAV4</label>
-            <label><input type="radio" name="P3_Q29" value="D"> MINI E</label>
+            <label><input type="radio" name="P3_Q34" value="A"> were capable of voyages to land that is not accessible to view.</label>
+            <label><input type="radio" name="P3_Q34" value="B"> were able to have the farthest voyage of 230 miles.</label>
+            <label><input type="radio" name="P3_Q34" value="C"> worked their way through the archipelagoes of the western Pacific.</label>
+            <label><input type="radio" name="P3_Q34" value="D"> fully explored the horizons.</label>
           </div>
         </div>
 
-        <div class="qblock" id="q30" data-type="single" data-answer="C">
-          <p><strong>30.</strong> Nissan and GM high-level leaders declared the real reason for the popularity of Roadster is its</p>
+        <div class="qblock" id="q35">
+          <p><strong>35.</strong> Once out exploring the sea, the sailors</p>
           <div class="options">
-            <label><input type="radio" name="P3_Q30" value="A"> legendary concert</label>
-            <label><input type="radio" name="P3_Q30" value="B"> huge population in the market</label>
-            <label><input type="radio" name="P3_Q30" value="C"> bursting demand</label>
-            <label><input type="radio" name="P3_Q30" value="D"> artistic design</label>
+            <label><input type="radio" name="P3_Q35" value="A"> always found the trade winds unsuitable for sailing.</label>
+            <label><input type="radio" name="P3_Q35" value="B"> could return home with various clues.</label>
+            <label><input type="radio" name="P3_Q35" value="C"> sometimes would overshoot their home port and sail off into eternity.</label>
+            <label><input type="radio" name="P3_Q35" value="D"> would sail in one direction.</label>
           </div>
         </div>
 
-        <h3 style="margin-top:16px">Questions 31–35</h3>
-        <p>YES if the statement is true — NO if it is false — NOT GIVEN if the information is not in the passage.</p>
+        <h3 style="margin-top:16px">Questions 36–40</h3>
+        <p>TRUE if the statement is true — FALSE if it is false — NOT GIVEN if the information is not in the passage.</p>
 
-        <div class="qblock" id="q31" data-type="single" data-answer="YES">
-          <p><strong>31.</strong> Some automakers mislead and suppressed the real demand for electric cars of keeping profit in a certain market by luring the want of CARB.</p>
+        <div class="qblock" id="q36">
+          <p><strong>36.</strong> The Lapita could canoe in the prevailing wind.</p>
           <div class="options">
-            <label><input type="radio" name="P3_Q31" value="YES"> YES</label>
-            <label><input type="radio" name="P3_Q31" value="NO"> NO</label>
-            <label><input type="radio" name="P3_Q31" value="NOT GIVEN"> NOT GIVEN</label>
+            <label><input type="radio" name="P3_Q36" value="TRUE"> TRUE</label>
+            <label><input type="radio" name="P3_Q36" value="FALSE"> FALSE</label>
+            <label><input type="radio" name="P3_Q36" value="NOT GIVEN"> NOT GIVEN</label>
           </div>
         </div>
 
-        <div class="qblock" id="q32" data-type="single" data-answer="NO">
-          <p><strong>32.</strong> Toyota started to sell 328 RAV4-EVs for taking up the market share.</p>
+        <div class="qblock" id="q37">
+          <p><strong>37.</strong> It was difficult for the sailors to find ways back, once they were out.</p>
           <div class="options">
-            <label><input type="radio" name="P3_Q32" value="YES"> YES</label>
-            <label><input type="radio" name="P3_Q32" value="NO"> NO</label>
-            <label><input type="radio" name="P3_Q32" value="NOT GIVEN"> NOT GIVEN</label>
+            <label><input type="radio" name="P3_Q37" value="TRUE"> TRUE</label>
+            <label><input type="radio" name="P3_Q37" value="FALSE"> FALSE</label>
+            <label><input type="radio" name="P3_Q37" value="NOT GIVEN"> NOT GIVEN</label>
           </div>
         </div>
 
-        <div class="qblock" id="q33" data-type="single" data-answer="YES">
-          <p><strong>33.</strong> In some countries, American automakers would like to grab the opportunity to earn money in bigger-engine cars rather than smaller ones.</p>
+        <div class="qblock" id="q38">
+          <p><strong>38.</strong> The reason why the Lapita stopped canoeing farther is still unknown.</p>
           <div class="options">
-            <label><input type="radio" name="P3_Q33" value="YES"> YES</label>
-            <label><input type="radio" name="P3_Q33" value="NO"> NO</label>
-            <label><input type="radio" name="P3_Q33" value="NOT GIVEN"> NOT GIVEN</label>
+            <label><input type="radio" name="P3_Q38" value="TRUE"> TRUE</label>
+            <label><input type="radio" name="P3_Q38" value="FALSE"> FALSE</label>
+            <label><input type="radio" name="P3_Q38" value="NOT GIVEN"> NOT GIVEN</label>
           </div>
         </div>
 
-        <div class="qblock" id="q34" data-type="single" data-answer="NO">
-          <p><strong>34.</strong> Hybrid cars are superior vehicles that combine an eco-friendly electric engine and a lower price per unit.</p>
+        <div class="qblock" id="q39">
+          <p><strong>39.</strong> The majority of the Lapita dwelled on Fiji.</p>
           <div class="options">
-            <label><input type="radio" name="P3_Q34" value="YES"> YES</label>
-            <label><input type="radio" name="P3_Q34" value="NO"> NO</label>
-            <label><input type="radio" name="P3_Q34" value="NOT GIVEN"> NOT GIVEN</label>
+            <label><input type="radio" name="P3_Q39" value="TRUE"> TRUE</label>
+            <label><input type="radio" name="P3_Q39" value="FALSE"> FALSE</label>
+            <label><input type="radio" name="P3_Q39" value="NOT GIVEN"> NOT GIVEN</label>
           </div>
         </div>
 
-        <div class="qblock" id="q35" data-type="single" data-answer="YES">
-          <p><strong>35.</strong> An inspiration to produce hybrid cars was to cope with economic difficulties from GM’s declining market.</p>
+        <div class="qblock" id="q40">
+          <p><strong>40.</strong> The navigators could take advantage of El Niño during their forth voyages.</p>
           <div class="options">
-            <label><input type="radio" name="P3_Q35" value="YES"> YES</label>
-            <label><input type="radio" name="P3_Q35" value="NO"> NO</label>
-            <label><input type="radio" name="P3_Q35" value="NOT GIVEN"> NOT GIVEN</label>
-          </div>
-        </div>
-
-        <h3 style="margin: top 16pxpx">Questions 36–40</h3>
-        <p>Complete the summary using the list of words below. <em>(Drag a chip into each blank.)</em></p>
-
-        <div class="bank" id="bank">
-          <span class="chip" draggable="true" data-key="A">A. electric car</span>
-          <span class="chip" draggable="true" data-key="B">B. United Kingdom</span>
-          <span class="chip" draggable="true" data-key="C">C. Market</span>
-          <span class="chip" draggable="true" data-key="D">D. concept car</span>
-          <span class="chip" draggable="true" data-key="E">E. longer distances</span>
-          <span class="chip" draggable="true" data-key="F">F. Emissions</span>
-          <span class="chip" draggable="true" data-key="G">G. battery</span>
-          <span class="chip" draggable="true" data-key="H">H. Consumers</span>
-          <span class="chip" draggable="true" data-key="I">I. gasoline-electricity</span>
-          <span class="chip" draggable="true" data-key="J">J. inspiration</span>
-          <span class="chip" draggable="true" data-key="K">K. cargo space</span>
-          <span class="chip" draggable="true" data-key="L">L. orientation</span>
-        </div>
-
-        <div class="qblock" id="q36to40">
-          <p>
-            A <span class="drop" id="drop36" data-answer="D" data-label="36">36</span>
-            was firstly introduced by car maker Toyota in 1995. Then it started for sale in 1997 with a new first-generation model.
-            Not only in Japan but included other countries such as
-            <span class="drop" id="drop37" data-answer="B" data-label="37">37</span>
-            and Oceania in which the Prius was imported to. The first-generation Prius was the first car in mass production which is powered by
-            <span class="drop" id="drop38" data-answer="I" data-label="38">38</span>.
-          </p>
-          <p>
-            The model NHW10 was designed by a winning Californian designer. The innovated NHW11 Prius has considerably higher running velocity and
-            <span class="drop" id="drop39" data-answer="E" data-label="39">39</span>
-            than American counterparts. Still, the load capacity of current Prius version was limited in its
-            <span class="drop" id="drop40" data-answer="K" data-label="40">40</span>.
-          </p>
-          <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:8px">
-            <button class="btn" id="resetDD">Reset</button>
+            <label><input type="radio" name="P3_Q40" value="TRUE"> TRUE</label>
+            <label><input type="radio" name="P3_Q40" value="FALSE"> FALSE</label>
+            <label><input type="radio" name="P3_Q40" value="NOT GIVEN"> NOT GIVEN</label>
           </div>
         </div>
 
@@ -257,226 +257,140 @@
 </main>
 
 <script>
-/* ===== Theme toggle ===== */
+/* ===== Theme ===== */
 (function(){
-  const toggle=document.getElementById('themeToggle');
-  if(!toggle) return;
+  const t=document.getElementById('themeToggle');
+  if(!t) return;
   const saved=localStorage.getItem('sp_theme')||'light';
   document.documentElement.setAttribute('data-theme', saved);
-  toggle.checked=(saved==='dark');
-  toggle.addEventListener('change',()=>{
-    const mode=toggle.checked?'dark':'light';
-    document.documentElement.setAttribute('data-theme', mode);
-    localStorage.setItem('sp_theme', mode);
-  });
+  t.checked=(saved==='dark');
+  t.addEventListener('change',()=>{ const m=t.checked?'dark':'light'; document.documentElement.setAttribute('data-theme',m); localStorage.setItem('sp_theme',m); });
 })();
 
-/* ===== Highlighter (yellow/green + eraser) — layout-safe ===== */
+/* ===== Highlighter ===== */
 (function(){
   function wrap(color){
-    const sel=window.getSelection();
-    if(!sel || sel.isCollapsed) return;
-    const range=sel.getRangeAt(0);
-    const span=document.createElement('span');
+    const sel=window.getSelection(); if(!sel||sel.isCollapsed) return;
+    const r=sel.getRangeAt(0); const span=document.createElement('span');
     span.className='hl '+(color==='yellow'?'hl-yellow':'hl-green');
-    try{ range.surroundContents(span); }catch{}
+    try{ r.surroundContents(span);}catch{}
     sel.removeAllRanges();
   }
   function erase(){
-    const sel=window.getSelection();
-    if(!sel || sel.isCollapsed) return;
-    const range=sel.getRangeAt(0);
+    const sel=window.getSelection(); if(!sel||sel.isCollapsed) return;
+    const r=sel.getRangeAt(0);
     document.querySelectorAll('#passage span.hl').forEach(el=>{
       try{
-        if(range.intersectsNode(el)){
-          const p=el.parentNode;
-          while(el.firstChild) p.insertBefore(el.firstChild, el);
-          p.removeChild(el);
-          p.normalize();
-        }
+        if(r.intersectsNode(el)){ const p=el.parentNode; while(el.firstChild) p.insertBefore(el.firstChild, el); p.removeChild(el); p.normalize(); }
       }catch{}
     });
     sel.removeAllRanges();
   }
-  document.querySelectorAll('[data-hl]')
-    .forEach(b=>b.addEventListener('click',()=>wrap(b.dataset.hl)));
-  const er=document.getElementById('hl-eraser');
-  if(er) er.addEventListener('click', erase);
+  document.querySelectorAll('[data-hl]').forEach(b=>b.addEventListener('click',()=>wrap(b.dataset.hl)));
+  document.getElementById('hl-eraser')?.addEventListener('click', erase);
 })();
 
-/* ===== GLOBAL: collect & snapshot ALL answers into localStorage ===== */
-(function(){
-  function collectAll(){
-    const a={};
-    // radios
-    document.querySelectorAll('input[type=radio]:checked').forEach(el=>{ a[el.name]=el.value; });
-    // selects
-    document.querySelectorAll('select').forEach(el=>{ a[el.id||el.name||`sel_${Math.random().toString(36).slice(2)}`]=el.value; });
-    // text/textarea
-    document.querySelectorAll('input[type=text], textarea').forEach(el=>{ a[el.id||el.name||`txt_${Math.random().toString(36).slice(2)}`]=el.value; });
-    // drag & drop
-    ['drop36','drop37','drop38','drop39','drop40'].forEach(id=>{ const chip=document.querySelector('#'+id+' .chip'); a[id]=chip?chip.dataset.key:''; });
-
-    // Optional: include which passage/page this is
-    a.__page='reading_p3';
-
-    const iso=new Date().toISOString();
-    localStorage.setItem('sp_reading_answers', JSON.stringify(a));
-    localStorage.setItem('sp_reading_saved_at', iso);
-    // Also store a page-specific bundle with pretty keys
-    const pageBundle={
-      page:'reading_p3',
-      savedAt: iso,
-      answers:{
-        P3_Q27:a['P3_Q27']||'', P3_Q28:a['P3_Q28']||'', P3_Q29:a['P3_Q29']||'', P3_Q30:a['P3_Q30']||'',
-        P3_Q31:a['P3_Q31']||'', P3_Q32:a['P3_Q32']||'', P3_Q33:a['P3_Q33']||'', P3_Q34:a['P3_Q34']||'', P3_Q35:a['P3_Q35']||'',
-        drop36:a['drop36']||'', drop37:a['drop37']||'', drop38:a['drop38']||'', drop39:a['drop39']||'', drop40:a['drop40']||''
-      }
-    };
-    localStorage.setItem('sp_reading_p3', JSON.stringify(pageBundle));
-  }
-  // expose
-  window.__sp_collectReadingAnswers = collectAll;
-
-  // background & catch-all autosave hooks
-  const snapshot=()=>{ try{ collectAll(); }catch{} };
-  window.addEventListener('visibilitychange',()=>{ if(document.visibilityState==='hidden') snapshot(); });
-  window.addEventListener('pagehide', snapshot);
-  window.addEventListener('beforeunload', snapshot);
-  document.addEventListener('change', snapshot, true);
-})();
-
-/* ===== Persist per-field (P3_*) ===== */
-(function(){
-  // Helper generates consistent keys WITHOUT double prefix
-  const keyFor=(raw)=>{
-    const base = raw || '';
-    return base.startsWith('P3_') ? base : ('P3_'+base);
-  };
-
-  // text + textarea
-  document.querySelectorAll('input[type=text], textarea').forEach(el=>{
-    const rawKey=(el.id||el.name||('txt_'+Math.random().toString(36).slice(2)));
-    const key=keyFor(rawKey);
-    if(!el.dataset.key) el.dataset.key=key;
-    el.value = localStorage.getItem(key) || '';
-    el.addEventListener('input',()=>{ localStorage.setItem(key, el.value); if(window.__sp_collectReadingAnswers) window.__sp_collectReadingAnswers(); });
-  });
-
-  // radios (store one key per group)
-  document.querySelectorAll('input[type=radio]').forEach(el=>{
-    const key=keyFor(el.name||el.id||'radio');
-    const saved=localStorage.getItem(key);
-    if(saved===el.value) el.checked=true;
-    el.addEventListener('change',()=>{ if(el.checked){ localStorage.setItem(key, el.value); if(window.__sp_collectReadingAnswers) window.__sp_collectReadingAnswers(); } });
-  });
-
-  // selects
-  document.querySelectorAll('select').forEach(el=>{
-    const key=keyFor(el.id||el.name||'sel');
-    const saved=localStorage.getItem(key);
-    if(saved!==null) el.value=saved;
-    el.addEventListener('change',()=>{ localStorage.setItem(key, el.value); if(window.__sp_collectReadingAnswers) window.__sp_collectReadingAnswers(); });
-  });
-})();
-
-/* ===== Question nav: smooth jump & active highlight ===== */
+/* ===== Nav jump ===== */
 (function(){
   const qnav=document.getElementById('qnav');
   const pane=document.getElementById('questions');
   if(!qnav||!pane) return;
   qnav.addEventListener('click',e=>{
-    const btn=e.target.closest('button[data-q]');
-    if(!btn) return;
+    const btn=e.target.closest('button[data-q]'); if(!btn) return;
     const target=document.getElementById(btn.dataset.q);
     if(target){ pane.scrollTo({top: target.offsetTop-8, behavior:'smooth'}); }
     qnav.querySelectorAll('button').forEach(b=>b.classList.remove('active'));
     btn.classList.add('active');
   });
 })();
-
 function pulseBox(qid){
   const btn=document.querySelector(`.qnav button[data-q="${qid}"]`);
-  if(!btn) return;
-  btn.classList.add('pulse');
-  setTimeout(()=>btn.classList.remove('pulse'),650);
+  if(btn){ btn.classList.add('pulse'); setTimeout(()=>btn.classList.remove('pulse'),650); }
 }
 
-/* ===== Green “done” markers for Q27–35 (no card flash) ===== */
+/* ===== Save all answers snapshot ===== */
+(function(){
+  function collect(){
+    const a={};
+    document.querySelectorAll('input[type=radio]:checked').forEach(el=>a[el.name]=el.value);
+    ['drop27','drop28','drop29','drop30','drop31'].forEach(id=>{ const chip=document.querySelector('#'+id+' .chip'); a[id]=chip?chip.dataset.key:''; });
+    a.__page='reading_p3';
+    localStorage.setItem('sp_reading_answers', JSON.stringify(a));
+    localStorage.setItem('sp_reading_saved_at', new Date().toISOString());
+    const bundle={page:'reading_p3', savedAt:new Date().toISOString(), answers:a};
+    localStorage.setItem('sp_reading_p3', JSON.stringify(bundle));
+  }
+  window.__sp_collectReadingAnswers = collect;
+  const snap=()=>{ try{ collect(); }catch{} };
+  window.addEventListener('visibilitychange',()=>{ if(document.visibilityState==='hidden') snap(); });
+  window.addEventListener('pagehide', snap);
+  window.addEventListener('beforeunload', snap);
+  document.addEventListener('change', snap, true);
+})();
+
+/* ===== Persist radios (group keys P3_*) ===== */
+(function(){
+  const keyFor = (raw)=> raw.startsWith('P3_')?raw:('P3_'+raw);
+  document.querySelectorAll('input[type=radio]').forEach(el=>{
+    const k=keyFor(el.name||el.id||'radio');
+    const saved=localStorage.getItem(k);
+    if(saved===el.value) el.checked=true;
+    el.addEventListener('change',()=>{ if(el.checked){ localStorage.setItem(k, el.value); window.__sp_collectReadingAnswers&&__sp_collectReadingAnswers(); } });
+  });
+})();
+
+/* ===== Mark green when answered (32–40 radios, 27–31 drops handled below) ===== */
 (function(){
   const map={
-    q27:'input[name="P3_Q27"]', q28:'input[name="P3_Q28"]', q29:'input[name="P3_Q29"]', q30:'input[name="P3_Q30"]',
-    q31:'input[name="P3_Q31"]', q32:'input[name="P3_Q32"]', q33:'input[name="P3_Q33"]', q34:'input[name="P3_Q34"]', q35:'input[name="P3_Q35"]'
+    q32:'input[name="P3_Q32"]', q33:'input[name="P3_Q33"]', q34:'input[name="P3_Q34"]', q35:'input[name="P3_Q35"]',
+    q36:'input[name="P3_Q36"]', q37:'input[name="P3_Q37"]', q38:'input[name="P3_Q38"]', q39:'input[name="P3_Q39"]', q40:'input[name="P3_Q40"]'
   };
-  const qnav=document.getElementById('qnav');
-  if(!qnav) return;
+  const qnav=document.getElementById('qnav'); if(!qnav) return;
   const btnFor=id=>qnav.querySelector(`button[data-q="${id}"]`);
   function update(id){
     const btn=btnFor(id); if(!btn) return;
-    const sel=map[id];
-    const done=!!document.querySelector(sel+':checked');
+    const sel=map[id]; const done=!!document.querySelector(sel+':checked');
     btn.classList.toggle('done', done);
   }
   Object.entries(map).forEach(([qid, sel])=>{
-    document.querySelectorAll(sel).forEach(r=>{
-      r.addEventListener('change',()=>{
-        const box=document.getElementById(qid);
-        const ans=(box?.dataset.answer||'').trim();
-        update(qid);
-        if(ans && r.value===ans) pulseBox(qid);
-        if(window.__sp_collectReadingAnswers) window.__sp_collectReadingAnswers();
-      });
-    });
+    document.querySelectorAll(sel).forEach(r=>r.addEventListener('change',()=>{ update(qid); pulseBox(qid); window.__sp_collectReadingAnswers&&__sp_collectReadingAnswers(); }));
   });
-  // initial
   setTimeout(()=>Object.keys(map).forEach(update),0);
 })();
 
-/* ===== Drag & Drop for 36–40 (with save & correct pulse) ===== */
+/* ===== Drag & Drop for 27–31 ===== */
 (function(){
   const bank=document.getElementById('bank');
-  const drops=[36,37,38,39,40].map(n=>document.getElementById('drop'+n));
+  const drops=[27,28,29,30,31].map(n=>document.getElementById('drop'+n));
   const LS='P3_DD_';
 
   function chipByKey(key){
     return bank.querySelector(`.chip[data-key="${key}"]`) || document.querySelector(`.chip[data-key="${key}"]`);
   }
   function wire(chip){
-    chip.addEventListener('dragstart',e=>{
-      e.dataTransfer.setData('text/plain', chip.dataset.key);
-      e.dataTransfer.effectAllowed='move';
-      chip.classList.add('dragging');
-    });
+    chip.addEventListener('dragstart',e=>{ e.dataTransfer.setData('text/plain', chip.dataset.key); e.dataTransfer.effectAllowed='move'; chip.classList.add('dragging'); });
     chip.addEventListener('dragend',()=>chip.classList.remove('dragging'));
   }
   bank.querySelectorAll('.chip').forEach(wire);
 
-  function markDone(qid, on){
-    const b=document.querySelector(`.qnav button[data-q="${qid}"]`);
-    if(b) b.classList.toggle('done', !!on);
-  }
-  function fill(dz, key){
-    const existing=dz.querySelector('.chip');
-    if(existing) bank.appendChild(existing);
+  function markDone(qid,on){ const b=document.querySelector(`.qnav button[data-q="${qid}"]`); if(b) b.classList.toggle('done', !!on); }
+
+  function fill(dz,key){
+    const existing=dz.querySelector('.chip'); if(existing) bank.appendChild(existing);
     const chip=chipByKey(key); if(!chip) return;
-    dz.textContent='';
-    dz.appendChild(chip);
-    dz.classList.add('filled');
-    const ok=(dz.dataset.answer===key);
-    dz.classList.toggle('dd-correct', ok);
+    dz.textContent=''; dz.appendChild(chip); dz.classList.add('filled');
+    const ok=(dz.dataset.answer===key); dz.classList.toggle('dd-correct', ok);
     if(ok) pulseBox(dz.id.replace('drop','q'));
     localStorage.setItem(LS+dz.id, key);
     markDone(dz.id.replace('drop','q'), true);
-    if(window.__sp_collectReadingAnswers) window.__sp_collectReadingAnswers();
+    window.__sp_collectReadingAnswers&&__sp_collectReadingAnswers();
   }
   function clear(dz){
-    const c=dz.querySelector('.chip');
-    if(c) bank.appendChild(c);
-    dz.classList.remove('filled','dd-correct');
-    dz.textContent=dz.dataset.label;
+    const c=dz.querySelector('.chip'); if(c) bank.appendChild(c);
+    dz.classList.remove('filled','dd-correct'); dz.textContent=dz.dataset.label;
     localStorage.removeItem(LS+dz.id);
     markDone(dz.id.replace('drop','q'), false);
-    if(window.__sp_collectReadingAnswers) window.__sp_collectReadingAnswers();
+    window.__sp_collectReadingAnswers&&__sp_collectReadingAnswers();
   }
 
   drops.forEach(dz=>{
@@ -485,89 +399,50 @@ function pulseBox(qid){
     dz.addEventListener('dblclick',()=>clear(dz));
   });
 
-  // restore (from per-drop keys)
+  // restore
   drops.forEach(dz=>{
     const saved=localStorage.getItem(LS+dz.id);
     if(saved) fill(dz, saved); else dz.textContent=dz.dataset.label;
   });
 
-  // controls
-  document.getElementById('resetDD').addEventListener('click',()=>drops.forEach(clear));
+  document.getElementById('reset27to31').addEventListener('click',()=>drops.forEach(clear));
 })();
 
-/* ===== Footer nav should actually navigate (and save first) ===== */
+/* ===== Footer nav & timer ===== */
 (function(){
   document.querySelectorAll('footer.nav a').forEach(a=>{
-    a.addEventListener('click', e=>{
-      e.preventDefault();
-      if(window.__sp_collectReadingAnswers) window.__sp_collectReadingAnswers();
-      window.location.href = a.getAttribute('href');
-    });
+    a.addEventListener('click',e=>{ e.preventDefault(); window.__sp_collectReadingAnswers&&__sp_collectReadingAnswers(); window.location.href=a.getAttribute('href'); });
   });
 })();
 
-/* ===== Ensure timer badge exists in header ===== */
 (function(){
   if(!document.getElementById('timer')){
-    const badge=document.createElement('span');
-    badge.id='timer';
-    badge.className='timer';
-    badge.textContent='60:00';
-    const header=document.querySelector('.appbar');
-    const meta=document.querySelector('.appbar .meta');
-    if(header) header.insertBefore(badge, meta||null);
+    const b=document.createElement('span'); b.id='timer'; b.className='timer'; b.textContent='60:00';
+    const header=document.querySelector('.appbar'), meta=document.querySelector('.appbar .meta');
+    if(header) header.insertBefore(b, meta||null);
   }
-})();
-
-/* ===== Reading global 60-minute countdown (persists across passages) ===== */
-(function(){
-  const DMS=60*60*1000; // 60 minutes
-  const END='sp_reading_end_ts';
-  const DONE='sp_reading_done';
-  const timer=document.getElementById('timer');
-
-  let end=parseInt(localStorage.getItem(END)||'0',10);
-  const now=Date.now();
-  if(!end || end<now){
-    end=now+DMS;
-    localStorage.setItem(END, String(end));
-    localStorage.removeItem(DONE);
-  }
-
+  const D=60*60*1000, END='sp_reading_end_ts', DONE='sp_reading_done', t=document.getElementById('timer');
+  let end=parseInt(localStorage.getItem(END)||'0',10); const now=Date.now();
+  if(!end||end<now){ end=now+D; localStorage.setItem(END,String(end)); localStorage.removeItem(DONE); }
   const fmt=n=>String(n).padStart(2,'0');
-  function tick(){
-    if(localStorage.getItem(DONE)==='1'){ redirect(); return; }
-    const remain=(parseInt(localStorage.getItem(END)||String(end),10))-Date.now();
-    if(remain<=0){ if(timer) timer.textContent='00:00'; finalizeAndRedirect(); return; }
-    const sec=Math.floor(remain/1000);
-    const m=Math.floor(sec/60), s=sec%60;
-    if(timer) timer.textContent=`${fmt(m)}:${fmt(s)}`;
-    setTimeout(tick,250);
-  }
-
-  function finalizeAndRedirect(){
-    try{ document.querySelectorAll('input, select, textarea, button').forEach(el=>{ if(el.id!=='themeToggle') el.disabled=true; }); }catch{}
-    if(window.__sp_collectReadingAnswers) window.__sp_collectReadingAnswers();
-    localStorage.setItem('sp_reading_submitted_at', new Date().toISOString());
-    localStorage.setItem(DONE,'1');
-    setTimeout(redirect,300);
-  }
   function redirect(){ window.location.href='writing.html'; }
-
-  tick();
+  function finalize(){ try{ document.querySelectorAll('input,select,textarea,button').forEach(el=>{ if(el.id!=='themeToggle') el.disabled=true; }); }catch{} window.__sp_collectReadingAnswers&&__sp_collectReadingAnswers(); localStorage.setItem('sp_reading_submitted_at', new Date().toISOString()); localStorage.setItem(DONE,'1'); setTimeout(redirect,300); }
+  (function tick(){
+    if(localStorage.getItem(DONE)==='1'){ redirect(); return; }
+    const rem=(parseInt(localStorage.getItem(END)||String(end),10))-Date.now();
+    if(rem<=0){ if(t) t.textContent='00:00'; finalize(); return; }
+    const s=Math.floor(rem/1000), m=Math.floor(s/60), r=s%60; if(t) t.textContent=`${fmt(m)}:${fmt(r)}`;
+    setTimeout(tick,250);
+  })();
 })();
 
-/* ===== Proceed button: save ALL answers, then go to writing ===== */
-(function(){
-  function proceed(){
-    if(window.__sp_collectReadingAnswers) window.__sp_collectReadingAnswers();
-    localStorage.setItem('sp_reading_done','1');
-    localStorage.setItem('sp_reading_submitted_at', new Date().toISOString());
-    window.location.href='writing.html';
-  }
-  const btn=document.getElementById('proceedBtn');
-  if(btn) btn.addEventListener('click', proceed);
-})();
+/* ===== Proceed ===== */
+document.getElementById('proceedBtn').addEventListener('click',()=>{
+  window.__sp_collectReadingAnswers&&__sp_collectReadingAnswers();
+  localStorage.setItem('sp_reading_done','1');
+  localStorage.setItem('sp_reading_submitted_at', new Date().toISOString());
+  window.location.href='writing.html';
+});
 </script>
 </body>
 </html>
