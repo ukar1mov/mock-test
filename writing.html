@@ -27,12 +27,11 @@
   .btn.primary{background:var(--brand-blue);color:#fff;border-color:var(--brand-blue)}
   .submit-fixed{position:fixed;right:16px;bottom:16px;z-index:50}
   /* media for task 1 graph */
-.task1-graph { margin-top:12px; text-align:center; }
-.task1-graph img { max-width:100%; height:auto; border:1px solid var(--line); border-radius:8px; }
+  .task1-graph { margin-top:12px; text-align:center; }
+  .task1-graph img { max-width:100%; height:auto; border:1px solid var(--line); border-radius:8px; }
 
-/* spaced actions in the thank-you overlay */
-.sp-actions { display:flex; align-items:center; justify-content:center; gap:10px; flex-wrap:wrap; }
-
+  /* spaced actions in the thank-you overlay */
+  .sp-actions { display:flex; align-items:center; justify-content:center; gap:10px; flex-wrap:wrap; }
 </style>
 </head>
 <body>
@@ -53,13 +52,13 @@
       <div class="split">
         <div class="panel">
           <div class="prompt">
-            <p><em>The graph below shows the average monthly change in the prices of three metals during 2014.</em></p>
-            <p><strong>Summarise</strong> the information by selecting and reporting the main features, and make comparisons where relevant.</p>
+            <p><em>The map below shows a school in 1985 and the school now.</em></p>
+            <p><strong>Summarize</strong> the information by selecting and reporting the main points and make comparisons where relevant.</p>
           </div>
           
-          <!-- Task 1 graph (replace src with your actual image path if needed) -->
+          <!-- Task 1 map image (update path as needed) -->
           <div class="task1-graph">
-            <img src="./task1/task1.jpg" alt="Average monthly change in prices of copper, nickel and zinc (2014)">
+            <img src="./images/task1.jpg" alt="Maps showing the school in 1985 and the school now">
           </div>
           
         </div>
@@ -76,10 +75,10 @@
       <div class="split">
         <div class="panel">
           <div class="prompt">
-            <p><em>Nowadays, a growing number of people with health problems are trying alternative medicines and treatments instead of visiting their usual doctor.</em></p>
-            <p><strong>Do you think this is a positive or a negative development?</strong></p>
+            <p><em>The differences between countries are becoming less evident because we can see the same brands, buildings, movies and clothes.</em></p>
+            <p><strong>Do you agree or disagree?</strong></p>
           </div>
-          <p>Give reasons for your answer and include relevant examples.</p>
+          <p>Give reasons for your answer and include any relevant examples from your own knowledge or experience.</p>
         </div>
         <div class="panel">
           <textarea id="W2" class="answer" placeholder="Write your Task 2 essay here..."></textarea>
@@ -166,26 +165,11 @@ function getCandidateInfo(){
 })();
 
 /* =========================================================
-   ANSWER KEYS + BAND TABLES
+   ANSWER KEYS + BAND TABLES (kept same API shape)
    ========================================================= */
 const ANSWER_KEYS = {
-  listening: {
-    Q1:["a radio program","radio program"],Q2:"LS142JW",Q3:"hennings.co.uk",Q4:["two","2"],Q5:"joint",
-    Q6:["forty-nine","forty nine","49"],Q7:["The Union Bank","Union Bank"],
-    Q8:["15th October","15 October","October 15th","October 15"],Q9:"JYZ37",Q10:"video",
-    Q11:"B",Q12:"A",Q13:"C",Q14:"A",Q15:"C",Q16:"B",Q17:"F",Q18:"C",Q19:"E",Q20:"A",
-    Q21:"B",Q22:"C",Q23:"A",Q24:"B",Q25:"B",Q26:"C",Q27:"B",Q28:"A",Q29:"C",Q30:"A",
-    Q31:"plastic",Q32:"processing",Q33:["properly seasoned","seasoned"],Q34:"polished",
-    Q35:["the cost","cost"],Q36:["grain patterns","grain pattern"],Q37:"words",Q38:"0.8",Q39:"0.1",Q40:"black velvet"
-  },
-  reading: {
-    Q1:"spread",Q2:"rain",Q3:"climate change",Q4:"10 times",Q5:["primary fuel","fuel"],Q6:"fire season",
-    Q7:"C",Q8:"B",Q9:"D",Q10:"TRUE",Q11:"NOT GIVEN",Q12:"TRUE",Q13:"FALSE",
-    Q14:"iii",Q15:"i",Q16:"v",Q17:"iv",Q18:"ii",Q19:"vi",
-    Q20:"D",Q21:"C",Q22:"A",Q23:"B",Q24:"B",Q25:"A",Q26:"D",
-    Q27:"B",Q28:"B",Q29:"A",Q30:"C",Q31:"YES",Q32:"NO",Q33:"NOT GIVEN",Q34:"NO",Q35:"YES",
-    Q36:"D",Q37:"B",Q38:"I",Q39:"E",Q40:"G"
-  }
+  listening: {Q1:"travel", Q2:"teaching", Q3:["9.15 am","9:15 am","9.15am","9:15am","9.15","9:15"], Q4:"guide", Q5:"coach", Q6:"garden", Q7:"guitar", Q8:"farm", Q9:"friends", Q10:"supermarket", Q21:"B", Q22:"A", Q23:"B", Q24:"C", Q25:"C", Q26:"A", Q27:"F", Q28:"C", Q29:"A", Q30:"B", Q31:"ocean", Q32:"depth", Q33:"plants", Q34:"rice", Q35:"A", Q36:"A", Q37:"B", Q38:"A", Q39:"shellfish", Q40:"spring"},
+  reading: {Q1:"YES", Q2:"NOT GIVEN", Q3:"YES", Q4:"NOT GIVEN", Q5:"NO", Q6:"NO", Q7:"ecological release", Q8:"competitors", Q9:"dragons", Q10:"overlooked", Q11:["vanished","have vanished"], Q12:"swallowed up", Q13:"misdated", Q14:"C", Q15:"E", Q16:"B", Q17:"F", Q18:"A", Q19:"E", Q20:"B", Q21:"F", Q22:"D", Q23:"A", Q24:["abraham darby iii","abraham darby 3","darby iii"], Q25:"stone", Q26:"river", Q27:"H", Q28:"L", Q29:"A", Q30:"C", Q31:"F", Q32:"D", Q33:"C", Q34:"A", Q35:"B", Q36:"TRUE", Q37:"FALSE", Q38:"TRUE", Q39:"FALSE", Q40:"NOT GIVEN"}
 };
 function listeningBand(n){
   const rows = [
@@ -216,7 +200,7 @@ function readingBand(n){
 }
 
 /* =========================================================
-   NORMALISATION + SCORING
+   NORMALISATION + SCORING (same API)
    ========================================================= */
 const tidy = s => String(s).replace(/[“”‘’]/g,'"').replace(/[–—]/g,'-').replace(/\s+/g,' ').trim();
 function canonTFYN(s){
@@ -270,7 +254,7 @@ function scoreSection(answersQ, which){
 }
 
 /* =========================================================
-   READING COLLECTOR (strict, ignores Listening/Writing)
+   READING COLLECTOR (strict, ignores Listening/Writing) — same as previous
    ========================================================= */
 function isWritingKey(k){
   const s = String(k);
@@ -462,11 +446,10 @@ function showThankYouOverlay(){
   p1.style.marginBottom='12px';
 
   const p2=document.createElement('div');
-  p2.textContent='Your overall band score will be released on 11/09/25.'; // fixed date
+  p2.textContent='Your overall band score will be released on 17/09/25.'; // fixed date
   p2.style.color='#667085';
   p2.style.marginBottom='18px';
 
-  // actions row (date pill + close button) with spacing
   const actions=document.createElement('div');
   actions.className='sp-actions';
 
@@ -762,12 +745,12 @@ try { localStorage.setItem('sp_reading_answers_q', JSON.stringify(collectReading
     getFirestore, collection, addDoc, setDoc, doc, serverTimestamp
   } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
-  // --- your project ---
+  // --- your project (kept from previous) ---
   const firebaseConfig = {
     apiKey: "AIzaSyAemCY9HP4ROiArtcIPOVgygkxlf5BfDEk",
     authDomain: "cd-ielts.firebaseapp.com",
     projectId: "cd-ielts",
-    storageBucket: "cd-ielts.appspot.com",    // important: *.appspot.com
+    storageBucket: "cd-ielts.appspot.com",
     messagingSenderId: "825769899021",
     appId: "1:825769899021:web:ff54fdb5dfabf5c6bed144",
     measurementId: "G-4VCCR48GTS"
@@ -801,7 +784,6 @@ try { localStorage.setItem('sp_reading_answers_q', JSON.stringify(collectReading
         t1: { essay: payload?.writing?.task1 || "" },
         t2: { essay: payload?.writing?.task2 || "" }
       },
-      // keep the original client timestamp too (helpful in the admin UI)
       submittedAtISO: payload?.submittedAt || new Date().toISOString(),
       createdAt: serverTimestamp(),
       updatedAt: serverTimestamp(),
@@ -812,10 +794,8 @@ try { localStorage.setItem('sp_reading_answers_q', JSON.stringify(collectReading
     };
 
     if (candNo) {
-      // Upsert by candidate number so the admin panel sees one row per candidate.
       await setDoc(doc(db, "submissions", candNo), data, { merge: true });
     } else {
-      // No candidate number; create a new doc.
       await addDoc(collection(db, "submissions"), data);
     }
   };
