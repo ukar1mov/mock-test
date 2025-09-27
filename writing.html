@@ -27,12 +27,10 @@
   .btn.primary{background:var(--brand-blue);color:#fff;border-color:var(--brand-blue)}
   .submit-fixed{position:fixed;right:16px;bottom:16px;z-index:50}
   /* media for task 1 graph */
-.task1-graph { margin-top:12px; text-align:center; }
-.task1-graph img { max-width:100%; height:auto; border:1px solid var(--line); border-radius:8px; }
-
-/* spaced actions in the thank-you overlay */
-.sp-actions { display:flex; align-items:center; justify-content:center; gap:10px; flex-wrap:wrap; }
-
+  .task1-graph { margin-top:12px; text-align:center; }
+  .task1-graph img { max-width:100%; height:auto; border:1px solid var(--line); border-radius:8px; }
+  /* spaced actions in the thank-you overlay */
+  .sp-actions { display:flex; align-items:center; justify-content:center; gap:10px; flex-wrap:wrap; }
 </style>
 </head>
 <body>
@@ -53,15 +51,13 @@
       <div class="split">
         <div class="panel">
           <div class="prompt">
-            <p><em>The graph below shows the average monthly change in the prices of three metals during 2014.</em></p>
+            <p><em>The chart below gives the number of people employed in five types of work in a certain region in Australia in 2001 and 2008.</em></p>
             <p><strong>Summarise</strong> the information by selecting and reporting the main features, and make comparisons where relevant.</p>
           </div>
-          
-          <!-- Task 1 graph (replace src with your actual image path if needed) -->
           <div class="task1-graph">
-            <img src="./task1/task1.jpg" alt="Average monthly change in prices of copper, nickel and zinc (2014)">
+            <!-- Replace src with your actual image path if different -->
+            <img src="./task1/Gemini_Generated_Image_qxywgxqxywgxqxyw.png" alt="Number of people employed in Sales, Accounting, Computing, Nursing and Farming in 2001 vs 2008">
           </div>
-          
         </div>
         <div class="panel">
           <textarea id="W1" class="answer" placeholder="Write your Task 1 response here..."></textarea>
@@ -76,8 +72,8 @@
       <div class="split">
         <div class="panel">
           <div class="prompt">
-            <p><em>Nowadays, a growing number of people with health problems are trying alternative medicines and treatments instead of visiting their usual doctor.</em></p>
-            <p><strong>Do you think this is a positive or a negative development?</strong></p>
+            <p><em>Despite better access to education, many adults today still cannot read or write.</em></p>
+            <p><strong>In what ways are they disadvantaged? What can governments do to help them?</strong></p>
           </div>
           <p>Give reasons for your answer and include relevant examples.</p>
         </div>
@@ -166,25 +162,28 @@ function getCandidateInfo(){
 })();
 
 /* =========================================================
-   ANSWER KEYS + BAND TABLES
+   ANSWER KEYS + BAND TABLES (UPDATED)
    ========================================================= */
 const ANSWER_KEYS = {
   listening: {
-    Q1:["a radio program","radio program"],Q2:"LS142JW",Q3:"hennings.co.uk",Q4:["two","2"],Q5:"joint",
-    Q6:["forty-nine","forty nine","49"],Q7:["The Union Bank","Union Bank"],
-    Q8:["15th October","15 October","October 15th","October 15"],Q9:"JYZ37",Q10:"video",
-    Q11:"B",Q12:"A",Q13:"C",Q14:"A",Q15:"C",Q16:"B",Q17:"F",Q18:"C",Q19:"E",Q20:"A",
-    Q21:"B",Q22:"C",Q23:"A",Q24:"B",Q25:"B",Q26:"C",Q27:"B",Q28:"A",Q29:"C",Q30:"A",
-    Q31:"plastic",Q32:"processing",Q33:["properly seasoned","seasoned"],Q34:"polished",
-    Q35:["the cost","cost"],Q36:["grain patterns","grain pattern"],Q37:"words",Q38:"0.8",Q39:"0.1",Q40:"black velvet"
+    Q1:"XHOSA",Q2:"STUDY",Q3:["11","eleven"],Q4:"HIGH",Q5:"DENTIST",Q6:"GYM",Q7:"FLOODING",
+    Q8:"AGES",Q9:"COOKERY",Q10:"LIBRARY",
+    Q11:"B",Q12:"B",Q13:"C",Q14:"B",Q15:"BUDDY",Q16:"SHARE",Q17:["SHOWER","SHOWERS"],
+    Q18:"D",Q19:"C",Q20:"A",Q21:"C",Q22:"B",Q23:"B",Q24:"A",Q25:"A",Q26:"C",
+    Q27:"AFRICA",Q28:["ANIMAL FAT","ANIMAL FATS"],Q29:"BREEDING",Q30:"HEALTH",
+    Q31:"MICE",Q32:"QUEEN",Q33:"COMFORTABLE",Q34:"NAVIGATE",Q35:"EMERGENCY",
+    Q36:"DISTANCE",Q37:"BACTERIA",Q38:"IRON",Q39:"EYES",Q40:"ELECTRICITY"
   },
   reading: {
-    Q1:"spread",Q2:"rain",Q3:"climate change",Q4:"10 times",Q5:["primary fuel","fuel"],Q6:"fire season",
-    Q7:"C",Q8:"B",Q9:"D",Q10:"TRUE",Q11:"NOT GIVEN",Q12:"TRUE",Q13:"FALSE",
-    Q14:"iii",Q15:"i",Q16:"v",Q17:"iv",Q18:"ii",Q19:"vi",
-    Q20:"D",Q21:"C",Q22:"A",Q23:"B",Q24:"B",Q25:"A",Q26:"D",
-    Q27:"B",Q28:"B",Q29:"A",Q30:"C",Q31:"YES",Q32:"NO",Q33:"NOT GIVEN",Q34:"NO",Q35:"YES",
-    Q36:"D",Q37:"B",Q38:"I",Q39:"E",Q40:"G"
+    /* 1–13 */
+    Q1:"TRUE", Q2:"NOT GIVEN", Q3:"FALSE", Q4:"TRUE", Q5:"FALSE", Q6:"NOT GIVEN",
+    Q7:"Summer", Q8:"Short", Q9:"Fires", Q10:"Sunrise", Q11:"Temperature", Q12:"Insomnia", Q13:"Obese",
+    /* 14–26 (matching/words) */
+    Q14:"E", Q15:"B", Q16:"F", Q17:"C", Q18:"A", Q19:"E", Q20:"B", Q21:"E", Q22:"D", Q23:"C",
+    Q24:"Smile", Q25:"Dialog", Q26:"Tools",
+    /* 27–40 */
+    Q27:"B", Q28:"A", Q29:"B", Q30:"C", Q31:"B", Q32:"NO", Q33:"YES", Q34:"YES", Q35:"NO",
+    Q36:"A", Q37:"D", Q38:"B", Q39:"H", Q40:"C"
   }
 };
 function listeningBand(n){
@@ -324,7 +323,7 @@ function scanNode(meta, node, ctx){
     const base = passageBase(ctx);
     for(const [k,v] of Object.entries(node)){
       if (isWritingKey(k)) continue;
-      if (String(k).toLowerCase().includes('listen')) continue; // hard ignore
+      if (String(k).toLowerCase().includes('listen')) continue;
       const childCtx = ctx ? `${ctx}.${k}` : String(k);
       const nStandalone = explicitQuestionNumber(k);
       if (nStandalone != null) assignBest(meta, nStandalone, v, childCtx, 100);
@@ -462,11 +461,10 @@ function showThankYouOverlay(){
   p1.style.marginBottom='12px';
 
   const p2=document.createElement('div');
-  p2.textContent='Your overall band score will be released on 11/09/25.'; // fixed date
+  p2.textContent='Your overall band score will be released on 01/30/2025.';
   p2.style.color='#667085';
   p2.style.marginBottom='18px';
 
-  // actions row (date pill + close button) with spacing
   const actions=document.createElement('div');
   actions.className='sp-actions';
 
@@ -518,17 +516,14 @@ function submitAll(){
     localStorage.setItem('sp_last_scoring', JSON.stringify({listening: listeningScore, reading: readingScore}));
     localStorage.setItem('sp_writing_done','1');
 
-    // lock UI
     document.querySelectorAll('textarea,input,select,button').forEach(el=>{
       if(el.id==='themeToggle' || el.id==='submitNow') return;
       el.disabled = true;
     });
 
-    // optional external hook
     try { window.dispatchEvent(new CustomEvent('sp_submission_ready', { detail: payload })); } catch {}
     try { if (typeof window.saveSubmissionToFirestore === 'function') { window.saveSubmissionToFirestore(payload); } } catch {}
 
-    // Show minimal professional overlay
     showThankYouOverlay();
   }catch(err){
     console.error('Submit failed:', err);
@@ -689,11 +684,11 @@ try { localStorage.setItem('sp_reading_answers_q', JSON.stringify(collectReading
           }
           if (isCheckbox(el)){
             const name=el.name||""; let groupCount=0;
-            if (name){ const cont=nearestGroupContainer(el, form); groupCount=cont.querySelectorAll(`input[type="checkbox"][name="${CSS.escape(name)}"]`).length; }
+            if (name){ const cont=nearestGroupContainer(el, form); groupCount=cont.querySelectorAll(`input[type='checkbox'][name='${CSS.escape(name)}']`).length; }
             if (name && groupCount>=2){
               const gk=groupKeyFor(el, form);
               const cont=nearestGroupContainer(el, form);
-              const group=Array.from(cont.querySelectorAll(`input[type="checkbox"][name="${CSS.escape(name)}"]`));
+              const group=Array.from(cont.querySelectorAll(`input[type='checkbox'][name='${CSS.escape(name)}']`));
               state[gk]=group.filter(c=>c.checked).map(c=>String(c.value||"on"));
               flushDebounced();
             } else {
@@ -762,12 +757,11 @@ try { localStorage.setItem('sp_reading_answers_q', JSON.stringify(collectReading
     getFirestore, collection, addDoc, setDoc, doc, serverTimestamp
   } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
-  // --- your project ---
   const firebaseConfig = {
     apiKey: "AIzaSyAemCY9HP4ROiArtcIPOVgygkxlf5BfDEk",
     authDomain: "cd-ielts.firebaseapp.com",
     projectId: "cd-ielts",
-    storageBucket: "cd-ielts.appspot.com",    // important: *.appspot.com
+    storageBucket: "cd-ielts.appspot.com",
     messagingSenderId: "825769899021",
     appId: "1:825769899021:web:ff54fdb5dfabf5c6bed144",
     measurementId: "G-4VCCR48GTS"
@@ -776,12 +770,6 @@ try { localStorage.setItem('sp_reading_answers_q', JSON.stringify(collectReading
   const app = initializeApp(firebaseConfig);
   const db  = getFirestore(app);
 
-  /**
-   * Called by submitAll() (already in your page).
-   * Saves a compact record into collection `submissions`.
-   * - If candidate number is present -> upsert doc with that ID (easy to match later).
-   * - Otherwise -> add a new document with an auto ID.
-   */
   window.saveSubmissionToFirestore = async function saveSubmissionToFirestore(payload) {
     const info   = payload?.candidate ?? {};
     const fullName = (info.name   || "").trim();
@@ -801,21 +789,15 @@ try { localStorage.setItem('sp_reading_answers_q', JSON.stringify(collectReading
         t1: { essay: payload?.writing?.task1 || "" },
         t2: { essay: payload?.writing?.task2 || "" }
       },
-      // keep the original client timestamp too (helpful in the admin UI)
       submittedAtISO: payload?.submittedAt || new Date().toISOString(),
       createdAt: serverTimestamp(),
       updatedAt: serverTimestamp(),
       source: "exam"
-      // If you also want raw answers in Firestore, uncomment next two lines:
-      // ,listeningAnswers: payload?.listening?.answers ?? null
-      // ,readingAnswers:   payload?.reading?.answers   ?? null
     };
 
     if (candNo) {
-      // Upsert by candidate number so the admin panel sees one row per candidate.
       await setDoc(doc(db, "submissions", candNo), data, { merge: true });
     } else {
-      // No candidate number; create a new doc.
       await addDoc(collection(db, "submissions"), data);
     }
   };

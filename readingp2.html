@@ -32,31 +32,33 @@
   .note{color:#667085}
   .qblock{border:1px solid var(--line);border-radius:12px;padding:12px;margin:10px 0}
   .options{display:grid;gap:6px;margin-top:8px}
-  input[type=text]{width:100%;padding:.5rem .6rem;border:1px solid var(--line);border-radius:10px}
+  input[type=text]{padding:.5rem .6rem;border:1px solid var(--line);border-radius:10px}
   select{width:100%;padding:.5rem .6rem;border:1px solid var(--line);border-radius:10px;background:var(--panel)}
   footer.nav{display:flex;gap:8px;justify-content:center;margin:14px 0}
   footer.nav a{ text-decoration:none }
   .timer{margin-left:8px;padding:.25rem .55rem;border:1px solid var(--line);border-radius:10px;background:var(--panel);font-weight:600;color:var(--brand-blue);min-width:64px;text-align:center}
-
-  /* Pills and match tables for this passage */
-  .heading-list{display:flex;flex-direction:column;gap:6px;margin:8px 0}
-  .heading-list .pill{border:1px solid var(--line);border-radius:8px;padding:8px 10px;background:#fff}
-  [data-theme="dark"] .heading-list .pill{background:var(--panel)}
-  .match-table{width:100%;border-collapse:collapse;margin:8px 0}
-  .match-table th,.match-table td{border:1px solid var(--line);padding:8px}
-
-  /* Highlights should not shift layout */
   .hl{display:inline;padding:0;border:0;line-height:inherit;font:inherit}
   .hl-yellow{background-color:#fff59d}
   .hl-green{background-color:#c8e6c9}
-  /* Question number boxes */
   .qnav{display:flex;gap:6px;flex-wrap:wrap;margin:12px 0}
   .qnav button{width:34px;height:34px;border:1px solid var(--line);border-radius:6px;background:#fff;cursor:pointer}
   .qnav button.done{background:#1fb66a;color:#fff;font-weight:600;border-color:#1fb66a}
   .qnav button.active{outline:2px solid var(--brand-blue)}
   @keyframes pulseGreen{0%{box-shadow:0 0 0 0 rgba(31,182,106,.6)}70%{box-shadow:0 0 0 10px rgba(31,182,106,0)}100%{box-shadow:none}}
-  .qnav button.pulse{animation:pulseGreen .6s ease-out 1}
   [data-theme="dark"] .qnav button{background:var(--panel)}
+
+  /* Bold the first (number) column in the tables */
+  .match-table th:first-child,
+  .match-table td:first-child{font-weight:700}
+
+  /* Inline blanks for Q24–26 */
+  .inline-q p{margin:.4rem 0}
+  .inline-q input.inline-input{
+    display:inline-block;
+    width:12ch;
+    margin:0 .35rem;
+    vertical-align:baseline;
+  }
 </style>
 </head>
 <body>
@@ -85,24 +87,24 @@
         <h2>READING PASSAGE 2</h2>
         <p class="note">You should spend about 20 minutes on Questions 14–26 which are based on Reading Passage 2.</p>
 
-        <h2 style="text-align:center">Griffith and American films</h2>
-        <p>Movies are key cultural artefacts that offer a window into American cultural and social history. A mixture of art, business, and popular entertainment, the movies provide a host of insights into Americans' shifting ideas, fantasies, and preoccupations</p>
+        <h2 style="text-align:center">The purpose of facial expressions</h2>
+        <p style="text-align:center"><em>Do facial expressions reflect inner feelings? Or are they social devices for influencing others?</em></p>
 
-        <p><strong>A</strong> Many films of the early silent era dealt with gender relations. Before 1905, as Kathy Peiss has argued, movie screens were filled with salacious sexual imagery and risque humor, drawn from burlesque halls and vaudeville theaters. Early films offered many glimpses of women disrobing or of passionate kisses. As the movies' female audience grew, sexual titillation and voyeurism persisted. But an ever-increasing number of the film dealt with the changing work and sexual roles of women in a more sophisticated manner. While D.W. Griffith's films presented an idealized picture of the frail Victorian child-woman and showed an almost obsessive preoccupation with female honor and chastity, other silent movies presented quite different images of femininity. These ranged from the exotic, sexually aggressive vamp to the athletic, energetic "serial queen"; the street smart urban working gal, who repels the sexual advances of her lascivious boss; and cigarette-smoking, alcohol drinking chorus girls or burlesque queens.</p>
+        <p><strong>A</strong> The use of facial expressions for measuring people's emotions has dominated psychology since the late 1960s. This was when Paul Ekman of the University of California pioneered the idea that, by carefully measuring facial expression, he could evaluate people's true emotions. Ekman carried out experiments in which people were asked to label photos of basic facial expressions such as a smile, frown or scowl with words for emotions. He found, for example, that a smile represented joy and a scowl represented anger. In fact, since the 1970s Ekman has dominated the field of emotion research with his theory that when an emotion occurs, a large number of electrical impulses also occur, creating specific facial expressions and other physiological changes, such as increased or decreased heart rate or heightened blood pressure.</p>
 
-        <p><strong>B</strong> In early 1910, director D.W. Griffith was sent by the Biograph Company to the west coast with his acting troupe, consisting of actors Blanche Sweet, Lillian Gish, Mary Pickford, Lionel Barrymore, and others. While there, the company decided to explore new territories, traveling several miles north to Hollywood, a little village that was friendly and enjoyed the movie company filming there. By focusing the camera on particular actors and actresses, Griffith inadvertently encouraged the development of the star system. As early as 1910, newspapers were deluged with requests for actors' names. But most studios refused to divulge their identities, fearing the salary demands of popular performers. As one industry observer put it, "In the 'star' your producer gets not only a 'production' value …. but a 'trademark' value, and an 'insurance' value which are … very potent in guaranteeing the sale of this product." As the star system emerged, salaries soared. In the course of just two years, the salary of actress Mary Pickford rose from less than $400 a week in 1914 to $10,000 a week in 1916. This action made Griffith believe the big potential in the movie industry. Thus many competitors completely copy the same system as Griffith used, for the considerable profits. Additionally, they also study the theory and methods which Griffith suggested.</p>
+        <p><strong>B</strong> Many took Ekman's work to imply that facial expressions precisely indicated people's feelings. However, this theory has been attacked by a number of psychologists, such as Alan Fridlund of the University of California, who claim that there is no one-to-one correspondence between facial expressions and emotions. Expressions evolved to set off certain behaviors in other people, says Fridlund. So a smile may prompt people to approach, a scowl may warn them to stay away, and a look of sadness may elicit words of sympathy and reassurance. In other words, in Fridlund's view, facial expressions are inherently social: they involve not one, but two or more people. Even when people are alone they are holding a dialog with another person internally, or imagining themselves in a social situation.</p>
 
-        <p><strong>C</strong> From the moment America entered the war, Hollywood feared that the industry would be subject to heavy-handed government censorship. But the government itself wanted no repeat of World War I, when the Committee on Public Information had whipped up anti-German hysteria and oversold the war as "a Crusade not merely to re-win the tomb of Christ, but to bring back to earth the rule of right, the peace, goodwill to men and gentleness he taught."</p>
+        <p><strong>C</strong> Thus Fridlund thinks of facial expressions as tools for influencing social interactions, a view which, he claims, enables us to begin predicting when certain facial expressions will occur. This in turn will allow more precise theories about social interactions. His studies find that expressions occur most often during pivotal points—the turning points in social interactions during greetings, social crises, or times of appeasement, for example. At these pivotal points there is an approach, or closeness, or more intimacy, and facial expressions, as well as gestures, open up the possibilities of various social interactions.</p>
 
-        <p><strong>D</strong> The formation of the movie trust ushered in a period of rationalization within the film industry. Camera and projecting equipment were standardized; film rental fees were fixed; theaters were upgraded; which improved the quality of movies by removing damaged prints from circulation. This was also a period of intense artistic and technical innovation, as pioneering directors like David Wark Griffith and others created a new language of film and revolutionized screen narrative.</p>
+        <p><strong>D</strong> Although much work on the emotions relies on a link between facial expression and emotions, psychologist James Russell, of the University of British Columbia, says there is very little evidence supporting such a connection. “There's some sense in which faces express emotion, but only in the sense that everything expresses emotion,” says Russell, a long-time critic of the expression-emotion link. “Music does, posture does, words do, tone of voice does, your behavior does.” The real question is, “Is there anything special about faces?” And there we really do not know much. What is more likely, argues Russell, is that facial expressions tell others something about a person's overall mood and context, rather than provide details about specific emotions.</p>
 
-        <p><strong>E</strong> With just six months of film experience, Griffith, a former stage actor, was hired as a director by the Biograph Company and promised $50 a week and one-twentieth of a cent for every foot of film sold to a rental exchange. Each week, Griffith turned out two or three one-reelers. While earlier directors had used such cinematic devices as close-ups, slow motion, fade-ins and fade-outs, lighting effects, and editing before, Griffith's great contribution to the movie industry was to show how these techniques could be used to create a wholly new style of storytelling, distinct from the theater. Griffith's approach to movie storytelling has been aptly called "photographic realism." This is not to say that he merely wished to record a story accurately; rather he sought to convey the illusion of realism. He demanded that his performers act less in a more lifelike manner, avoiding the broad, exaggerated gestures and pantomiming of emotions that characterized the nineteenth-century stage. He wanted his performers to take on a role rather than directly addressing the camera. Above all, he used close-ups, lighting, editing, and other cinematic techniques convey suspense and other emotions and to focus the audience's attention on individual performers.</p>
+        <p><strong>E</strong> Others, including Ekman, argue that the face can display information about emotions, but they admit that it is not reliable one hundred percent of the time. And those who only examine faces when trying to study emotion will jump to false conclusions. But according to Ekman, to say, as Fridlund does, that there is no connection at all between facial expressions and emotions is simply wrong. “There is a link between facial expression and emotion,” agrees developmental psychologist Linda Camras of DePaul University, “but it's not a one-to-one kind of relationship as many once thought.” She believes there are many situations where emotion is experienced, yet no basic facial expression is displayed. And there are times when a facial expression appears with no corresponding emotion.</p>
 
-        <p><strong>F</strong> During the 1920s and 1930s, a small group of film companies consolidated their control. Known as the "Big Five" – Paramount, Warner Brothers, RKO, 20th Century-Fox, and Lowe's (MGM) and the "Little Three" – Universal, Columbia, and United Artists, they formed fully integrated companies. The old film company's opposition was shocked by new tycoons. The confusion of tongues in the foreign version of American films deepened when American directors themselves embarked on the shooting of the new version. They did not usually speak Spanish (or the given target language) and, at that time, there were only a few translators at the studio's disposal. For this reason, it was more general to contract Spanish directors, actors, and screenwriters to produce American films in Spanish for Latin American audiences and for the public in the Iberian Peninsula. Hollywood had depended on overseas markets for as much as 40 percent of its revenue. But in an effort to nurture their own film industries and prevent an excessive outflow of dollars, Britain, France, and Italy imposed stiff import tariffs and restrictive quotas on imported American movies.</p>
+        <p><strong>F</strong> Ekman's theory states that if the emotion comes on slowly or is rather weak, the feeling might not be strong enough to trigger the expression. This would explain why there can sometimes be emotion without expression, he argues. In addition, cultural rules which determine when and whether people of certain cultures display emotional expressions can prevent this otherwise automatic process from being completed. Facial expressions evolved in humans as signals to others about how they feel, says Ekman. At times, though, it may be uncomfortable or inconvenient for us to let others know our emotions. But in the long run, over the course of evolution, it was useful to us as signalers: an angry look on someone's face may be a warning that they are preparing to behave in an angry fashion.</p>
 
-        <p><strong>G</strong> A basic problem facing today's Hollywood is the rapidly rising cost of making and marketing a movie: an average of $40 million today. The immense cost of producing movies has led the studios to seek guaranteed hits: blockbuster loaded with high-tech special effects, sequels, and remakes of earlier movies, foreign films, and even old TV shows. Hollywood has also sought to cope with rising costs by focusing ever more intently on its core audiences. Since the mid-1980s, the movie-going audience has continued to decrease in size. Ticket sales fell from 1.2 billion in 1983 to 950 million in 1992, with the biggest drop occurring among adults. And since over half of Hollywood's profits are earned overseas, the target market has to be changed due to the increasing costs and salary of making a film. The industry has concentrated much of its energy on crude action films easily understood by an international audience, featuring stars like Arnold Schwarzenegger and Sylvester Stallone.</p>
+        <p><strong>G</strong> Although Fridlund disagrees with Ekman on certain matters, the two basically share the opinion that facial expressions indicate people's future actions. The area of dispute between Fridlund and Ekman draws attention away from their major areas of agreement, says Joseph Campos of the University of California. Indeed, he says, “there is profound agreement that the face, along with the voice, body posture and hand gestures, forecasts to outside observers what people will do next.” He goes on to say, “The face is a component [of emotion], but to make it the center of study of the human being experiencing an emotion is like saying the only thing you need to study in a car is the transmission. Not that the transmission is unimportant, but it's only part of an entire system.”</p>
 
-        <!-- Numbered navigation boxes 14–26 (below the passage text) -->
+        <!-- Numbered navigation boxes 14–26 -->
         <div class="qnav" id="qnav">
           <button data-q="q14">14</button><button data-q="q15">15</button><button data-q="q16">16</button><button data-q="q17">17</button><button data-q="q18">18</button><button data-q="q19">19</button><button data-q="q20">20</button><button data-q="q21">21</button><button data-q="q22">22</button><button data-q="q23">23</button><button data-q="q24">24</button><button data-q="q25">25</button><button data-q="q26">26</button>
         </div>
@@ -110,105 +112,55 @@
 
       <!-- RIGHT: QUESTIONS (scrollable) -->
       <aside id="questions" class="panel" tabindex="0">
-        <h3>Questions 14–19</h3>
-        <p>The text has six sections. Choose the correct heading for each section and move it into the gap.</p>
+        <h3>Questions 14–18</h3>
+        <p>Reading Passage 2 has seven paragraphs, <strong>A–G</strong>. Which paragraph contains the following information? Write the correct letter, <strong>A–G</strong>, in boxes 14–18 on your answer sheet.</p>
 
         <div class="qblock">
-          <h4>List of Headings</h4>
-          <div class="heading-list">
-            <div class="pill">i. Detailed description for a film system</div>
-            <div class="pill">ii. Griffith's contribution to American films</div>
-            <div class="pill">iii. The gender in the development of American film</div>
-            <div class="pill">iv. Change the view of the American movie</div>
-            <div class="pill">v. People's reaction to making movies in the war period</div>
-            <div class="pill">vi. The increasing market of the film in society</div>
-            <div class="pill">vii. Griffith improved gender recognition in society</div>
-          </div>
-
-          <table class="match-table" aria-label="Headings for sections A–F">
-            <thead><tr><th>Section</th><th>Your answer (pick one)</th></tr></thead>
+          <table class="match-table" aria-label="Which paragraph contains information">
+            <thead><tr><th>Q</th><th>Statement</th><th>Answer (A–G)</th></tr></thead>
             <tbody>
-              <tr id="q14"><td>14 &nbsp; A</td>
+              <tr id="q14">
+                <td>14.</td>
+                <td>a recognition that facial expressions do not always provide a true guide to feelings.</td>
                 <td>
-                  <select id="P2_H_A">
-                    <option value="">—</option>
-                    <option value="i">i</option>
-                    <option value="ii">ii</option>
-                    <option value="iii">iii</option>
-                    <option value="iv">iv</option>
-                    <option value="v">v</option>
-                    <option value="vi">vi</option>
-                    <option value="vii">vii</option>
+                  <select id="P2_FI_14">
+                    <option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option>
                   </select>
                 </td>
               </tr>
-              <tr id="q15"><td>15 &nbsp; B</td>
+              <tr id="q15">
+                <td>15.</td>
+                <td>examples of ways that a person's facial expression can affect someone else's actions.</td>
                 <td>
-                  <select id="P2_H_B">
-                    <option value="">—</option>
-                    <option value="i">i</option>
-                    <option value="ii">ii</option>
-                    <option value="iii">iii</option>
-                    <option value="iv">iv</option>
-                    <option value="v">v</option>
-                    <option value="vi">vi</option>
-                    <option value="vii">vii</option>
+                  <select id="P2_FI_15">
+                    <option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option>
                   </select>
                 </td>
               </tr>
-              <tr id="q16"><td>16 &nbsp; C</td>
+              <tr id="q16">
+                <td>16.</td>
+                <td>a reference to reasons for hiding emotions.</td>
                 <td>
-                  <select id="P2_H_C">
-                    <option value="">—</option>
-                    <option value="i">i</option>
-                    <option value="ii">ii</option>
-                    <option value="iii">iii</option>
-                    <option value="iv">iv</option>
-                    <option value="v">v</option>
-                    <option value="vi">vi</option>
-                    <option value="vii">vii</option>
+                  <select id="P2_FI_16">
+                    <option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option>
                   </select>
                 </td>
               </tr>
-              <tr id="q17"><td>17 &nbsp; D</td>
+              <tr id="q17">
+                <td>17.</td>
+                <td>examples of times when facial expressions are used especially frequently.</td>
                 <td>
-                  <select id="P2_H_D">
-                    <option value="">—</option>
-                    <option value="i">i</option>
-                    <option value="ii">ii</option>
-                    <option value="iii">iii</option>
-                    <option value="iv">iv</option>
-                    <option value="v">v</option>
-                    <option value="vi">vi</option>
-                    <option value="vii">vii</option>
+                  <select id="P2_FI_17">
+                    <option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option>
                   </select>
                 </td>
               </tr>
-              <tr id="q18"><td>18 &nbsp; E</td>
+              <tr id="q18">
+                <td>18.</td>
+                <td>examples of changes inside the body when an emotion is felt.</td>
                 <td>
-                  <select id="P2_H_E">
-                    <option value="">—</option>
-                    <option value="i">i</option>
-                    <option value="ii">ii</option>
-                    <option value="iii">iii</option>
-                    <option value="iv">iv</option>
-                    <option value="v">v</option>
-                    <option value="vi">vi</option>
-                    <option value="vii">vii</option>
-                  </select>
-                </td>
-              </tr>
-              <tr id="q19"><td>19 &nbsp; F</td>
-                <td>
-                  <select id="P2_H_F">
-                    <option value="">—</option>
-                    <option value="i">i</option>
-                    <option value="ii">ii</option>
-                    <option value="iii">iii</option>
-                    <option value="iv">iv</option>
-                    <option value="v">v</option>
-                    <option value="vi">vi</option>
-                    <option value="vii">vii</option>
+                  <select id="P2_FI_18">
+                    <option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option>
                   </select>
                 </td>
               </tr>
@@ -216,58 +168,64 @@
           </table>
         </div>
 
-        <h3 style="margin-top:16px">Questions 20–23</h3>
-        <p>Use the information in the text to match the companies with opinions.</p>
+        <h3 style="margin-top:16px">Questions 19–23</h3>
+        <p>Match each statement with the correct researcher, <strong>A–E</strong>.</p>
 
         <div class="qblock">
-          <p><strong>List of Companies</strong></p>
+          <p><strong>List of Researchers</strong></p>
           <ul>
-            <li><strong>A</strong> – old company's opposition</li>
-            <li><strong>B</strong> – huge drop happens among adults</li>
-            <li><strong>C</strong> – the pressure to change its market</li>
-            <li><strong>D</strong> – completely copy his system</li>
+            <li><strong>A</strong> Paul Ekman</li>
+            <li><strong>B</strong> Alan Fridlund</li>
+            <li><strong>C</strong> James Russell</li>
+            <li><strong>D</strong> Linda Camras</li>
+            <li><strong>E</strong> Joseph Campos</li>
           </ul>
 
-          <table class="match-table" aria-label="Match companies to statements">
-            <thead><tr><th>Q</th><th>Statement</th><th>Answer (A–D)</th></tr></thead>
+          <table class="match-table" aria-label="Match statements to researchers">
+            <thead><tr><th>Q</th><th>Statement</th><th>Answer (A–E)</th></tr></thead>
             <tbody>
-              <tr id="q20">
-                <td>20</td>
-                <td>Griffith's successful in the 1910s, led his rivals …</td>
+              <tr id="q19">
+                <td>19.</td>
+                <td>Focusing on the face in researching emotions is like studying a large structure by looking at just one small unit of it.</td>
                 <td>
-                  <select id="P2_M_20">
-                    <option value="">—</option>
-                    <option>A</option><option>B</option><option>C</option><option>D</option>
+                  <select id="P2_RS_19">
+                    <option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option>
+                  </select>
+                </td>
+              </tr>
+              <tr id="q20">
+                <td>20.</td>
+                <td>Facial expressions developed in order to encourage other people to react in particular ways.</td>
+                <td>
+                  <select id="P2_RS_20">
+                    <option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option>
                   </select>
                 </td>
               </tr>
               <tr id="q21">
-                <td>21</td>
-                <td>The growing costs and salary in Hollywood which shows it has …</td>
+                <td>21.</td>
+                <td>Although certain researchers have different opinions about various points, they share some important ideas.</td>
                 <td>
-                  <select id="P2_M_21">
-                    <option value="">—</option>
-                    <option>A</option><option>B</option><option>C</option><option>D</option>
+                  <select id="P2_RS_21">
+                    <option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option>
                   </select>
                 </td>
               </tr>
               <tr id="q22">
-                <td>22</td>
-                <td>The increasing new movie industries have a big impact on …</td>
+                <td>22.</td>
+                <td>Both emotion and expression can exist independently of each other in certain circumstances.</td>
                 <td>
-                  <select id="P2_M_22">
-                    <option value="">—</option>
-                    <option>A</option><option>B</option><option>C</option><option>D</option>
+                  <select id="P2_RS_22">
+                    <option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option>
                   </select>
                 </td>
               </tr>
               <tr id="q23">
-                <td>23</td>
-                <td>In 1992, ticket sales declined dramatically, due to …</td>
+                <td>23.</td>
+                <td>It cannot be proved that there is a connection between facial expression and real emotion.</td>
                 <td>
-                  <select id="P2_M_23">
-                    <option value="">—</option>
-                    <option>A</option><option>B</option><option>C</option><option>D</option>
+                  <select id="P2_RS_23">
+                    <option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option>
                   </select>
                 </td>
               </tr>
@@ -276,36 +234,40 @@
         </div>
 
         <h3 style="margin-top:16px">Questions 24–26</h3>
-        <p>Choose the correct answer.</p>
+        <p>Complete the sentences below. <strong>Choose ONE WORD ONLY</strong> from the passage for each answer.</p>
 
-        <div class="qblock" id="q24">
-          <p><strong>24.</strong> Why Griffith believe the potential in making movies?</p>
-          <div class="options">
-            <label><input type="radio" name="P2_Q24" value="A"> The gender development in American films</label>
-            <label><input type="radio" name="P2_Q24" value="B"> He used the star system successfully</label>
-            <label><input type="radio" name="P2_Q24" value="C"> He prefers advanced movie techniques</label>
-            <label><input type="radio" name="P2_Q24" value="D"> He earns lots of money</label>
-          </div>
+        <!-- Inline answers inside each sentence -->
+        <div class="qblock inline-q" id="q24">
+          <p>
+            <label for="P2_SC_24">
+              <strong>24.</strong> In Fridlund’s view, a
+              <input type="text" id="P2_SC_24" class="inline-input" placeholder="one word"
+                     autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+              on someone’s face may be intended as an invitation to come nearer.
+            </label>
+          </p>
         </div>
 
-        <div class="qblock" id="q25">
-          <p><strong>25.</strong> What is other competitors' reaction to Griffith?</p>
-          <div class="options">
-            <label><input type="radio" name="P2_Q25" value="A"> Adopt Griffith's theory and methods in making films</label>
-            <label><input type="radio" name="P2_Q25" value="B"> Complete copy his theory and methods</label>
-            <label><input type="radio" name="P2_Q25" value="C"> Try to catch up with their innovations</label>
-            <label><input type="radio" name="P2_Q25" value="D"> Find a new system against Griffith</label>
-          </div>
+        <div class="qblock inline-q" id="q25">
+          <p>
+            <label for="P2_SC_25">
+              <strong>25.</strong> According to Fridlund, when we are by ourselves we still use facial expressions because we are having a
+              <input type="text" id="P2_SC_25" class="inline-input" placeholder="one word"
+                     autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+              with someone in our minds.
+            </label>
+          </p>
         </div>
 
-        <div class="qblock" id="q26">
-          <p><strong>26.</strong> What is the great change in films industries during the 1920s and 1930s?</p>
-          <div class="options">
-            <label><input type="radio" name="P2_Q26" value="A"> Try to seek the high-tech special efforts</label>
-            <label><input type="radio" name="P2_Q26" value="B"> Dismiss the needs of overseas audiences</label>
-            <label><input type="radio" name="P2_Q26" value="C"> Changed its goal market</label>
-            <label><input type="radio" name="P2_Q26" value="D"> Improved the foreign version of American movies</label>
-          </div>
+        <div class="qblock inline-q" id="q26">
+          <p>
+            <label for="P2_SC_26">
+              <strong>26.</strong> Fridlund considers facial expressions to be
+              <input type="text" id="P2_SC_26" class="inline-input" placeholder="one word"
+                     autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+              other people that can affect our contact with them.
+            </label>
+          </p>
         </div>
 
         <footer class="nav">
@@ -321,50 +283,29 @@
 <script>
   /* ---------- GLOBAL: collect & persist all Reading P2 answers ---------- */
   function collectAndSaveAnswersP2(){
-    // Gather current answers from the DOM
     const answers = {};
-  
-    // radios
-    document.querySelectorAll('input[type=radio]:checked').forEach(el=>{
-      answers[el.name] = el.value;               // e.g., P2_Q24 -> "A"
-    });
-  
-    // selects
-    document.querySelectorAll('select').forEach(el=>{
-      answers[el.id || el.name || `sel_${Math.random().toString(36).slice(2)}`] = el.value; // e.g., P2_H_A -> "ii"
-    });
-  
-    // text/textarea (none here, but harmless)
-    document.querySelectorAll('input[type=text], textarea').forEach(el=>{
-      answers[el.id || el.name || `txt_${Math.random().toString(36).slice(2)}`] = el.value;
-    });
-  
-    // Flat snapshot (for export/debug)
+    document.querySelectorAll('input[type=radio]:checked').forEach(el=>{ answers[el.name] = el.value; });
+    document.querySelectorAll('select').forEach(el=>{ answers[el.id || el.name || `sel_${Math.random().toString(36).slice(2)}`] = el.value; });
+    document.querySelectorAll('input[type=text], textarea').forEach(el=>{ answers[el.id || el.name || `txt_${Math.random().toString(36).slice(2)}`] = el.value; });
+
     localStorage.setItem('sp_reading_answers', JSON.stringify(answers));
     localStorage.setItem('sp_reading_submitted_at', new Date().toISOString());
-  
-    // Merge into the shared "reading" namespace
+
     const reading = JSON.parse(localStorage.getItem('reading') || '{}');
-  
-    // 1) Keep exact P2_* keys (no double prefixing)
-    Object.entries(answers).forEach(([k,v])=>{
-      if (k && k.startsWith('P2_')) reading[k] = v;
-    });
-  
-    // 2) Explicitly map to Q14–Q26 keys that your summary/score page reads
+    Object.entries(answers).forEach(([k,v])=>{ if (k && k.startsWith('P2_')) reading[k] = v; });
+
+    // Map to Q14–Q26 keys
     const map = {
-      Q14:'P2_H_A', Q15:'P2_H_B', Q16:'P2_H_C', Q17:'P2_H_D', Q18:'P2_H_E', Q19:'P2_H_F',
-      Q20:'P2_M_20', Q21:'P2_M_21', Q22:'P2_M_22', Q23:'P2_M_23',
-      Q24:'P2_Q24',  Q25:'P2_Q25',  Q26:'P2_Q26'
+      Q14:'P2_FI_14', Q15:'P2_FI_15', Q16:'P2_FI_16', Q17:'P2_FI_17', Q18:'P2_FI_18',
+      Q19:'P2_RS_19', Q20:'P2_RS_20', Q21:'P2_RS_21', Q22:'P2_RS_22', Q23:'P2_RS_23',
+      Q24:'P2_SC_24', Q25:'P2_SC_25', Q26:'P2_SC_26'
     };
     for (const [qKey, srcKey] of Object.entries(map)){
-      reading[qKey] = answers[srcKey] || '';     // keep '' if unanswered
+      reading[qKey] = answers[srcKey] || '';
     }
-  
     localStorage.setItem('reading', JSON.stringify(reading));
   }
-  </script>
-  
+</script>
 
 <script>
 // Dark mode toggle (shared)
@@ -380,7 +321,7 @@ if(themeToggle){
   });
 }
 
-// Highlighter (yellow/green + eraser) — layout-safe
+// Highlighter (yellow/green + eraser)
 function wrapSelection(color){
   const sel=window.getSelection();
   if(!sel || sel.isCollapsed) return;
@@ -407,48 +348,42 @@ function eraseSelection(){
   sel.removeAllRanges();
 }
 document.querySelectorAll('[data-hl]').forEach(b=>b.addEventListener('click',()=>wrapSelection(b.getAttribute('data-hl'))));
-const erBtn=document.getElementById('hl-eraser'); if(erBtn) erBtn.addEventListener('click', eraseSelection);
+document.getElementById('hl-eraser')?.addEventListener('click', eraseSelection);
 
-// Autosave: text, radios, selects (prefix P2_)
+// Autosave: text, radios, selects (prefix P2_) + disable browser suggestions
 (function persistAll(){
   document.querySelectorAll('input[type=text], textarea').forEach(el=>{
+    el.setAttribute('autocomplete','off');
+    el.setAttribute('autocorrect','off');
+    el.setAttribute('autocapitalize','off');
+    el.setAttribute('spellcheck','false');
+
     const key='P2_'+(el.id||el.name||'txt_'+Math.random().toString(36).slice(2));
     if(!el.dataset.key){ el.dataset.key = key; }
     el.value = localStorage.getItem(el.dataset.key) || '';
-    el.addEventListener('input',()=>{
-      localStorage.setItem(el.dataset.key, el.value);
-      collectAndSaveAnswersP2();
-    });
+    el.addEventListener('input',()=>{ localStorage.setItem(el.dataset.key, el.value); collectAndSaveAnswersP2(); });
   });
   document.querySelectorAll('input[type=radio]').forEach(el=>{
     const key='P2_'+(el.name||el.id||'radio');
     if(localStorage.getItem(key)===el.value) el.checked=true;
-    el.addEventListener('change',()=>{
-      if(el.checked) localStorage.setItem(key, el.value);
-      collectAndSaveAnswersP2();
-    });
+    el.addEventListener('change',()=>{ if(el.checked) localStorage.setItem(key, el.value); collectAndSaveAnswersP2(); });
   });
   document.querySelectorAll('select').forEach(el=>{
     const key='P2_'+(el.id||el.name||'sel');
     const saved=localStorage.getItem(key);
     if(saved!==null) el.value=saved;
-    el.addEventListener('change',()=>{
-      localStorage.setItem(key, el.value);
-      collectAndSaveAnswersP2();
-    });
+    el.addEventListener('change',()=>{ localStorage.setItem(key, el.value); collectAndSaveAnswersP2(); });
   });
-  // initial combined snapshot
   collectAndSaveAnswersP2();
 })();
 
-// Question nav: smooth jump & active ring (not overriding completion)
+// Question nav: smooth jump & active ring
 (function(){
   const qnav=document.getElementById('qnav');
   const aside=document.getElementById('questions');
   if(!qnav||!aside) return;
   qnav.addEventListener('click', (e)=>{
-    const btn=e.target.closest('button[data-q]');
-    if(!btn) return;
+    const btn=e.target.closest('button[data-q]'); if(!btn) return;
     const target=document.getElementById(btn.dataset.q);
     if(target){ aside.scrollTo({top: target.offsetTop - 8, behavior:'smooth'}); }
     qnav.querySelectorAll('button').forEach(b=>b.classList.remove('active'));
@@ -459,47 +394,40 @@ const erBtn=document.getElementById('hl-eraser'); if(erBtn) erBtn.addEventListen
 // Mark question boxes green when their answers are filled
 (function(){
   const map={
-    q14:'#P2_H_A', q15:'#P2_H_B', q16:'#P2_H_C', q17:'#P2_H_D', q18:'#P2_H_E', q19:'#P2_H_F',
-    q20:'#P2_M_20', q21:'#P2_M_21', q22:'#P2_M_22', q23:'#P2_M_23',
-    q24:'input[name="P2_Q24"]', q25:'input[name="P2_Q25"]', q26:'input[name="P2_Q26"]'
+    q14:'#P2_FI_14', q15:'#P2_FI_15', q16:'#P2_FI_16', q17:'#P2_FI_17', q18:'#P2_FI_18',
+    q19:'#P2_RS_19', q20:'#P2_RS_20', q21:'#P2_RS_21', q22:'#P2_RS_22', q23:'#P2_RS_23',
+    q24:'#P2_SC_24', q25:'#P2_SC_25', q26:'#P2_SC_26'
   };
   const qnav=document.getElementById('qnav');
   if(!qnav) return;
+
   function btnFor(id){ return qnav.querySelector(`button[data-q="${id}"]`); }
-  function isAnswered(id){
-    const sel=map[id]; if(!sel) return false;
-    if(sel.startsWith('input[')){
-      return !!document.querySelector(sel+':checked');
-    }
+  function isAnswered(sel){
     const el=document.querySelector(sel);
     if(!el) return false;
     if(el.tagName==='SELECT') return el.value!=='';
     return (el.value||'').trim().length>0;
   }
   function update(id, pulse){
+    const sel=map[id]; if(!sel) return;
     const btn=btnFor(id); if(!btn) return;
-    const done=isAnswered(id);
+    const done=isAnswered(sel);
     if(done){
-      const firstTime=!btn.classList.contains('done');
+      const first=!btn.classList.contains('done');
       btn.classList.add('done');
-      if(pulse && firstTime){ btn.classList.add('pulse'); setTimeout(()=>btn.classList.remove('pulse'),600); }
-    } else {
+      if(pulse && first){ btn.classList.add('pulse'); setTimeout(()=>btn.classList.remove('pulse'),600); }
+    }else{
       btn.classList.remove('done');
     }
-    // keep LS snapshot current
     collectAndSaveAnswersP2();
   }
-  // Bind listeners
+
   Object.entries(map).forEach(([qid, sel])=>{
-    if(sel.startsWith('input[')){
-      document.querySelectorAll(sel).forEach(r=>r.addEventListener('change',()=>update(qid,true)));
-    }else{
-      const el=document.querySelector(sel);
-      if(!el) return;
-      el.addEventListener(el.tagName==='SELECT'?'change':'input',()=>update(qid,true));
-    }
+    const el=document.querySelector(sel);
+    if(!el) return;
+    const evt = (el.tagName==='SELECT') ? 'change' : 'input';
+    el.addEventListener(evt, ()=>update(qid,true));
   });
-  // Initial paint after autosave restore
   setTimeout(()=>{ Object.keys(map).forEach(id=>update(id,false)); }, 0);
 })();
 </script>
@@ -531,12 +459,11 @@ const erBtn=document.getElementById('hl-eraser'); if(erBtn) erBtn.addEventListen
 <script>
 // ===== Reading global 60-minute countdown (persists across passages) =====
 (function readingCountdown(){
-  const DURATION_MS = 60 * 60 * 1000; // 60 minutes
+  const DURATION_MS = 60 * 60 * 1000;
   const END_KEY = 'sp_reading_end_ts';
   const DONE_KEY = 'sp_reading_done';
   const timerEl = document.getElementById('timer');
 
-  // Start or continue the shared timer
   let end = parseInt(localStorage.getItem(END_KEY)||'0', 10);
   const now = Date.now();
   if (!end || end < now) {
@@ -562,15 +489,12 @@ const erBtn=document.getElementById('hl-eraser'); if(erBtn) erBtn.addEventListen
     try{
       document.querySelectorAll('input, select, textarea, button').forEach(el=>{ if (el.id !== 'themeToggle') el.disabled = true; });
     }catch{}
-    // final save
     collectAndSaveAnswersP2();
     localStorage.setItem(DONE_KEY, '1');
     setTimeout(()=>{ window.location.href = 'writing.html'; }, fromOtherTab ? 0 : 300);
   }
 
-  // keep snapshot current even if page is closed suddenly
   window.addEventListener('beforeunload', collectAndSaveAnswersP2);
-
   tick();
 })();
 </script>

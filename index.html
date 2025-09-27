@@ -107,7 +107,7 @@
     @keyframes flashBlue{from{box-shadow:0 0 0 0 rgba(56,189,248,.9)} to{box-shadow:0 0 0 14px rgba(56,189,248,0)}}
     .part-nav .btn.flash{animation:flashBlue .8s ease-out 1}
 
-    /* Matching (Q17–20) */
+    /* Matching (drag & drop) */
     .match-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:8px}
     @media (max-width: 800px){.match-grid{grid-template-columns:1fr}}
     .left{display:grid;gap:10px}
@@ -176,7 +176,7 @@
         </div>
 
         <audio id="audio" autoplay preload="auto" playsinline muted>
-          <source src="./audio/mix_28m26s (audio-joiner.com) - CopyCopyCopyCopyCopyCopyCopyCopyCopyCopyCopyCopyCopyCopyCopyCopyCopyCopyCopy.mp3" type="audio/mpeg" />
+          <source src="./audio/audio3.mp3" type="audio/mpeg" />
         </audio>
 
         <!-- PART 1 -->
@@ -185,42 +185,37 @@
             <span style="font-weight:500;color:#64707d">Listen and answer questions 1–10</span>
           </h3>
 
-          <p><em>Questions 1–10</em> — Write <strong>NO MORE THAN THREE WORDS AND/OR A NUMBER</strong> for each answer.</p>
+          <p><em>Questions 1–10</em> — Write <strong>ONE WORD AND/OR A NUMBER</strong> for each answer.</p>
 
           <div class="card" style="padding:0;border-radius:12px">
             <div style="padding:16px 16px 0 16px">
-              <h4 style="margin:0 0 6px 0">Wildlife Conservation Society</h4>
-              <p style="margin:0 0 12px 0;color:#64707d">Application for membership</p>
-              <p style="margin:0 12px 12px 0"><strong>Example</strong> — Caller’s name: <em>Michael Jones</em></p>
+              <h4 style="margin:0 0 6px 0">Suggestions for improving Winton</h4>
+              <p style="margin:0 0 12px 0;color:#64707d">Information about person interviewed</p>
+              <p style="margin:0 12px 12px 0"><strong>Example</strong> — Woman’s name is Eve <em>Jones</em>.</p>
             </div>
             <table class="form-table">
               <tbody>
-                <tr><th style="width:30%">Heard of WCS from</th><td><input id="L1" class="answer" placeholder="1" /></td></tr>
-                <tr><th>Address</th><td>21 Beel Street, Leeds</td></tr>
-                <tr><th>Postcode</th><td><input id="L2" class="answer" placeholder="2" style="max-width:220px" /></td></tr>
-                <tr><th>Phone number</th><td>01173 58642</td></tr>
-                <tr><th>E-mail address</th><td>mj@<input id="L3" class="answer" placeholder="3" style="max-width:220px" />.</td></tr>
-                <tr><th>Length of membership</th><td><input id="L4" class="answer" placeholder="4" style="max-width:120px" /> years</td></tr>
-                <tr><th>Type of membership</th><td><input id="L5" class="answer" placeholder="5" style="max-width:260px" /></td></tr>
-                <tr><th>Fee</th><td>£ <input id="L6" class="answer" placeholder="6" style="max-width:120px" /></td></tr>
-                <tr><th>Payment details</th><td>direct debit</td></tr>
-                <tr><th>Name of bank</th><td><input id="L7" class="answer" placeholder="7" style="max-width:300px" /></td></tr>
-                <tr><th>Account name</th><td>Michael Jones</td></tr>
-                <tr><th>Account number</th><td>01059612</td></tr>
-                <tr><th>Date of first payment</th><td><input id="L8" class="answer" placeholder="8" style="max-width:220px" /></td></tr>
-                <tr><th>Reference number</th><td><input id="L9" class="answer" placeholder="9" style="max-width:220px" /></td></tr>
-                <tr>
-                  <th>Other requests</th>
-                  <td>
-                    <ul style="margin:0;padding-left:18px;list-style:disc">
-                      <li>extra information pack</li>
-                      <li><input id="L10" class="answer" placeholder="10" style="max-width:400px" /></li>
-                    </ul>
-                  </td>
-                </tr>
+                <tr><th style="width:34%">Born in</th><td>South Africa</td></tr>
+                <tr><th>Languages</th><td>English (mother tongue), Afrikaans, a little <input id="L1" class="answer" placeholder="1" /></td></tr>
+                <tr><th>Moved to UK to</th><td><input id="L2" class="answer" placeholder="2" style="max-width:220px" /> at age of 18</td></tr>
+                <tr><th>Has lived in Winton for</th><td>3 <input id="L3" class="answer" placeholder="3" style="max-width:120px" /> years</td></tr>
+                <tr><th>Family</th><td>Has a daughter and twin sons</td></tr>
+                <tr><th>Address</th><td>54, 4 <input id="L4" class="answer" placeholder="4" style="max-width:260px" /> Street</td></tr>
+                <tr><th>Occupation</th><td><input id="L5" class="answer" placeholder="5" style="max-width:260px" /></td></tr>
+                <tr><th>Free time activity</th><td>goes to a <input id="L6" class="answer" placeholder="6" style="max-width:220px" /> regularly</td></tr>
               </tbody>
             </table>
-            <div style="padding:0 16px 16px 16px"><small class="note">Answers autosave in your browser.</small></div>
+
+            <div style="padding:16px">
+              <h4 style="margin:0 0 8px 0">Suggestions for improvements</h4>
+              <ul style="margin:0;padding-left:18px;list-style:disc">
+                <li>Is concerned about risk of <input id="L7" class="answer" placeholder="7" style="max-width:260px" />.</li>
+                <li>Would like more activities that bring people of different <input id="L8" class="answer" placeholder="8" style="max-width:220px" /> together, e.g.,</li>
+                <li><strong>9</strong> <input id="L9" class="answer" placeholder="9" style="max-width:300px" /> sessions.</li>
+                <li>Could have a <input id="L10" class="answer" placeholder="10" style="max-width:300px" /> supplied and run by volunteers.</li>
+              </ul>
+              <small class="note">Answers autosave in your browser.</small>
+            </div>
           </div>
 
           <!-- per-question buttons 1–10 -->
@@ -238,89 +233,78 @@
           <h3>Part 2</h3>
           <p><em>Questions 11–20</em>. Listen and answer the questions below.</p>
 
-          <!-- 11–16 -->
-          <p><strong>Questions 11–16</strong> — Choose the correct answer.</p>
-          <div class="mcq"><h4>11. What is the purpose of the talk?</h4>
+          <!-- 11–14 MCQ -->
+          <p><strong>Questions 11–14</strong> — Choose the correct letter, A, B or C.</p>
+          <div class="mcq"><h4>11. Mentona fashion was established in</h4>
             <div class="options">
-              <label><input type="radio" name="L11" value="A"> to welcome its new members</label>
-              <label><input type="radio" name="L11" value="B"> to commemorate its 10th anniversary</label>
-              <label><input type="radio" name="L11" value="C"> to celebrate the award it received recently</label>
+              <label><input type="radio" name="L11" value="A"> 1927.</label>
+              <label><input type="radio" name="L11" value="B"> 1935.</label>
+              <label><input type="radio" name="L11" value="C"> 1996.</label>
             </div>
           </div>
-          <div class="mcq"><h4>12. What's the audience of this speech?</h4>
+          <div class="mcq"><h4>12. Most of the company’s sales income is from</h4>
             <div class="options">
-              <label><input type="radio" name="L12" value="A"> journalists</label>
-              <label><input type="radio" name="L12" value="B"> local residents</label>
-              <label><input type="radio" name="L12" value="C"> school children</label>
+              <label><input type="radio" name="L12" value="A"> leisurewear.</label>
+              <label><input type="radio" name="L12" value="B"> women’s clothing.</label>
+              <label><input type="radio" name="L12" value="C"> protective clothing.</label>
             </div>
           </div>
-          <div class="mcq"><h4>13. Why is the speaker most proud of the skating rink?</h4>
+          <div class="mcq"><h4>13. The company’s sales are growing fastest in</h4>
             <div class="options">
-              <label><input type="radio" name="L13" value="A"> Because two world champions have been trained there.</label>
-              <label><input type="radio" name="L13" value="B"> Because people in this area are fitter than the rest of the country.</label>
-              <label><input type="radio" name="L13" value="C"> Because they have encouraged local school children to participate more in sports.</label>
+              <label><input type="radio" name="L13" value="A"> the UK.</label>
+              <label><input type="radio" name="L13" value="B"> continental Europe.</label>
+              <label><input type="radio" name="L13" value="C"> Asia.</label>
             </div>
           </div>
-          <div class="mcq"><h4>14. The complex has recently opened a new venue for</h4>
+          <div class="mcq"><h4>14. When will the current chief executive leave the company?</h4>
             <div class="options">
-              <label><input type="radio" name="L14" value="A"> the unemployed.</label>
-              <label><input type="radio" name="L14" value="B"> mothers with babies.</label>
-              <label><input type="radio" name="L14" value="C"> pensioners.</label>
-            </div>
-          </div>
-          <div class="mcq"><h4>15. What does the complex plan to do next year?</h4>
-            <div class="options">
-              <label><input type="radio" name="L15" value="A"> extend opening hours</label>
-              <label><input type="radio" name="L15" value="B"> expand the space</label>
-              <label><input type="radio" name="L15" value="C"> sell fitness equipment</label>
-            </div>
-          </div>
-          <div class="mcq"><h4>16. What does the complex encourage people to do?</h4>
-            <div class="options">
-              <label><input type="radio" name="L16" value="A"> become a coach</label>
-              <label><input type="radio" name="L16" value="B"> be on the committee</label>
-              <label><input type="radio" name="L16" value="C"> work as volunteers</label>
+              <label><input type="radio" name="L14" value="A"> April</label>
+              <label><input type="radio" name="L14" value="B"> June</label>
+              <label><input type="radio" name="L14" value="C"> July</label>
             </div>
           </div>
 
-          <!-- 17–20 drag & drop -->
+          <!-- 15–17 ONE WORD ONLY -->
+          <p style="margin-top:18px"><strong>Questions 15–17</strong> — Complete the sentences below. Write <strong>ONE WORD ONLY</strong> for each answer.</p>
           <div class="mcq">
-            <h4 style="margin-bottom:6px">Questions 17–20</h4>
-            <p style="margin-top:0">Choose <strong>FOUR</strong> answers from the box and write the correct letter, <strong>A–G</strong>, next to Questions 17–20.</p>
+            <ul style="margin:0;padding-left:18px;list-style:disc">
+              <li>15 Each student will be given a <input id="L15" class="answer" placeholder="15" style="max-width:240px" />.</li>
+              <li>16 The students can make use of the company’s arrangements for staff to <input id="L16" class="answer" placeholder="16" style="max-width:220px" /> cars.</li>
+              <li>17 People who cycle to work can use the <input id="L17" class="answer" placeholder="17" style="max-width:240px" />.</li>
+            </ul>
+          </div>
+
+          <!-- 18–20 info matching (drag & drop) -->
+          <div class="mcq">
+            <h4 style="margin-bottom:6px">Questions 18–20</h4>
+            <p style="margin:6px 0 10px 0">What information does the speaker give about each of the following social events? Choose <strong>THREE</strong> answers from the box and write the correct letter, <strong>A–E</strong>, next to questions 18–20.</p>
             <div class="match-grid">
               <div class="left">
                 <div class="match-row">
-                  <div class="facility">Swimming pool</div>
-                  <div class="drop-slot" data-q="L17" aria-label="Drop option for Question 17"></div>
-                  <div class="qnum">17</div>
-                </div>
-                <div class="match-row">
-                  <div class="facility">Climbing wall</div>
+                  <div class="facility">Dance</div>
                   <div class="drop-slot" data-q="L18" aria-label="Drop option for Question 18"></div>
                   <div class="qnum">18</div>
                 </div>
                 <div class="match-row">
-                  <div class="facility">Skating rink</div>
+                  <div class="facility">Trip to National Space Centre</div>
                   <div class="drop-slot" data-q="L19" aria-label="Drop option for Question 19"></div>
                   <div class="qnum">19</div>
                 </div>
                 <div class="match-row">
-                  <div class="facility">Gym</div>
+                  <div class="facility">Football match</div>
                   <div class="drop-slot" data-q="L20" aria-label="Drop option for Question 20"></div>
                   <div class="qnum">20</div>
                 </div>
               </div>
               <div class="right">
-                <div id="bank17" class="token-bank" aria-label="Options A–G">
-                  <div class="token" data-letter="A" draggable="true"><strong>A.</strong> A one-on-one coach is bookable.</div>
-                  <div class="token" data-letter="B" draggable="true"><strong>B.</strong> It is featured in a TV drama.</div>
-                  <div class="token" data-letter="C" draggable="true"><strong>C.</strong> It is beneficial for young people.</div>
-                  <div class="token" data-letter="D" draggable="true"><strong>D.</strong> It is only available for women sometimes.</div>
-                  <div class="token" data-letter="E" draggable="true"><strong>E.</strong> It is the largest in the country.</div>
-                  <div class="token" data-letter="F" draggable="true"><strong>F.</strong> It can be booked for parties.</div>
-                  <div class="token" data-letter="G" draggable="true"><strong>G.</strong> It is a place to hold courses for school children.</div>
+                <div id="bank17" class="token-bank" aria-label="Options A–E">
+                  <div class="token" data-letter="A" draggable="true"><strong>A.</strong> coach fully booked</div>
+                  <div class="token" data-letter="B" draggable="true"><strong>B.</strong> take refreshments</div>
+                  <div class="token" data-letter="C" draggable="true"><strong>C.</strong> meal will be provided</div>
+                  <div class="token" data-letter="D" draggable="true"><strong>D.</strong> can invite other people to come</div>
+                  <div class="token" data-letter="E" draggable="true"><strong>E.</strong> people who attend can perform</div>
                 </div>
-                <small class="note">Drag an option to a question slot, or click an option then click a slot to place it. Each option can be used once.</small>
+                <small class="note">Drag a letter to a question slot, or click a letter then a slot to place it. Each option can be used at most once.</small>
               </div>
             </div>
           </div>
@@ -340,91 +324,85 @@
           <h3>Part 3</h3>
           <p><em>Questions 21–30</em>. Listen and answer the questions below.</p>
 
-          <!-- 21–24 -->
-          <p><strong>Questions 21–24</strong> — Choose the correct answer.</p>
-          <div class="mcq"><h4>21. What background information does Daisy give about rice?</h4>
+          <!-- 21–26 MCQ -->
+          <p><strong>Questions 21–26</strong> — Choose the correct letter, A, B or C.</p>
+          <div class="mcq"><h4>21. What made Colin and Rosie decide to study palm oil for their project?</h4>
             <div class="options">
-              <label><input type="radio" name="L21" value="A"> Wild rice is grown throughout Asia</label>
-              <label><input type="radio" name="L21" value="B"> Some types of rice need less water than others.</label>
-              <label><input type="radio" name="L21" value="C"> All rice varieties have a lovely aroma</label>
+              <label><input type="radio" name="L21" value="A"> a lecture they attended on corn syrup</label>
+              <label><input type="radio" name="L21" value="B"> an article they read in a magazine</label>
+              <label><input type="radio" name="L21" value="C"> a visit they made to a food products factory</label>
             </div>
           </div>
-          <div class="mcq"><h4>22. Erik says that a priority for rice farmers is to be able to</h4>
+          <div class="mcq"><h4>22. Both Colin and Rosie were surprised to learn that palm oil is used in</h4>
             <div class="options">
-              <label><input type="radio" name="L22" value="A"> grow rice without fertilizers.</label>
-              <label><input type="radio" name="L22" value="B"> predict the weather patterns.</label>
-              <label><input type="radio" name="L22" value="C"> manage water resources.</label>
+              <label><input type="radio" name="L22" value="A"> beauty products.</label>
+              <label><input type="radio" name="L22" value="B"> cleaning materials.</label>
+              <label><input type="radio" name="L22" value="C"> fast foods.</label>
             </div>
           </div>
-          <div class="mcq"><h4>23. Where is the International Rice Research Institute?</h4>
+          <div class="mcq"><h4>23. What initially restricted the widespread production of palm oil?</h4>
             <div class="options">
-              <label><input type="radio" name="L23" value="A"> The Philippines</label>
-              <label><input type="radio" name="L23" value="B"> China</label>
-              <label><input type="radio" name="L23" value="C"> Japan</label>
+              <label><input type="radio" name="L23" value="A"> Extraction of the oil was a complex process.</label>
+              <label><input type="radio" name="L23" value="B"> The fruit had to be processed immediately.</label>
+              <label><input type="radio" name="L23" value="C"> It was difficult to pick the fruit.</label>
             </div>
           </div>
-          <div class="mcq"><h4>24. Scientists in Bangladesh want to find a</h4>
+          <div class="mcq"><h4>24. The main point made in John Harper’s article on oil palm plantations was that they</h4>
             <div class="options">
-              <label><input type="radio" name="L24" value="A"> more effective type of fertilizer.</label>
-              <label><input type="radio" name="L24" value="B"> strain of rice resistant to flooding.</label>
-              <label><input type="radio" name="L24" value="C"> way to reduce the effects of global warming.</label>
+              <label><input type="radio" name="L24" value="A"> are being set up illegally in protected areas.</label>
+              <label><input type="radio" name="L24" value="B"> are causing a lot of traffic problems.</label>
+              <label><input type="radio" name="L24" value="C"> have increased pollution to a dangerous level.</label>
+            </div>
+          </div>
+          <div class="mcq"><h4>25. Colin thinks the most serious problem with palm oil is that</h4>
+            <div class="options">
+              <label><input type="radio" name="L25" value="A"> its source is often impossible to identify.</label>
+              <label><input type="radio" name="L25" value="B"> it has to be transported a long way to suppliers.</label>
+              <label><input type="radio" name="L25" value="C"> it requires very expensive fertiliser and pesticides.</label>
+            </div>
+          </div>
+          <div class="mcq"><h4>26. The students agree that they need to find out more about</h4>
+            <div class="options">
+              <label><input type="radio" name="L26" value="A"> consumer attitudes to palm oil.</label>
+              <label><input type="radio" name="L26" value="B"> new ways of producing palm oil.</label>
+              <label><input type="radio" name="L26" value="C"> possible replacements for palm oil.</label>
             </div>
           </div>
 
-          <!-- 25–30 matrix -->
+          <!-- 27–30 Flow-chart (short answers) -->
           <div class="mcq">
-            <h4 style="margin-bottom:6px">Questions 25–30</h4>
-            <div class="legend">
-              <div><strong>List of Countries</strong></div>
-              <div class="row">
-                <div class="item"><strong>A</strong> <span>Japan</span></div>
-                <div class="item"><strong>B</strong> <span>China</span></div>
-                <div class="item"><strong>C</strong> <span>Thailand</span></div>
+            <h4 style="margin-bottom:6px">Questions 27–30</h4>
+            <p style="margin:0 0 8px 0">Complete the flow-chart below. Choose <strong>NO MORE THAN TWO WORDS</strong> for each answer.</p>
+
+            <div class="card" style="padding:14px;margin:8px 0">
+              <h4 style="margin:0 0 8px 0">How the cultivation of palm oil developed</h4>
+
+              <div class="card" style="padding:12px;margin-bottom:10px">
+                <strong>Early 1900s</strong>
+                <ul style="margin:8px 0 0 18px;list-style:disc">
+                  <li>Palm oil trees were taken from <input id="L27" class="answer" placeholder="27" style="max-width:260px" /> to SE Asia by colonists.</li>
+                  <li>Demand remained low due to the availability of <input id="L28" class="answer" placeholder="28" style="max-width:260px" /> and other plant oils.</li>
+                </ul>
+              </div>
+
+              <div class="card" style="padding:12px;margin-bottom:10px">
+                <strong>1920s</strong>
+                <p style="margin:6px 0 0 0">Advances in technology meant palm oil had less taste.</p>
+              </div>
+
+              <div class="card" style="padding:12px;margin-bottom:10px">
+                <strong>1950s</strong>
+                <ul style="margin:8px 0 0 18px;list-style:disc">
+                  <li>Improvements in the <input id="L29" class="answer" placeholder="29" style="max-width:260px" /> of palm oil trees increased production and reduced prices.</li>
+                  <li>Hydrogenated fats were increasingly used to help with preserving foods.</li>
+                </ul>
+              </div>
+
+              <div class="card" style="padding:12px">
+                <strong>1980s and 1990s</strong>
+                <p style="margin:6px 0 0 0">Hydrogenated fats were found to be bad for people’s <input id="L30" class="answer" placeholder="30" style="max-width:220px" />.</p>
               </div>
             </div>
-            <table class="matrix-table" role="grid" aria-label="Which country do the following statements apply to?">
-              <thead>
-                <tr><th>Which country do the following statements apply to?</th><th>A</th><th>B</th><th>C</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td><span class="qid">25</span> They grow the most rice in the world.</td>
-                  <td class="pick"><label><input type="radio" name="L25" value="A" aria-label="25 A"></label></td>
-                  <td class="pick"><label><input type="radio" name="L25" value="B" aria-label="25 B"></label></td>
-                  <td class="pick"><label><input type="radio" name="L25" value="C" aria-label="25 C"></label></td>
-                </tr>
-                <tr>
-                  <td><span class="qid">26</span> They export the most rice in the world.</td>
-                  <td class="pick"><label><input type="radio" name="L26" value="A" aria-label="26 A"></label></td>
-                  <td class="pick"><label><input type="radio" name="L26" value="B" aria-label="26 B"></label></td>
-                  <td class="pick"><label><input type="radio" name="L26" value="C" aria-label="26 C"></label></td>
-                </tr>
-                <tr>
-                  <td><span class="qid">27</span> They aim to increase the nutritional value of rice.</td>
-                  <td class="pick"><label><input type="radio" name="L27" value="A" aria-label="27 A"></label></td>
-                  <td class="pick"><label><input type="radio" name="L27" value="B" aria-label="27 B"></label></td>
-                  <td class="pick"><label><input type="radio" name="L27" value="C" aria-label="27 C"></label></td>
-                </tr>
-                <tr>
-                  <td><span class="qid">28</span> Less rice is eaten than in the past.</td>
-                  <td class="pick"><label><input type="radio" name="L28" value="A" aria-label="28 A"></label></td>
-                  <td class="pick"><label><input type="radio" name="L28" value="B" aria-label="28 B"></label></td>
-                  <td class="pick"><label><input type="radio" name="L28" value="C" aria-label="28 C"></label></td>
-                </tr>
-                <tr>
-                  <td><span class="qid">29</span> An annual rice festival takes place.</td>
-                  <td class="pick"><label><input type="radio" name="L29" value="A" aria-label="29 A"></label></td>
-                  <td class="pick"><label><input type="radio" name="L29" value="B" aria-label="29 B"></label></td>
-                  <td class="pick"><label><input type="radio" name="L29" value="C" aria-label="29 C"></label></td>
-                </tr>
-                <tr>
-                  <td><span class="qid">30</span> A new type of rice is now popular locally.</td>
-                  <td class="pick"><label><input type="radio" name="L30" value="A" aria-label="30 A"></label></td>
-                  <td class="pick"><label><input type="radio" name="L30" value="B" aria-label="30 B"></label></td>
-                  <td class="pick"><label><input type="radio" name="L30" value="C" aria-label="30 C"></label></td>
-                </tr>
-              </tbody>
-            </table>
           </div>
 
           <!-- per-question buttons 21–30 -->
@@ -442,44 +420,41 @@
           <h3>Part 4</h3>
           <p><em>Questions 31–40</em>. Listen and answer the questions below.</p>
 
-          <!-- 31–37 short answers -->
+          <!-- 31–40 ONE WORD ONLY (notes) -->
           <div class="mcq">
-            <h4 style="margin-bottom:6px">Questions 31–37</h4>
-            <p style="margin:0 0 8px 0">Write <strong>NO MORE THAN TWO WORDS</strong> for each answer.</p>
-            <div class="card" style="padding:14px;margin:8px 0">
-              <h4 style="margin:0 0 8px 0">How to Choose Flooring Materials</h4>
-              <div style="display:grid;gap:10px">
-                <div><strong>Source</strong></div>
-                <ul style="margin:0;padding-left:18px;list-style:disc">
-                  <li>There are some man-made materials like <input id="L31" class="answer" placeholder="31" style="max-width:260px" />.</li>
-                  <li>Before being used, material undergoes <input id="L32" class="answer" placeholder="32" style="max-width:260px" />.</li>
-                  <li>Wood should be cut and <input id="L33" class="answer" placeholder="33" style="max-width:260px" />.</li>
-                  <li>Stone should be cut and <input id="L34" class="answer" placeholder="34" style="max-width:260px" />.</li>
-                </ul>
-                <div style="margin-top:6px"><strong>Selection</strong></div>
-                <ul style="margin:0;padding-left:18px;list-style:disc">
-                  <li>Aside from environmental factors, one should take <input id="L35" class="answer" placeholder="35" style="max-width:260px" /> into account during construction.</li>
-                  <li>Some properties of materials affect mood, such as <input id="L36" class="answer" placeholder="36" style="max-width:220px" />, texture, and colour.</li>
-                  <li>Use a mathematical formula to choose the type of wood, because <input id="L37" class="answer" placeholder="37" style="max-width:320px" /> are subjective, which are ambiguous in verbal description.</li>
-                </ul>
-              </div>
-            </div>
-          </div>
+            <h4 style="margin-bottom:6px">Magnetism and Animals — Awareness of magnetism by animals</h4>
+            <p style="margin:0 0 8px 0">Complete the notes below. Write <strong>ONE WORD ONLY</strong> for each answer.</p>
 
-          <!-- 38–40 table -->
-          <div class="mcq">
-            <h4 style="margin-bottom:6px">Questions 38–40</h4>
-            <p style="margin-top:0">Complete the table below. Write <strong>NO MORE THAN TWO WORDS AND/OR A NUMBER</strong> for each answer.</p>
-            <table class="ref-table" role="grid" aria-label="Material and reflectance rate">
-              <thead><tr><th>Material</th><th>Reflectance rate</th></tr></thead>
-              <tbody>
-                <tr><td>Polished silver</td><td>Almost 1.0</td></tr>
-                <tr><td>White-painted plastic</td><td>Approximately <input id="L38" class="answer" placeholder="38" style="max-width:140px" /></td></tr>
-                <tr><td>Quarry tile</td><td>Approximately <input id="L39" class="answer" placeholder="39" style="max-width:140px" /></td></tr>
-                <tr><td><input id="L40" class="answer" placeholder="40" style="max-width:260px" /></td><td>Almost 0.0</td></tr>
-              </tbody>
-            </table>
-            <small class="note">Answers autosave in your browser.</small>
+            <div class="card" style="padding:14px;margin:8px 0">
+              <ul style="margin:0;padding-left:18px;list-style:disc">
+                <li>Humans use magnetic instruments such as compasses to indicate where North is.</li>
+                <li>Some animals may sense magnetism when resting, e.g. <input id="L31" class="answer" placeholder="31" style="max-width:220px" /> and fish both adopt a North–South alignment.</li>
+                <li>When investigating termites, Purushottam Deoras found that the <input id="L32" class="answer" placeholder="32" style="max-width:220px" /> always lay in a North–South alignment.</li>
+                <li>Satellite images showed cattle stood in a North–South alignment.</li>
+              </ul>
+
+              <h4 style="margin:12px 0 6px 0">Why do animals align themselves magnetically?</h4>
+              <ul style="margin:0;padding-left:18px;list-style:disc">
+                <li>Roswitha Wiltschko suggested it made them more <input id="L33" class="answer" placeholder="33" style="max-width:200px" />.</li>
+                <li>It is known that birds use magnetism to <input id="L34" class="answer" placeholder="34" style="max-width:220px" /> when flying.</li>
+                <li>Alignment may be used by an animal herd when there is an <input id="L35" class="answer" placeholder="35" style="max-width:220px" />.</li>
+                <li>A study of foxes concluded that they use magnetism to work out the <input id="L36" class="answer" placeholder="36" style="max-width:220px" /> that has to be jumped when hunting.</li>
+              </ul>
+
+              <h4 style="margin:12px 0 6px 0">How do animals sense magnetism?</h4>
+              <ul style="margin:0;padding-left:18px;list-style:disc">
+                <li>Some bees and <input id="L37" class="answer" placeholder="37" style="max-width:180px" /> contain magnetite — a very magnetic mineral.</li>
+                <li>Cells found in the inner ears of pigeons contained small pieces of <input id="L38" class="answer" placeholder="38" style="max-width:200px" />.</li>
+                <li>Some animals sense magnetic fields with their <input id="L39" class="answer" placeholder="39" style="max-width:200px" />.</li>
+              </ul>
+
+              <h4 style="margin:12px 0 6px 0">Problems faced by researchers</h4>
+              <ul style="margin:0;padding-left:18px;list-style:disc">
+                <li>In studies of dogs, alignment did not always occur.</li>
+                <li>The alignment of cattle is interfered with when they are near to a source of <input id="L40" class="answer" placeholder="40" style="max-width:200px" />.</li>
+              </ul>
+              <small class="note">Answers autosave in your browser.</small>
+            </div>
           </div>
 
           <!-- per-question buttons 31–40 -->
@@ -648,8 +623,8 @@
         const id = ids[i];
         b.addEventListener('click', ()=>{
           btns.forEach(x=>x.classList.remove('active'));
-          b.classList.add('active','flash');
           b.addEventListener('animationend', ()=> b.classList.remove('flash'), {once:true});
+          b.classList.add('active','flash');
           const t = findTarget(id);
           if (t){ t.scrollIntoView({behavior:'smooth', block:'center'}); try{ t.focus({preventScroll:true}); }catch{} }
         });
@@ -686,12 +661,12 @@
     });
   })();
 
-  /* ========= Drag & drop (17–20) ========= */
+  /* ========= Drag & drop (for matching) ========= */
   (function matching(){
     const bank = document.getElementById('bank17'); if(!bank) return;
     const slots = [...document.querySelectorAll('.drop-slot[data-q]')];
 
-    // order tokens A..G once
+    // order tokens once
     [...bank.querySelectorAll('.token')]
       .sort((a,b)=> a.dataset.letter.localeCompare(b.dataset.letter))
       .forEach(t=> bank.appendChild(t));
@@ -737,7 +712,7 @@
     }
 
     function placeToken(token, slot){
-      // make letter unique (move from previous slot if exists)
+      // enforce unique letters
       const used = document.querySelector('.slot-content[data-letter="'+token.dataset.letter+'"]');
       if (used) clearSlot(used.closest('.drop-slot'));
 
@@ -749,7 +724,7 @@
       wrap.dataset.letter = token.dataset.letter;
 
       const pill = document.createElement('span'); pill.className='pill'; pill.textContent = token.dataset.letter;
-      const text = document.createElement('span'); text.textContent = token.textContent.replace(/^\s*[A-G]\.\s*/,'').trim();
+      const text = document.createElement('span'); text.textContent = token.textContent.replace(/^\s*[A-E]\.\s*/,'').trim();
       const rem  = document.createElement('button'); rem.className='slot-remove'; rem.setAttribute('title','Remove'); rem.innerHTML='&times;';
       rem.addEventListener('click', ()=> clearSlot(slot));
 
@@ -773,7 +748,7 @@
     }
 
     (function restore(){
-      ['L17','L18','L19','L20'].forEach(q=>{
+      ['L18','L19','L20'].forEach(q=>{
         const letter = localStorage.getItem('sp_'+q) || '';
         if (!letter) return;
         const token = bank.querySelector('.token[data-letter="'+letter+'"]');
@@ -783,7 +758,7 @@
     })();
   })();
 
-  /* ========= Highlighter (stable, within one block) + targeted eraser ========= */
+  /* ========= Highlighter (same as before) ========= */
   (function highlighter(){
     let lastRange = null;
 
@@ -811,7 +786,7 @@
 
     function getCommonBlock(aNode, bNode){
       const A = (aNode.nodeType===1 ? aNode : aNode.parentElement);
-      const B = (bNode.nodeType===1 ? bNode : bNode.parentElement);
+      const B = (bNode.nodeType===1   ? bNode : bNode.parentElement);
       if (!A || !B) return null;
       const blockSel = 'th,td,p,li,blockquote,div,h1,h2,h3,h4,h5,h6';
       const ca = A.closest(blockSel);
@@ -852,7 +827,7 @@
         slices.push({node,start,end});
       }
 
-      // recolor within single highlight
+      // recolor inside one highlight
       const startHL = sc && sc.closest('span.hl');
       const endHL   = ec && ec.closest('span.hl');
       if (startHL && endHL && startHL === endHL && rangeIntersectsElement(range, startHL)){
@@ -861,7 +836,7 @@
         return;
       }
 
-      // wrap back-to-front
+      // wrap
       for (let i = slices.length - 1; i >= 0; i--){
         const {node,start,end} = slices[i];
         const mid = node.splitText(start);
@@ -876,7 +851,7 @@
         span.appendChild(mid);
       }
 
-      // merge neighbors of same color
+      // merge neighbors
       document.querySelectorAll('span.hl').forEach(h=>{
         const n = h.nextSibling, p = h.previousSibling;
         if (n && n.nodeType===1 && n.matches('span.hl') && n.dataset.hl===h.dataset.hl){
@@ -888,7 +863,6 @@
       });
     }
 
-    // Swatch handlers (pointer & click capture)
     function swatchHandler(e){
       const btn = e.target.closest('[data-hl]');
       if (!btn) return;
@@ -899,7 +873,6 @@
     document.addEventListener('mousedown',  swatchHandler, true);
     document.addEventListener('click',      swatchHandler, true);
 
-    // Targeted eraser
     (function bindEraser(){
       const old = document.getElementById('clearHighlights'); if(!old) return;
       const btn = old.cloneNode(true); old.replaceWith(btn); btn.id='clearHighlights';
@@ -948,10 +921,8 @@
   })();
 
   /* ========= Misc ========= */
-  // disable autocomplete for all inputs
   document.querySelectorAll('input').forEach(el => el.setAttribute('autocomplete','off'));
 
-  // attempt autoplay on visibility
   (function attemptAutoplay(){
     const a=document.getElementById('audio'); if(!a) return;
     const play=()=>a.play().catch(()=>{});
@@ -970,11 +941,10 @@
     });
   })();
 
-  // Helpful console notice when using file://
   if (location.protocol === 'file:') {
     try { console.warn('Running from file:// — each file has its own LocalStorage. Serve via http://localhost so pages share storage.'); } catch {}
   }
   </script>
-  
+
 </body>
 </html>
